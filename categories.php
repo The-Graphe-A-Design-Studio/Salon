@@ -36,28 +36,16 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add new Branch</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Add new Category</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form class="branch_form text-left">
+                                <form class="cat_form text-left">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="branchName">Branch Name</label>
-                                            <input type="text" class="form-control" name="newbranchName" placeholder="Enter Branch Name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="branchAddress">Branch Address</label>
-                                            <textarea class="form-control" style="height: 100px;" name="newbranchAddress" placeholder="Enter Branch Address" required></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="branchPhone">Branch Phone</label>
-                                            <input type="text" class="form-control" name="newbranchPhone" placeholder="Enter Branch Phone number" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="branchPassword">Branch Password</label>
-                                            <input type="text" class="form-control" name="newbranchPassword" placeholder="Enter Branch Password" required>
+                                            <label for="categoryName">Category Name</label>
+                                            <input type="text" class="form-control" name="newcatName" placeholder="Enter Category Name" required>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -99,11 +87,39 @@
                                                     <div class="card-body p-0">
                                                         <div class="table-responsive my-table-responsive">
                                                             <table class="table">
+                                                                <?php
+                                                                    $i = 1;
+                                                                    $gets = "select * from services where s_id = '".$cat['s_id']."' order by se_name";
+                                                                    $run_gets = mysqli_query($link, $gets);
+                                                                    $counts = mysqli_num_rows($run_gets);
+                                                                    if($counts >= 1)
+                                                                    {
+                                                                        while($row_gets = mysqli_fetch_array($run_gets, MYSQLI_ASSOC))
+                                                                        {
+                                                                ?>
                                                                 <tr>
-                                                                    <td>Create a mobile app</td>
+                                                                    <td class="text-center"><?php echo $i; ?></td>
+                                                                    <td class="text-left">
+                                                                        <?php echo $row_gets['se_name']; ?>
+                                                                    </td>
                                                                 </tr>
+                                                                <?php
+                                                                            $i++;
+                                                                        }
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                ?>
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                            No Services found
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php
+                                                                    }
+                                                                ?>
                                                                 <tr>
-                                                                    <td class="text-center">
+                                                                    <td class="text-center" colspan="2">
                                                                         <a href="categories_edit?s_id=<?php echo $cat['s_id']; ?>&s_name=<?php echo $cat['s_name']; ?>">
                                                                             <div class="btn-group mb-3 btn-group-sm" role="group" aria-label="Basic example">
                                                                                 <button type="button" class="btn btn-primary btn-lg" title="Add Service"><i class="fas fa-folder-plus"></i></button>
@@ -116,14 +132,15 @@
                                                             </table>
                                                         </div>
                                                     </div>
+                                                    <form class="card-footer cat_form text-center" title="Delete this Category">
+                                                        <input type="text" name="cat_delete_id" value="<?php echo $cat['s_id']; ?>" hidden>
+                                                        <button class="btn btn-danger" type="submit">
+                                                            Delete this Category
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <form class="branch_form">
-                                            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse<?php echo $cat['s_id']; ?>" aria-expanded="true" aria-controls="collapse<?php echo $cat['s_id']; ?>">
-                                                Cancel
-                                            </button>
-                                        </form> -->
                                     </div>
                                 </div>
                             </div>
@@ -140,23 +157,23 @@
     <?php echo $script_tags; ?>
 
     <script type="text/javascript">
-        $(".branch_form").submit(function(e)
+        $(".cat_form").submit(function(e)
 		{
 			var form_data = $(this).serialize();
 			// alert(form_data);
 			var button_content = $(this).find('button[type=submit]');
 			button_content.addClass("disabled btn-progress");
             $.ajax({
-				url: 'processing/curd_location.php',
+				url: 'processing/curd_category.php',
 				data: form_data,
 				type: 'POST',
 				success: function(data)
 				{
                     alert(data);
                     button_content.removeClass("disabled btn-progress");
-					if(data === "Branch details updated" || data === "New branch added" || data === "Branch removed")
+					if(data === "New Category created" || data === "Category Deleted")
 					{
-						location.href="locations";
+						location.href="categories";
 					}
 				}
 			});

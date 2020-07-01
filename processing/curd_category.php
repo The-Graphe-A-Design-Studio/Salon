@@ -1,7 +1,48 @@
 <?php
     include('../session.php');
 
-    if(isset($_POST['category_id']))
+    if(isset($_POST['newcatName']))
+    {
+        mysqli_query($link, "insert into categories (s_name) values ('".$_POST['newcatName']."')");
+
+        echo "New Category created";
+    }
+    elseif(isset($_POST['cat_delete_id']))
+    {
+        $ser = mysqli_query($link, "delete from services where s_id = '".$_POST['cat_delete_id']."'");
+        if($ser)
+        {
+            $cat = mysqli_query($link, "delete from categories where s_id = '".$_POST['cat_delete_id']."'");
+
+            if($cat)
+            {
+                echo "Category Deleted";
+            }
+            else
+            {
+                echo "Something went wrong";
+            }
+        }
+        else
+        {
+            echo "Something went wrong";
+        }
+    }
+    elseif(isset($_POST['categoryEditName']) && isset($_POST['categoryEditId']))
+    {
+        $name = mysqli_real_escape_string($link, $_POST['categoryEditName']);
+        $edi_ca = mysqli_query($link, "update categories set s_name = '$name' where s_id = '".$_POST['categoryEditId']."'");
+
+        if($edi_ca)
+        {
+            echo "Category name updated";
+        }
+        else
+        {
+            echo "Something went wrong";
+        }
+    }
+    elseif(isset($_POST['category_id']))
     {
         foreach($_POST['new_service'] as $service)
         {

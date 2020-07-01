@@ -35,7 +35,15 @@
                     </div>
                 </div>
                 <div class="section-body text-center">
-                    <p><h4><?php echo $row_category['s_name']; ?></h4></p>
+                    <form class="edit_cat form-inline">
+                        <input type="text" style="width: 280px; height: 50px; font-size: 1.2em;" class="form-control mb-2 mr-sm-2" 
+                                name="categoryEditName" value="<?php echo $row_category['s_name']; ?>">
+                        <input type="text" name="categoryEditId" value="<?php echo $cat; ?>" hidden>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <!-- <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username"> -->
+                            <button type="submit" class="btn btn-primary btn-md">Rename this Category</button>
+                        </div>
+                    </form>
                 </div>
                 <div class="section-body">
                     <div class="row mt-sm-4">
@@ -105,8 +113,10 @@
                                                                         $get = "select * from services where s_id = '$cat' order by se_name";
                                                                         $run_get = mysqli_query($link, $get);
                                                                         $count = mysqli_num_rows($run_get);
-                                                                        while($row_get = mysqli_fetch_array($run_get, MYSQLI_ASSOC))
+                                                                        if($count >= 1)
                                                                         {
+                                                                            while($row_get = mysqli_fetch_array($run_get, MYSQLI_ASSOC))
+                                                                            {
                                                                     ?>
                                                                     <tr>
                                                                         <td>
@@ -115,9 +125,18 @@
                                                                         </td>
                                                                     </tr>
                                                                     <?php
-                                                                            $i++;
+                                                                                $i++;
+                                                                            }
                                                                         }
+                                                                        else
+                                                                        {
                                                                     ?>
+                                                                    <tr>
+                                                                        <td class="text-center">
+                                                                            No Services found
+                                                                        </td>
+                                                                    </tr>
+                                                                    <?php } ?>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -129,12 +148,6 @@
                                                                 <input type="text" name="edit_category_id" value="<?php echo $cat; ?>" hidden>
                                                                 <input type="text" name="edit_category_total" value="<?php echo $i - 1; ?>" hidden>
                                                                 <button type="submit" class="btn btn-primary btn-lg">Update</button>
-                                                            <?php
-                                                                }
-                                                                else
-                                                                {
-                                                            ?>
-                                                                No Services found
                                                             <?php
                                                                 }
                                                             ?>
@@ -235,7 +248,7 @@
 				{
                     alert(data);
                     button_content.removeClass("disabled btn-progress");
-					if(data === "New services updated" || data === "Services updated" || data === "Service Deleted")
+					if(data === "New services updated" || data === "Services updated" || data === "Service Deleted" || data === "Category name updated")
 					{
 						location.href="categories_edit?s_id=<?php echo $cat; ?>&s_name=<?php echo $row_category['s_name']; ?>";
 					}
