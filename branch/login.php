@@ -4,7 +4,7 @@
    session_start();
    
    // Check if the user is already logged in, if yes then redirect him to welcome page
-   if(isset($_SESSION["admin_loggedin"]) && $_SESSION["admin_loggedin"] === true)
+   if(isset($_SESSION["branch_loggedin"]) && $_SESSION["branch_loggedin"] === true)
    {
       header("location: dashboard");
       exit;
@@ -24,7 +24,7 @@
       // Check if email is empty
       if(empty(trim($_POST["branchId"])))
       {
-         $branchId_err = "Please enter branchId.";
+         $branchId_err = "Please enter Branch Id.";
       }
       else
       {
@@ -46,15 +46,15 @@
       {
          $enpassword = md5($password);
          
-         $login_sql = "SELECT * FROM admin WHERE admin_branchId = '$branchId' and admin_pass = '$enpassword'";
+         $login_sql = "SELECT * FROM locations WHERE l_id = '$branchId' and l_pass_enc = '$enpassword'";
          $result = mysqli_query($link, $login_sql);
          $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
          $count = mysqli_num_rows($result);
          
          if($count == 1)
          {
-            $_SESSION["admin_loggedin"] = true;
-            $_SESSION['admin_branchId'] = $branchId;
+            $_SESSION["branch_loggedin"] = true;
+            $_SESSION['branchId_loggedin'] = $branchId;
             // $_SESSION['login_pass'] = $password;
             header("location: dashboard");
          }
@@ -67,7 +67,7 @@
                      <button class="close" data-dismiss="alert">
                         <span>×</span>
                      </button>
-                     Invalid branchId or password.
+                     Invalid Branch Id or Password.
                   </div>
                </div>
             ';
@@ -89,6 +89,7 @@
    <meta charset="UTF-8">
    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
    <title>Branch Login | diva lounge spa</title>
+   <link rel="icon" href="../assets/img/diva-logo-sm.png" type="image/gif" sizes="32x32">
    <!-- General CSS Files -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
