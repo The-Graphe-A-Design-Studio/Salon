@@ -56,7 +56,7 @@
                 <ul class="sidebar-menu">
                     <li class="menu-header" style="margin-bottom: 50px"></li>
                     <li class="dashboard"><a class="nav-link" href="dashboard"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
-                    <li class="services"><a class="nav-link" href="services"><i class="fas fa-list-ol"></i><span>Services</span></a></li>
+                    <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
                     <li class="locations"><a class="nav-link" href="locations"><i class="fas fa-map-marked-alt"></i><span>Branch Locations</span></a></li>
                 </ul>
             </aside>
