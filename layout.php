@@ -56,8 +56,9 @@
                 <ul class="sidebar-menu">
                     <li class="menu-header" style="margin-bottom: 50px"></li>
                     <li class="dashboard"><a class="nav-link" href="dashboard"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
-                    <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
                     <li class="locations"><a class="nav-link" href="locations"><i class="fas fa-map-marked-alt"></i><span>Branch Locations</span></a></li>
+                    <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
+                    <li class="staffs"><a class="nav-link" href="staff"><i class="fas fa-users"></i><span>Staffs</span></a></li>
                 </ul>
             </aside>
         </div>
@@ -81,14 +82,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="assets/js/diva.js"></script>
-    
+        
         <!-- Template JS File -->
         <script src="assets/js/scripts.js"></script>
         <script src="assets/js/custom.js"></script>
     
-        <!-- Page Specific JS File -->
-        <script src="assets/js/page/index-0.js"></script>
     ';
 
 ?>
