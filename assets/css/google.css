@@ -1,0 +1,70 @@
+/*
+=======
+Google Translation Default: Starts
+*/
+.skiptranslate.goog-te-gadget > div {
+    display: block;
+  }
+  
+  select.google_translate_element {
+    color: black;
+  }
+  
+  .goog-logo-link {
+    display: none;
+  }
+  .goog-te-gadget {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+  }
+  .goog-te-gadget select {
+    border-radius: 0 !important;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    padding: 0.3rem 0.5rem;
+    min-width: 170px;
+    box-shadow: none;
+    border: 1px solid #aaa;
+  }
+
+
+  /*
+  =======
+  Google Translation : Custom Styles
+  */
+  
+  .gt__box {
+    z-index: 999999999;
+    background: #8bc251;
+    position: fixed;
+    padding: 10px;
+    color: #b8aea5;
+    bottom: 50px;
+    left: 0;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+  .gt__notif, .gt__select {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .gt__notif {
+    max-width: calc(100% - 166px);
+    margin: 0;
+    padding-right: 10px;
+    line-height: 18px;
+  }
+  @media screen and (max-width: 767px) {
+    .gt__notif {
+      max-width: 100%;
+      margin: 0 0 10px 0;
+    }
+  }
+  .gt__select select {
+    outline: 0;
+  }
+  
+  .theme-content {
+    padding: 15px;
+  }
+  

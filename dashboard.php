@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Dashboard | diva lounge spa</title>
     <?php echo $head_tags; ?>
+
 </head>
 <body>
     <div id="app">
@@ -25,6 +26,7 @@
                     <h1>Dashboard</h1>
                 </div>
             </section>
+
         </div>
 
         <?php echo $footer; ?>
@@ -37,5 +39,6 @@
             $(".dashboard").addClass("active");
         });
     </script>
+
 </body>
 </html>

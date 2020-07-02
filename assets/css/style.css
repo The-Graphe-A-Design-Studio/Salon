@@ -2451,7 +2451,8 @@ pre {
   width: 250px;
   background-color: #fff;
   z-index: 880;
-  left: 0; }
+  left: 0; 
+}
 
 .main-sidebar,
 .navbar,
