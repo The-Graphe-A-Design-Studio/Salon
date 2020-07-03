@@ -97,6 +97,13 @@
    <!-- Template CSS -->
    <link rel="stylesheet" href="assets/css/style.css">
    <link rel="stylesheet" href="assets/css/components.css">
+
+   <style>
+      a
+      {
+         text-decoration: none !important;
+      }
+   </style>
 </head>
 <body>
 
@@ -138,6 +145,9 @@
                            </div>
                         </form>
                      </div>
+                  </div>
+                  <div class="simple-footer">
+                     <i class="fas fa-long-arrow-alt-right"></i> Go to <a href="branch/login">Branch Login</a>
                   </div>
                   <div class="simple-footer">
                      Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa

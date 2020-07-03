@@ -28,7 +28,7 @@
                                     <a href="login">
                                         <div class="card card-primary">
                                             <div class="card-body text-center">
-                                                <h4><p><span style="font-size: 2em;">Admin Login</span></p></h4>
+                                                <h4><p><span style="font-size: 1.5em;">Admin Login</span></p></h4>
                                             </div>
                                         </div>
                                     </a>
@@ -37,7 +37,7 @@
                                     <a href="branch/login">
                                         <div class="card card-primary">
                                             <div class="card-body text-center">
-                                                <h4><p><span style="font-size: 2em;">Branch Login</span></p></h4>
+                                                <h4><p><span style="font-size: 1.5em;">Branch Login</span></p></h4>
                                             </div>
                                         </div>
                                     </a>
