@@ -24,6 +24,11 @@
             $query .= " AND c_date LIKE '$ses%'";
         }
 
+        if(isset($_POST['branch']))
+        {
+            $query .= " AND branch_id = '".$_POST['branch']."'";
+        }
+
         if(isset($_POST['search']))
         {
             $se = $_POST['search'];
@@ -87,7 +92,7 @@
                                 <input type="text" class="form-control" name="edit_cust_id" value="'.$row['c_id'].'" hidden>
                                 <button type="submit" class="btn btn-info btn-md">Update</button>
                             </td>
-                            <td data-column="Edit Details">
+                            <td data-column="Delete">
                                 <button class="btn btn-primary btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
                                 aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Cancel</button>
                             </td>
@@ -101,7 +106,7 @@
                     $(".edit_cust").submit(function(e)
                     {
                         var form_data = $(this).serialize();
-                        // alert(form_data);
+                        alert(form_data);
                         var button_content = $(this).find("button[type=submit]");
                         $.ajax({
                             url: "processing/curd_customer.php",
@@ -126,7 +131,7 @@
             $output = 
             '
             <tr>
-                <td colspan="6"><h5>No Data Found</h5></td>
+                <td colspan="7"><h5>No Data Found</h5></td>
             </tr>
             ';
         }
@@ -134,13 +139,13 @@
         echo $output;
 
     }
-    elseif(isset($_POST['newcustName']) && isset($_POST['newcustEmail']) && isset($_POST['newcustPhone']))
+    elseif(isset($_POST['newcustName']) && isset($_POST['newcustEmail']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
     {
         date_default_timezone_set("Asia/Qatar");
         $order_time = date('h:i A');
         $order_date = date('d M, Y');
 
-        mysqli_query($link, "insert into customers (c_name, c_email, c_phone, c_date) values ('".$_POST['newcustName']."', '".$_POST['newcustEmail']."', 
+        mysqli_query($link, "insert into customers (branch_id, c_name, c_email, c_phone, c_date) values ('".$_POST['branch_id']."', '".$_POST['newcustName']."', '".$_POST['newcustEmail']."', 
         '".$_POST['newcustPhone']."', '$order_date')");
 
         echo "New customer registered";

@@ -131,6 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
+                                        <input type="text" name="branch_id" value="<?php echo $branch_id_session; ?>" hidden>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </div>
                                 </form>
@@ -215,7 +216,7 @@
                 $.ajax({
                     url:"processing/curd_customer.php",
                     method:"POST",
-                    data:{action:action, active:active, inactive:inactive, search: search, date: date},
+                    data:{action:action, active:active, inactive:inactive, search: search, date: date, branch: <?php echo $branch_id_session; ?>},
                     success:function(data){
                         $('.filter_data').html(data);
                     }
