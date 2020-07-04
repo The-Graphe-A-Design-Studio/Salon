@@ -145,12 +145,17 @@
                         <div class="col-12 col-md-4">
                             <div class="custom-switches-stacked mt-2" style="flex-direction: row">
                                 <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Link not Generated</span>
+                                </label>
+                                <label class="custom-switch">
                                     <input type="radio" name="option" class="custom-switch-input common_selector active" value="1">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description">Reviewed</span>
                                 </label>
                                 <label class="custom-switch">
-                                    <input type="radio" name="option" class="custom-switch-input common_selector inactive" value="0">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector inactive" value="2">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description">Pending</span>
                                 </label>
@@ -176,7 +181,6 @@
                         <table>
                             <thead>
                                 <tr>
-
                                     <th>Date</th>
                                     <th>Name</th>
                                     <th>Email</th>
@@ -211,12 +215,13 @@
                 var action = 'fetch_data';
                 var active = get_filter('active');
                 var inactive = get_filter('inactive');
+                var nothing = get_filter('nothing');
                 var search = get_key('search_bar');
                 var date = get_date('search_date');
                 $.ajax({
                     url:"processing/curd_customer.php",
                     method:"POST",
-                    data:{action:action, active:active, inactive:inactive, search: search, date: date, branch: <?php echo $branch_id_session; ?>},
+                    data:{action:action, active:active, inactive:inactive, nothing:nothing, search: search, date: date, branch: <?php echo $branch_id_session; ?>},
                     success:function(data){
                         $('.filter_data').html(data);
                     }
@@ -272,26 +277,6 @@
                 });
                 e.preventDefault();
             });
-
-            // $(".form").on('submit',(function(e){
-            //   e.preventDefault();
-            //   var form_data = $(this).serialize();
-			//         // alert(form_data);
-            //   $.ajax({
-            //       url: "processing/city_fetch.php",
-            //       type: "POST",
-            //       data:  new FormData(this),
-            //       contentType: false,
-            //       cache: false,
-            //       processData:false,
-            //       success: function(data)
-            //       {
-            //         alert(data);
-            //         filter_data();
-            //       },
-            //       error: function(){}
-            //   });
-            // }));
 
         });
 

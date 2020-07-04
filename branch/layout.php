@@ -11,8 +11,7 @@
         <link rel="stylesheet" href="../assets/css/style.css">
         <link rel="stylesheet" href="../assets/css/components.css">
         <link rel="stylesheet" href="../assets/css/google.css">
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
     ';
 
     $nav_bar =

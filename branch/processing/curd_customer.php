@@ -15,6 +15,11 @@
 
         if(isset($_POST["inactive"]))
         {
+            $query .= " AND c_status = '2'";
+        }
+
+        if(isset($_POST["nothing"]))
+        {
             $query .= " AND c_status = '0'";
         }
     
@@ -59,14 +64,21 @@
                 {
                     $status =
                     '
-                        <i class="fas fa-clipboard-list" style="color: red; font-size: 1.5em"></i>
+                        <a href="customer_from?cust_id='.$row['c_id'].'"><i class="fas fa-align-left" title="Generate Form" style="color: red; font-size: 1.5em"></i></a>
+                    ';
+                }
+                elseif($row['c_status'] == 2)
+                {
+                    $status =
+                    '
+                        <i class="fas fa-clipboard-list" title="Pending" style="color: #495ae1; font-size: 1.5em"></i>
                     ';
                 }
                 else
                 {
                     $status =
                     '
-                        <i class="fas fa-clipboard-check" style="color: #81be41; font-size: 1.5em"></i>
+                        <i class="fas fa-clipboard-check" title="Reviewed" style="color: #81be41; font-size: 1.5em"></i>
                     ';
                 }
 
@@ -81,50 +93,52 @@
                             <button class="btn btn-danger btn-md btn-icon" title="Delete Customer"><i class="fas fa-trash"></i></button>
                         </td>
                     </tr>
-                    <form class="edit_cust">
-                        <tr class="collapse" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
-                            <td data-column="Date">'.$row['c_date'].'</td>
-                            <td data-column="Name"><input type="text" class="form-control" name="edit_cust_name" value="'.$row['c_name'].'"></td>
-                            <td data-column="Email"><input type="text" class="form-control" name="edit_cust_email" value="'.$row['c_email'].'"></td>
-                            <td data-column="Phone"><input type="text" class="form-control" name="edit_cust_phone" value="'.$row['c_phone'].'"></td>
-                            <td data-column="Status">'.$status.'</td>
-                            <td data-column="Edit Details">
-                                <input type="text" class="form-control" name="edit_cust_id" value="'.$row['c_id'].'" hidden>
-                                <button type="submit" class="btn btn-info btn-md">Update</button>
-                            </td>
-                            <td data-column="Delete">
-                                <button class="btn btn-primary btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
-                                aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Cancel</button>
-                            </td>
-                        </tr>
-                    </form>
+                    <tr class="collapse edit_cust" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
+                        <td colspan="7" style="padding: 0">
+                            <form class="edit_cust'.$row['c_id'].'">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td data-column="Date">'.$row['c_date'].'</td>
+                                            <td data-column="Name"><input type="text" class="form-control" name="edit_cust_name" value="'.$row['c_name'].'"></td>
+                                            <td data-column="Email"><input type="text" class="form-control" name="edit_cust_email" value="'.$row['c_email'].'"></td>
+                                            <td data-column="Phone"><input type="text" class="form-control" name="edit_cust_phone" value="'.$row['c_phone'].'"></td>
+                                            <td data-column="Status">'.$status.'</td>
+                                            <td data-column="Edit Details" colspan="2">
+                                                <input type="text" class="form-control" name="edit_cust_id" value="'.$row['c_id'].'" hidden>
+                                                <button type="submit" class="btn btn-info btn-md">Update</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <script>
+                                $(".edit_cust'.$row['c_id'].'").submit(function(e)
+                                {
+                                    // alert("shd");
+                                    var form_data = $(this).serialize();
+                                    // alert(form_data);
+                                    var button_content = $(this).find("button[type=submit]");
+                                    $.ajax({
+                                        url: "processing/curd_customer.php",
+                                        data: form_data,
+                                        type: "POST",
+                                        success: function(data)
+                                        {
+                                            alert(data);
+                                            if(data === "Customer details updated")
+                                            {
+                                                $( "#refresh_btn" ).trigger( "click" );
+                                            }
+                                        }
+                                    });
+                                    e.preventDefault();
+                                });
+                            </script>
+                        </td>
+                    </tr>
                 ';
             }
-            $output .=
-            '
-                <script>
-                    $(".edit_cust").submit(function(e)
-                    {
-                        var form_data = $(this).serialize();
-                        alert(form_data);
-                        var button_content = $(this).find("button[type=submit]");
-                        $.ajax({
-                            url: "processing/curd_customer.php",
-                            data: form_data,
-                            type: "POST",
-                            success: function(data)
-                            {
-                                alert(data);
-                                if(data === "Customer details updated" || data === "City deleted")
-                                {
-                                    $( "#refresh_btn" ).trigger( "click" );
-                                }
-                            }
-                        });
-                        e.preventDefault();
-                    });
-                </script>
-            ';
         }
         else
         {

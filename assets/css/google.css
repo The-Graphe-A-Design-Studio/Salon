@@ -40,7 +40,7 @@ Google Translation Default: Starts
     position: fixed;
     padding: 10px;
     color: #b8aea5;
-    bottom: 50px;
+    bottom: 90px;
     left: 0;
     font-family: Helvetica, Arial, sans-serif;
   }
@@ -66,5 +66,10 @@ Google Translation Default: Starts
   
   .theme-content {
     padding: 15px;
+  }
+
+  .skiptranslate
+  {
+    width: 25px !important;
   }
   
