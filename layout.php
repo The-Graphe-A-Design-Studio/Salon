@@ -59,7 +59,7 @@
                     <li class="dashboard"><a class="nav-link" href="dashboard"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
                     <li class="locations"><a class="nav-link" href="locations"><i class="fas fa-map-marked-alt"></i><span>Branch Locations</span></a></li>
                     <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
-                    <li class="staffs"><a class="nav-link" href="staff"><i class="fas fa-users"></i><span>Staffs</span></a></li>
+                    <li class="staffs"><a class="nav-link" href="staffs"><i class="fas fa-users"></i><span>Staffs</span></a></li>
                 </ul>
             </aside>
             

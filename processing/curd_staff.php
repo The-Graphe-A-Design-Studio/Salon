@@ -1,29 +1,57 @@
 <?php
     include('../session.php');
 
-    if(isset($_POST['newstaffName']) && isset($_POST['newstaffBranch']))
-    {
-        mysqli_query($link, "insert into staffs (l_id, st_name) values ('".$_POST['newstaffBranch']."', '".$_POST['newstaffName']."')");
+    // if(isset($_POST['newstaffName']) && isset($_POST['newstaffBranch']))
+    // {
+    //     mysqli_query($link, "insert into staffs (l_id, st_name) values ('".$_POST['newstaffBranch']."', '".$_POST['newstaffName']."')");
 
-        echo "New staff registered";
-    }
-    elseif(isset($_POST['location_id']))
+    //     echo "New staff registered";
+    // }
+    // elseif(isset($_POST['location_id']))
+    // {
+    //     foreach($_POST['new_staff'] as $staff)
+    //     {
+    //         if(!empty($staff))
+    //         {
+    //             $staff = mysqli_real_escape_string($link, $staff);
+
+    //             $rtt = "insert into staffs (l_id, st_name) values ('".$_POST['location_id']."', '$staff')";
+    //             mysqli_query($link, $rtt);
+    //         }
+    //     }
+    //     echo "New staffs updated";
+    // }
+    // elseif(isset($_POST['edit_location_id']) && isset($_POST['edit_location_total']))
+    // {
+    //     for($i = 1; $i <= $_POST['edit_location_total']; $i++)
+    //     {
+    //         $edit_staff = $_POST['edit_staff_'.$i];
+    //         $edit_staff_id = $_POST['edit_staff_id_'.$i];
+            
+    //         $edit_staff = mysqli_real_escape_string($link, $edit_staff);
+            
+    //         mysqli_query($link, "update staffs set st_name = '$edit_staff' where st_id = '$edit_staff_id'");
+    //     }
+    //     echo "Staffs details updated";
+    // }
+    
+    if(isset($_POST['new_page_staffs']))
     {
-        foreach($_POST['new_staff'] as $staff)
+        foreach($_POST['new_page_staffs'] as $staff)
         {
             if(!empty($staff))
             {
                 $staff = mysqli_real_escape_string($link, $staff);
 
-                $rtt = "insert into staffs (l_id, st_name) values ('".$_POST['location_id']."', '$staff')";
+                $rtt = "insert into staffs (st_name) values ('$staff')";
                 mysqli_query($link, $rtt);
             }
         }
         echo "New staffs updated";
     }
-    elseif(isset($_POST['edit_location_id']) && isset($_POST['edit_location_total']))
+    elseif(isset($_POST['edit_staff_total']))
     {
-        for($i = 1; $i <= $_POST['edit_location_total']; $i++)
+        for($i = 1; $i <= $_POST['edit_staff_total']; $i++)
         {
             $edit_staff = $_POST['edit_staff_'.$i];
             $edit_staff_id = $_POST['edit_staff_id_'.$i];
