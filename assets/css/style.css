@@ -337,7 +337,7 @@ select.form-control:not([size]):not([multiple]) {
   opacity: 0; }
 
 .custom-switches-stacked {
-  display: flex;
+  /* display: flex; */
   flex-direction: column; }
   .custom-switches-stacked .custom-switch {
     margin-bottom: .5rem; }

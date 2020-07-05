@@ -64,7 +64,12 @@
                 {
                     $status =
                     '
-                        <a href="customer_from?cust_id='.$row['c_id'].'"><i class="fas fa-align-left" title="Generate Form" style="color: red; font-size: 1.5em"></i></a>
+                        <a href="customer_form?cust_id='.$row['c_id'].'"><i class="fas fa-align-left" title="Generate Form" style="color: red; font-size: 1.5em"></i></a>
+                    ';
+
+                    $link =
+                    '
+                        <a href="#"><i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em"></i></a>
                     ';
                 }
                 elseif($row['c_status'] == 2)
@@ -73,6 +78,11 @@
                     '
                         <i class="fas fa-clipboard-list" title="Pending" style="color: #495ae1; font-size: 1.5em"></i>
                     ';
+
+                    $link =
+                    '
+                        <i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i>
+                    ';
                 }
                 else
                 {
@@ -80,17 +90,26 @@
                     '
                         <i class="fas fa-clipboard-check" title="Reviewed" style="color: #81be41; font-size: 1.5em"></i>
                     ';
+
+                    $link =
+                    '
+                        <i class="fas fa-check-double" title="Review complete" style="color: #81be41; font-size: 1.5em"></i>
+                    ';
                 }
 
                 $output .=
                 '
                         <td data-column="Status">'.$status.'</td>
+                        <td data-column="Link">'.$link.'</td>
                         <td data-column="Edit Details">
                             <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
                             aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
                         </td>
                         <td data-column="Delete">
-                            <button class="btn btn-danger btn-md btn-icon" title="Delete Customer"><i class="fas fa-trash"></i></button>
+                            <form class="edit_cust'.$row['c_id'].'">
+                                <input type="text" name="delete_customer" value="'.$row['c_id'].'" hidden>
+                                <button type="submit" class="btn btn-danger btn-md btn-icon" title="Delete Customer"><i class="fas fa-trash"></i></button>
+                            </form>
                         </td>
                     </tr>
                     <tr class="collapse edit_cust" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
@@ -126,7 +145,7 @@
                                         success: function(data)
                                         {
                                             alert(data);
-                                            if(data === "Customer details updated")
+                                            if(data === "Customer details updated" || data === "Customer removed")
                                             {
                                                 $( "#refresh_btn" ).trigger( "click" );
                                             }
@@ -134,6 +153,7 @@
                                     });
                                     e.preventDefault();
                                 });
+
                             </script>
                         </td>
                     </tr>
@@ -145,7 +165,7 @@
             $output = 
             '
             <tr>
-                <td colspan="7"><h5>No Data Found</h5></td>
+                <td colspan="8"><h5>No Data Found</h5></td>
             </tr>
             ';
         }
@@ -159,10 +179,25 @@
         $order_time = date('h:i A');
         $order_date = date('d M, Y');
 
-        mysqli_query($link, "insert into customers (branch_id, c_name, c_email, c_phone, c_date) values ('".$_POST['branch_id']."', '".$_POST['newcustName']."', '".$_POST['newcustEmail']."', 
-        '".$_POST['newcustPhone']."', '$order_date')");
+        function generateRandomString($length = 7)
+        {
+            $characters = 'aAbBc0CdDeE1fFgGh2HiIjJ3kKlLm4MnNoO5pPqQr6RsStT7uUvVw8WxXyY9zZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++)
+            {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
+        }
+
+        $code = generateRandomString();
+
+        mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_email, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
+            '".$_POST['newcustName']."', '".$_POST['newcustEmail']."', '".$_POST['newcustPhone']."', '$order_date')");
 
         echo "New customer registered";
+
     }
     elseif(isset($_POST['edit_cust_name']) && isset($_POST['edit_cust_email']) && isset($_POST['edit_cust_phone']) && isset($_POST['edit_cust_id']))
     {
@@ -170,6 +205,12 @@
                     c_phone = '".$_POST['edit_cust_phone']."' where c_id = '".$_POST['edit_cust_id']."'");
 
         echo "Customer details updated";
+    }
+    elseif($_POST['delete_customer'])
+    {
+        mysqli_query($link, "delete from customers where c_id = '".$_POST['delete_customer']."'");
+
+        echo "Customer removed";
     }
     else
     {

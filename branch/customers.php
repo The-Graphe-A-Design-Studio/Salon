@@ -164,14 +164,14 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <div class="form-div">
-                                    <input class="form-control common_selector search_date" placeholder="Search Customer by Date" name="date" style="width: 300px"/>
+                                    <input class="form-control common_selector search_date" placeholder="Search Customer by Date" name="date"/>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <div class="form-div">
-                                    <input class="form-control common_selector search_bar" placeholder="Search Customer by Name" name="name" style="width: 300px"/>
+                                    <input class="form-control common_selector search_bar" placeholder="Search Customer by Name" name="name"/>
                                 </div>
                             </div>
                         </div>
@@ -186,6 +186,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Status</th>
+                                    <th>Form Link</th>
                                     <th>Edit Details</th>
                                     <th>Delete</th>
                                 </tr>

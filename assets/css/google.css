@@ -68,8 +68,7 @@ Google Translation Default: Starts
     padding: 15px;
   }
 
-  .skiptranslate
+  .goog-te-gadget-simple span
   {
-    width: 25px !important;
+    display: none !important;
   }
-  
