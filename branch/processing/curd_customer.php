@@ -81,7 +81,7 @@
 
                     $link =
                     '
-                        <i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i>
+                        <a href="feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'"><i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i></a>
                     ';
                 }
                 else
