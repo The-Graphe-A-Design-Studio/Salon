@@ -69,7 +69,7 @@
 
                     $link =
                     '
-                        <a href="#"><i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em"></i></a>
+                        <b>Feedback Form Link: </b>Link not generated
                     ';
                 }
                 elseif($row['c_status'] == 2)
@@ -80,9 +80,7 @@
                     ';
 
                     $link =
-                    '
-                        <i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i></a>
-                    ';
+                    '<b>Feedback Form Link:</b> https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
                 }
                 else
                 {
@@ -93,7 +91,7 @@
 
                     $link =
                     '
-                        <i class="fas fa-check-double" title="Review complete" style="color: #81be41; font-size: 1.5em"></i>
+                        <b>Feedback Form Link:</b> Submitted
                     ';
                 }
 
@@ -112,8 +110,7 @@
                         </td>
                     </tr>
                     <tr style="border-top: 0">
-                        <td colspan="7" class="form-link">
-                            <b>Form Link:</b> https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'</td>
+                        <td colspan="7" class="form-link">'.$link.'</td>
                     </tr>
                     <tr class="collapse edit_cust" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
                         <td colspan="7" style="padding: 0">

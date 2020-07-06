@@ -12,8 +12,9 @@
         <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/components.css">
+        <link rel="stylesheet" href="assets/css/google.css">
     </head>
-    <body>
+    <body style="overflow: hidden">
 
         <div id="app">
             <section class="section">
@@ -21,7 +22,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="login-brand">
-                                <img src="assets/img/diva-logo.png" alt="diva lounge spa logo" width="300">
+                                <img src="assets/img/diva-logo.png" alt="diva lounge spa logo" width="350">
                             </div>
                             <div class="row">
                                 <div class="col-12 col-md-6 col-lg-6">
@@ -54,5 +55,15 @@
             </section>
         </div>
 
+        <div class="gt">
+            <div class="gt__box">
+                <div class="gt__select">
+                    <div id="google_translate_element"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Translater -->
+        <script src="assets/js/google.js"></script>
     </body>
 </html>

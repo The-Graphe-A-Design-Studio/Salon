@@ -277,6 +277,7 @@
                     {
                         alert(data);
                         button_content.removeClass("disabled btn-progress");
+                        $('#exampleModal').removeClass("show");
                         filter_data();
                     }
                 });

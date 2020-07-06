@@ -29,7 +29,30 @@
                     </div>
                 </div>
                 <div class="section-body">
-                    <div class="row mt-sm-4">
+
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <div class="custom-switches-stacked mt-2" style="flex-direction: row">
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Link not Generated</span>
+                                </label>
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector active" value="1">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Reviewed</span>
+                                </label>
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector inactive" value="2">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Pending</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-sm-4 filter_data">
 
                         <?php
                             $customers = array();
@@ -43,52 +66,7 @@
                             {
                         ?>
 
-                        <div class="col-12 col-md-3 col-lg-3">
-                            <div class="card profile-widget">
-                                <div class="profile-widget-header">
-                                    <div class="profile-widget-items">
-                                        <div class="profile-widget-item">
-                                            <div class="profile-widget-item-value"><?php echo $customer['c_name']; ?></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="profile-widget-description">
-                                    <div class="profile-widget-name">
-                                        <?php echo $customer['c_email']; ?> 
-                                        <div class="text-muted d-inline font-weight-normal">
-                                            <div class="slash"></div>
-                                            <?php echo $customer['c_phone']; ?>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 0 !important; margin-bottom: 0 !important;">
-                                        <div class="card-header" style="padding: 0 !important; min-height: 20px !important;">
-                                            <h4>Services used</h4>
-                                        </div>
-                                        <div class="card-body" style="padding: 0 !important">
-                                            <ul class="list-group">
-                                                <?php
-                                                    $re = "select * from review_form where c_id = '".$customer['c_id']."'";
-                                                    $get_re = mysqli_query($link, $re);
-                                                    while($row_re = mysqli_fetch_array($get_re, MYSQLI_ASSOC))
-                                                    {
-                                                        $service = "select * from services where se_id = '".$row_re['se_id']."'";
-                                                        $get_service = mysqli_query($link, $service);
-                                                        $row_service = mysqli_fetch_array($get_service, MYSQLI_ASSOC);
-                                                ?>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <?php echo $row_service['se_name']; ?>
-                                                        <span class="badge badge-primary badge-pill"><?php echo $row_re['rating']; ?>/5</span>
-                                                    </li>
-                                                <?php } ?>
-                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                        <?php echo $customer['c_comment']; ?>
-                                                    </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <?php
                             }
@@ -108,6 +86,38 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
+            filter_data();
+        
+            function filter_data()
+            {
+                var action = 'fetch_data';
+                var active = get_filter('active');
+                var inactive = get_filter('inactive');
+                var nothing = get_filter('nothing');
+                $.ajax({
+                    url:"processing/curd_customer.php",
+                    method:"POST",
+                    data:{action:action, active:active, inactive:inactive, nothing:nothing},
+                    success:function(data){
+                        $('.filter_data').html(data);
+                    }
+                });
+            }
+        
+            function get_filter(class_name)
+            {
+                var filter = [];
+                $('.'+class_name+':checked').each(function(){
+                    filter.push($(this).val());
+                });
+                return filter;
+            }
+        
+            $('.common_selector').on('keyup change',function(){
+                filter_data();
+            });
+
+
             $(".customers").addClass("active");
         });
     </script>
