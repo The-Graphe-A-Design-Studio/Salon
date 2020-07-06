@@ -60,6 +60,7 @@
                     <li class="locations"><a class="nav-link" href="locations"><i class="fas fa-map-marked-alt"></i><span>Branch Locations</span></a></li>
                     <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
                     <li class="staffs"><a class="nav-link" href="staffs"><i class="fas fa-users"></i><span>Staffs</span></a></li>
+                    <li class="customers"><a class="nav-link" href="customers"><i class="fas fa-smile"></i><span>Customers</span></a></li>
                 </ul>
             </aside>
             

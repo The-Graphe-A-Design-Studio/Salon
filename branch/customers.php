@@ -65,6 +65,11 @@
                 padding-left: 50%; 
             }
 
+            .form-link
+            {
+                padding-left: 0 !important;
+            }
+
             td:before { 
                 /* Now like a table header */
                 position: absolute;
@@ -186,7 +191,6 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Status</th>
-                                    <th>Form Link</th>
                                     <th>Edit Details</th>
                                     <th>Delete</th>
                                 </tr>

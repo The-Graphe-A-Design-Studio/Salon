@@ -86,6 +86,8 @@
                                         <div class="profile-widget-name">
                                             <?php echo $place['l_name']; ?>
                                         </div>
+                                        Branch Id - <?php echo $place['l_id']; ?>
+                                        <br>
                                         <?php echo $place['l_address']; ?>
                                         <br>
                                         <?php echo $place['l_phone']; ?>

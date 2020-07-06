@@ -81,7 +81,7 @@
 
                     $link =
                     '
-                        <a href="feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'"><i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i></a>
+                        <i class="fas fa-copy" title="Click to Copy Link" style="color: #81be41; font-size: 1.5em; cursor: pointer"></i></a>
                     ';
                 }
                 else
@@ -100,7 +100,6 @@
                 $output .=
                 '
                         <td data-column="Status">'.$status.'</td>
-                        <td data-column="Link">'.$link.'</td>
                         <td data-column="Edit Details">
                             <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
                             aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
@@ -111,6 +110,10 @@
                                 <button type="submit" class="btn btn-danger btn-md btn-icon" title="Delete Customer"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
+                    </tr>
+                    <tr style="border-top: 0">
+                        <td colspan="7" class="form-link">
+                            <b>Form Link:</b> https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'</td>
                     </tr>
                     <tr class="collapse edit_cust" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
                         <td colspan="7" style="padding: 0">
