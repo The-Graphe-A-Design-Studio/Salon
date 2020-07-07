@@ -11,6 +11,91 @@
     <title>Dashboard | diva lounge spa</title>
     <?php echo $head_tags; ?>
 
+    <script type="text/javascript">
+        window.onload = function () {
+            var branch = new CanvasJS.Chart("branchChart",
+            {
+                exportEnabled: true,
+                animationEnabled: true,
+                title:{
+                    text: "Customers in Branch"
+                },
+                legend:{
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    legendText: "{indexLabel}",
+                    dataPoints: [
+                        <?php
+                            $branch = "select branch_id, count(branch_id) from customers group by branch_id having count(branch_id) > 0";
+                            $get_branch = mysqli_query($link, $branch);
+                            while($row_branch = mysqli_fetch_array($get_branch, MYSQLI_ASSOC))
+                            {
+                                $id = "select l_name from locations where l_id = '".$row_branch['branch_id']."'";
+                                $get_id = mysqli_query($link, $id);
+                                $row_id = mysqli_fetch_array($get_id, MYSQLI_ASSOC);
+                        ?>
+                        { y: <?php echo $row_branch['count(branch_id)']; ?>, indexLabel: "<?php echo $row_id['l_name']; ?>" },
+                        <?php
+                            }
+                        ?>
+                    ]
+                }
+                ]
+            });
+
+            var category = new CanvasJS.Chart("categoryChart",
+            {
+                exportEnabled: true,
+                animationEnabled: true,
+                title:{
+                    text: "Categories Rating"
+                },
+                legend:{
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    legendText: "{indexLabel}",
+                    dataPoints: [
+                        <?php
+                            $branch = "select s_id, count(s_id), avg(rating) from review_form group by s_id having count(s_id) > 0";
+                            $get_branch = mysqli_query($link, $branch);
+                            while($row_branch = mysqli_fetch_array($get_branch, MYSQLI_ASSOC))
+                            {
+                                $id = "select s_name from categories where s_id = '".$row_branch['s_id']."'";
+                                $get_id = mysqli_query($link, $id);
+                                $row_id = mysqli_fetch_array($get_id, MYSQLI_ASSOC);
+                        ?>
+                        { y: <?php echo $row_branch['avg(rating)']; ?>, indexLabel: "<?php echo $row_id['s_name']; ?>" },
+                        <?php
+                            }
+                        ?>
+                    ]
+                }
+                ]
+            });
+
+            branch.render();
+            category.render();
+        }
+
+        function explodePie (e) {
+            if(typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+            }
+            e.branch.render();
+            e.category.render();
+        }
+    </script>
+
 </head>
 <body>
     <div id="app">
@@ -209,6 +294,18 @@
                 </div>
 
             </div>
+
+            <div class="row">
+            
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div id="branchChart" class="card" style="height: 300px; width: 100%;"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div id="categoryChart" class="card" style="height: 300px; width: 100%;"></div>
+                </div>
+
+            </div>
         </div>
 
         <?php echo $footer; ?>
@@ -216,6 +313,8 @@
     </div>
 
     <?php echo $script_tags; ?>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             $(".dashboard").addClass("active");

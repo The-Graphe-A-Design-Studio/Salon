@@ -32,14 +32,11 @@
         $comment = $_POST['cust_comment'];
         $comment = mysqli_real_escape_string($link, $comment);
 
-        // echo $id."       ".$comment;
-
         for($i = 1; $i <= $_POST['total_count']; $i++)
         {
             $star = $_POST['stars'.$i];
             $re_id = $_POST['review_id'.$i];
 
-            // echo $star."        ".$re_id."<br>";
             $update = "update review_form set rating = '$star' where re_id = '$re_id'";
             mysqli_query($link, $update);
         }
