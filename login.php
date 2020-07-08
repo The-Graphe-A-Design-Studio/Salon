@@ -147,12 +147,14 @@
                      </div>
                   </div>
                   <div class="simple-footer">
-                     <i class="fas fa-long-arrow-alt-right"></i> Go to <a href="branch/login">Branch Login</a>
+                     <i class="fas fa-long-arrow-alt-left"></i> Go to <a href="branch/login">Branch Login</a>
                   </div>
                   <div class="simple-footer">
                      Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
                      <br>
-                     Developed by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
+                     Designed by Teciza Solution and
+                     <br>
+                     Powered by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
                   </div>
                </div>
             </div>

@@ -1,12 +1,6 @@
 <?php
     include('session.php');
     include('layout.php');
-
-    $cust_id = $_GET['cust_id'];
-
-    $cust = "select * from customers where c_id = '$cust_id'";
-    $cust_run = mysqli_query($link, $cust);
-    $cust_row = mysqli_fetch_array($cust_run, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -43,43 +37,36 @@
                 </div>
 
                 <div class="section-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card profile-widget services-widget">
-                                <div class="profile-widget-description">
-                                    <div class="row">
-                                        <div class="col-12 col-md-4 col-lg-4">
-                                            <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                                Name
-                                            </div>
-                                            <p><?php echo $cust_row['c_name']; ?></p>
-                                        </div>
-                                        <div class="col-12 col-md-4 col-lg-4">
-                                            <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                                Email
-                                            </div>
-                                            <p><?php echo $cust_row['c_email']; ?></p>
-                                        </div>
-                                        <div class="col-12 col-md-4 col-lg-4">
-                                            <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                                Phone
-                                            </div>
-                                            <p><?php echo $cust_row['c_phone']; ?></p>
-                                        </div>
-                                    </div>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section-body">
                     <form id="create_form_for_customer">
                         <div class="row mt-sm-4">
                         
                             <div class="col-12 col-md-3 cl-lg-3"></div>
 
                             <div class="col-12 col-md-6 cl-lg-6">
+                                <div class="card profile-widget services-widget">
+                                    <div class="profile-widget-description">
+                                        <div class="row">
+                                            <div class="col-12 col-md-4 col-lg-4">
+                                                <div class="profile-widget-name" style="margin-bottom: 0 !important">
+                                                    Name
+                                                </div>
+                                                <p><input type="text" class="form-control" name="newcustName"></p>
+                                            </div>
+                                            <div class="col-12 col-md-4 col-lg-4">
+                                                <div class="profile-widget-name" style="margin-bottom: 0 !important">
+                                                    Email
+                                                </div>
+                                                <p><input type="email" class="form-control" name="newcustEmail"></p>
+                                            </div>
+                                            <div class="col-12 col-md-4 col-lg-4">
+                                                <div class="profile-widget-name" style="margin-bottom: 0 !important">
+                                                    Phone
+                                                </div>
+                                                <p><input type="text" class="form-control" name="newcustPhone"></p>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </div>
                                 <div class="card profile-widget services-widget">
                                     <div class="profile-widget-description">
                                         <table class="table" id="mytable">
@@ -125,7 +112,7 @@
                             <div class="col-12 col-md-3 cl-lg-3"></div>
                             
                             <div class="col-12 text-center">
-                                <input type="text" name="customer_id" value="<?php echo $cust_id; ?>" hidden>
+                                <!-- <input type="text" name="customer_id" value="<?php echo $cust_id; ?>" hidden> -->
                                 <input type="text" name="branch_id" value="<?php echo $branch_id_session; ?>" hidden>
                                 <button class="btn btn-primary btn-lg" type="submit">Create Form</button>
                             </div>
@@ -157,7 +144,7 @@
                     success: function(data)
                     {
                         alert(data);
-                        if(data === "Form created")
+                        if(data === "Customer registered and form created")
                         {
                             location.href="customers";
                         }

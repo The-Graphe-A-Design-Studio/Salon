@@ -8,20 +8,20 @@
     {
         $query = "SELECT * FROM customers where reg = '1'";
 
-        if(isset($_POST["active"]))
-        {
-            $query .= " AND c_status = '1'";
-        }
+        // if(isset($_POST["active"]))
+        // {
+        //     $query .= " AND c_status = '1'";
+        // }
 
-        if(isset($_POST["inactive"]))
-        {
-            $query .= " AND c_status = '2'";
-        }
+        // if(isset($_POST["inactive"]))
+        // {
+        //     $query .= " ";
+        // }
 
-        if(isset($_POST["nothing"]))
-        {
-            $query .= " AND c_status = '0'";
-        }
+        // if(isset($_POST["nothing"]))
+        // {
+        //     $query .= " AND c_status = '0'";
+        // }
     
         if(isset($_POST['date']))
         {
@@ -37,7 +37,7 @@
         if(isset($_POST['search']))
         {
             $se = $_POST['search'];
-            $query .= " AND c_name LIKE '$se%' order by c_id desc";
+            $query .= " AND c_name LIKE '$se%' AND c_status = '2' order by c_id desc";
         }
 
         $statement = $connect->prepare($query);
@@ -80,7 +80,7 @@
                     ';
 
                     $link =
-                    '<b>Feedback Form Link:</b> https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
+                    'localhost/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
                 }
                 else
                 {
@@ -98,6 +98,16 @@
                 $output .=
                 '
                         <td data-column="Status">'.$status.'</td>
+                        <td data-column="Link" class="copy'.$row['c_id'].'">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" value="'.$link.'" readonly>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary btn-info" type="button">Copy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                         <td data-column="Edit Details">
                             <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
                             aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
@@ -109,11 +119,8 @@
                             </form>
                         </td>
                     </tr>
-                    <tr style="border-top: 0">
-                        <td colspan="7" class="form-link">'.$link.'</td>
-                    </tr>
                     <tr class="collapse edit_cust" id="collapse_'.$row['c_id'].'" style="border: 2px solid #ffa426;">
-                        <td colspan="7" style="padding: 0">
+                        <td colspan="8" style="padding: 0">
                             <form class="edit_cust'.$row['c_id'].'">
                                 <table>
                                     <tbody>
@@ -131,7 +138,7 @@
                                     </tbody>
                                 </table>
                             </form>
-                            <script>
+                            <script type="text/javascript">
                                 $(".edit_cust'.$row['c_id'].'").submit(function(e)
                                 {
                                     // alert("shd");
@@ -154,6 +161,22 @@
                                     e.preventDefault();
                                 });
 
+                                (function()
+                                {
+                                    var copyButton = document.querySelector(".copy'.$row['c_id'].' button");
+                                    var copyInput = document.querySelector(".copy'.$row['c_id'].' input");
+                                    copyButton.addEventListener("click", function(e) {
+                                        e.preventDefault();
+                                        var text = copyInput.select();
+                                        document.execCommand("copy");
+                                        copyButton.classList.remove("btn-primary");
+                                        copyButton.innerHTML = "Copied";
+                                    });
+                                    
+                                    copyInput.addEventListener("click", function() {
+                                        this.select();
+                                    });
+                                })();
                             </script>
                         </td>
                     </tr>

@@ -65,6 +65,11 @@
                 padding-left: 50%; 
             }
 
+            .copy-td
+            {
+                padding-left: 0% !important;
+            }
+
             .form-link
             {
                 padding-left: 0 !important;
@@ -108,46 +113,12 @@
                 </div>
 
                 <div class="section-body text-right">
-                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Add new Customer</button>
-                    
-                    <!-- Modal -->
-                    <div class="mymodal modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Add new Customer</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form class="cust_form text-left">
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="customerName">Customer Name</label>
-                                            <input type="text" class="form-control" name="newcustName" placeholder="Enter Customer Full Name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="customerEmail">Customer Email</label>
-                                            <input type="email" class="form-control" name="newcustEmail" placeholder="Enter Customer Email (Ex: name@mail.com)" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="customerPhone">Customer Phone</label>
-                                            <input type="text" class="form-control" name="newcustPhone" placeholder="Enter Customer Phone (Ex: +97 3424534552)" required>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <input type="text" name="branch_id" value="<?php echo $branch_id_session; ?>" hidden>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <a href="customer_form"><button class="btn btn-primary btn-lg">Add new Customer</button></a>
                 </div>
 
                 <div class="section-body" style="margin-top: 2vh">
                     <div class="row">
-                        <div class="col-12 col-md-4">
+                        <!-- <div class="col-12 col-md-4">
                             <div class="custom-switches-stacked mt-2" style="flex-direction: row">
                                 <label class="custom-switch">
                                     <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
@@ -165,7 +136,7 @@
                                     <span class="custom-switch-description">Pending</span>
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <div class="form-div">
@@ -191,6 +162,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Status</th>
+                                    <th>Link</th>
                                     <th>Edit Details</th>
                                     <th>Delete</th>
                                 </tr>
@@ -288,6 +260,22 @@
 
         $(document).ready(function(){
             $(".customers").addClass("active");
+        });
+    </script>
+    <script>
+        $("#insert-more").click(function () {
+            $("#mytable").each(function () {
+                var tds = '<tr>';
+                jQuery.each($('tr:last td', this), function () {
+                    tds += '<td>' + $(this).html() + '</td>';
+                });
+                tds += '</tr>';
+                if ($('tbody', this).length > 0) {
+                    $('tbody', this).append(tds);
+                } else {
+                    $(this).append(tds);
+                }
+            });
         });
     </script>
 </body>
