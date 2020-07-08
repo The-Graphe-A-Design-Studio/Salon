@@ -80,7 +80,7 @@
                     ';
 
                     $link =
-                    'localhost/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
+                    'https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
                 }
                 else
                 {
