@@ -34,11 +34,6 @@
                         <div class="col-12 col-md-12">
                             <div class="custom-switches-stacked mt-2" style="flex-direction: row">
                                 <label class="custom-switch">
-                                    <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
-                                    <span class="custom-switch-indicator"></span>
-                                    <span class="custom-switch-description">Link not Generated</span>
-                                </label>
-                                <label class="custom-switch">
                                     <input type="radio" name="option" class="custom-switch-input common_selector active" value="1">
                                     <span class="custom-switch-indicator"></span>
                                     <span class="custom-switch-description">Reviewed</span>
@@ -93,11 +88,10 @@
                 var action = 'fetch_data';
                 var active = get_filter('active');
                 var inactive = get_filter('inactive');
-                var nothing = get_filter('nothing');
                 $.ajax({
                     url:"processing/curd_customer.php",
                     method:"POST",
-                    data:{action:action, active:active, inactive:inactive, nothing:nothing},
+                    data:{action:action, active:active, inactive:inactive},
                     success:function(data){
                         $('.filter_data').html(data);
                     }

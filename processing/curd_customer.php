@@ -18,11 +18,6 @@
             $query .= " AND c_status = '2'";
         }
 
-        if(isset($_POST["nothing"]))
-        {
-            $query .= " AND c_status = '0'";
-        }
-    
         $query .= " order by c_id desc";
         
         $statement = $connect->prepare($query);
@@ -63,7 +58,7 @@
                                         <ul class="list-group">
                 ';
 
-                                            $re = "select * from review_form where c_id = '".$row['c_id']."'";
+                                            $re = "select * from review_form where c_code = '".$row['c_code']."'";
                                             $get_re = mysqli_query($link, $re);
                                             while($row_re = mysqli_fetch_array($get_re, MYSQLI_ASSOC))
                                             {
@@ -78,10 +73,29 @@
                                                 </li>
                 ';
                                             }
+                                            if($row['c_return'] == 1)
+                                            {
+                                                $return = "Definitely";
+                                            }
+                                            elseif($row['c_return'] == 2)
+                                            {
+                                                $return = "May be";
+                                            }
+                                            elseif($row['c_return'] == 3)
+                                            {
+                                                $return = "Definitely Not";
+                                            }
+                                            else
+                                            {
+                                                $return = "Form not submitted";
+                                            }
                 $output .=
                 '
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    '.$row['c_comment'].'
+                                                    <b>Visit Again : </b>'.$return.'
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <b>Comment : </b>'.$row['c_comment'].'
                                                 </li>
                                         </ul>
                                     </div>

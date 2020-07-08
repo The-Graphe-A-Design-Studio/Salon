@@ -81,8 +81,52 @@
                 ]
             });
 
+            var return23 = new CanvasJS.Chart("returnChart",
+            {
+                exportEnabled: true,
+                animationEnabled: true,
+                title:{
+                    text: "May Visit Again"
+                },
+                legend:{
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    legendText: "{indexLabel}",
+                    dataPoints: [
+                        <?php
+                            $return2 = "select c_return, count(c_return), avg(c_return) from customers where c_return <> 0 group by c_return having count(c_return) > 0";
+                            $get_return2 = mysqli_query($link, $return2);
+                            while($row_return2 = mysqli_fetch_array($get_return2, MYSQLI_ASSOC))
+                            {
+                                if($row_return2['c_return'] == 1)
+                                {
+                                    $return1 = "Definitely";
+                                }
+                                elseif($row_return2['c_return'] == 2)
+                                {
+                                    $return1 = "May be";
+                                }
+                                elseif($row_return2['c_return'] == 3)
+                                {
+                                    $return1 = "Definitely Not";
+                                }
+                        ?>
+                        { y: <?php echo $row_return2['avg(c_return)']; ?>, indexLabel: "<?php echo $return1; ?>" },
+                        <?php
+                            }
+                        ?>
+                    ]
+                }
+                ]
+            });
+
             branch.render();
             category.render();
+            return23.render();
         }
 
         function explodePie (e) {
@@ -93,6 +137,7 @@
             }
             e.branch.render();
             e.category.render();
+            e.return23.render();
         }
     </script>
 
@@ -142,11 +187,11 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                            <h4>Link not Generated</h4>
+                            <h4>Total Feedback Forms</h4>
                             </div>
                             <div class="card-body">
                             <?php
-                                $cust = "select * from customers where c_status = '0'";
+                                $cust = "select * from customers";
                                 $cust_get = mysqli_query($link, $cust);
                                 $count_cust = mysqli_num_rows($cust_get);
 
@@ -303,6 +348,10 @@
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div id="categoryChart" class="card" style="height: 300px; width: 100%;"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div id="returnChart" class="card" style="height: 300px; width: 100%;"></div>
                 </div>
 
             </div>

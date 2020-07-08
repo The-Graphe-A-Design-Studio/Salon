@@ -8,6 +8,15 @@
     $get = mysqli_query($link, $customer);
     $row = mysqli_fetch_array($get, MYSQLI_ASSOC);
 
+    if($row['c_status'] == 1)
+    {
+        header("location: thankyou");
+    }
+
+    $branch = "select * from locations where l_id = '".$row['branch_id']."'";
+    $get_branch = mysqli_query($link, $branch);
+    $row_branch = mysqli_fetch_array($get_branch, MYSQLI_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,174 +34,241 @@
         <link rel="stylesheet" href="../assets/css/components.css">
         <link rel="stylesheet" href="../assets/css/google.css">
 
-        <style>
-            a
+    <style>
+        
+        table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        }
+
+        th { 
+            background: #a5ce77; 
+            color: #f4f6f9; 
+            font-weight: bold;
+            }
+
+        td, th { 
+            padding: 8px; 
+            border: 1px solid #a5ce77; 
+            text-align: center; 
+            font-size: 1.1em;
+            }
+
+        /* 
+        Max width before this PARTICULAR table gets nasty
+        This query will take effect for any screen smaller than 760px
+        and also iPads specifically.
+        */
+        @media 
+        only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+            table { 
+                width: 100%; 
+            }
+
+            /* Force table to not be like tables anymore */
+            table, thead, tbody, th, td, tr { 
+                display: block; 
+            }
+            
+            /* Hide table headers (but not display: none;, for accessibility) */
+            thead tr { 
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            
+            tr { border: 1px solid #ccc; }
+            
+            td { 
+                /* Behave  like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee; 
+                position: relative;
+                padding-left: 50%; 
+            }
+
+            .copy-td
             {
-                text-decoration: none !important;
+                padding-left: 0% !important;
             }
 
-            .rating {
-            display: inline-block;
-            position: relative;
-            height: 50px;
-            line-height: 50px;
-            font-size: 50px;
+            .form-link
+            {
+                padding-left: 0 !important;
             }
 
-            .rating label {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            cursor: pointer;
+            td:before { 
+                /* Now like a table header */
+                position: absolute;
+                /* Top/left values mimic padding */
+                top: 6px;
+                left: 6px;
+                width: 45%; 
+                padding-right: 10px; 
+                white-space: nowrap;
+                /* Label the data */
+                content: attr(data-column);
+
+                color: #000;
+                font-weight: bold;
             }
 
-            .rating label:last-child {
-            position: static;
-            }
-
-            .rating label:nth-child(1) {
-            z-index: 5;
-            }
-
-            .rating label:nth-child(2) {
-            z-index: 4;
-            }
-
-            .rating label:nth-child(3) {
-            z-index: 3;
-            }
-
-            .rating label:nth-child(4) {
-            z-index: 2;
-            }
-
-            .rating label:nth-child(5) {
-            z-index: 1;
-            }
-
-            .rating label input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            }
-
-            .rating label .icon {
-            float: left;
-            color: transparent;
-            }
-
-            .rating label:last-child .icon {
-            color: #cae1ad;
-            }
-
-            .rating:not(:hover) label input:checked ~ .icon,
-            .rating:hover label:hover input ~ .icon {
-            color: #81be41;
-            }
-
-            .rating label input:focus:not(:checked) ~ .icon:last-child {
-            color: #cae1ad;
-            text-shadow: 0 0 5px #cae1ad;
-            }
-        </style>
+        }
+    </style>
     </head>
     <body>
 
         <div id="app">
             <section class="section">
-                <div class="container mt-5">
+                <div class="container mt-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="login-brand">
-                                <img src="../assets/img/diva-logo.png" alt="diva lounge spa logo" width="350">
-                            </div>
-
                             <div class="card">
+                                <div class="login-brand" style="position: relative;">
+                                    <div style="position: absolute; top: 50%; left: 2%;">
+                                        <span style="font-size: 0.6rem; letter-spacing: 2px;"><?php echo $row_branch['l_name']; ?></span>
+                                    </div>
+                                    <div style="position: absolute; top: 50%; right: 2%;">
+                                        <span style="font-size: 0.6rem; letter-spacing: 2px;"><?php echo $row['c_date']; ?></span>
+                                    </div>
+                                </div>
+                                <div class="login-brand">
+                                    <img src="../assets/img/diva-logo.png" alt="diva lounge spa logo" width="320">
+                                </div>
                                 <div class="card-header text-center" style="width: unset !important">
-                                    <h4 class="card-title">Feedback Form</h4>
+                                    <h1 class="card-title">Feedback Form</h1>
                                 </div>
+                                <p class="text-center" style="padding-left: 3vh; padding-right: 3vh; font-size: 0.9rem">We appreciate your business and we want to make sure we meet your expectations, providing the right treatment 
+                                    is very important and we would like to hear your feedback on your Spa experience.</p>
                                 <div class="card-body text-center">
-                                    <h4><?php echo $row['c_name']; ?></h4>
-                                    <a href="" class="card-link"><?php echo $row['c_email']; ?></a>
-                                    <a href="" class="card-link"><?php echo $row['c_phone']; ?></a>
+                                    <h6>
+                                        Customer Name : <?php echo $row['c_name']; ?>
+                                        <br>
+                                        Customer Email : <?php echo $row['c_email']; ?>
+                                        <br>
+                                        Customer Contact : <?php echo $row['c_phone']; ?>
+                                    </h6>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <form class="feedback">
-                                    <?php
-                                        $i = 1;
-                                        $data = "select * from review_form where c_id = '$cust_id'";
-                                        $get_data = mysqli_query($link, $data);
-                                        while($row_data = mysqli_fetch_array($get_data, MYSQLI_ASSOC))
-                                        {
-                                            $services[] = $row_data;
-                                        }
-                                        foreach($services as $service)
-                                        {
-                                            $se = "select * from services where se_id = '".$service['se_id']."'";
-                                            $get_se = mysqli_query($link, $se);
-                                            $row_se = mysqli_fetch_array($get_se, MYSQLI_ASSOC);
+                                <div class="card-body">
+                                    <form class="feedback">
+                                        <table>
+                                            <thead>
+                                                <th>Evaluation</th>
+                                                <th>Very Poor</th>
+                                                <th>Poor</th>
+                                                <th>Average</th>
+                                                <th>Very Good</th>
+                                                <th>Excellent</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                    $i = 1;
+                                                    $data = "select * from review_form where c_code = '$cust_code'";
+                                                    $get_data = mysqli_query($link, $data);
+                                                    while($row_data = mysqli_fetch_array($get_data, MYSQLI_ASSOC))
+                                                    {
+                                                        $services[] = $row_data;
+                                                    }
+                                                    foreach($services as $service)
+                                                    {
+                                                        $se = "select * from services where se_id = '".$service['se_id']."'";
+                                                        $get_se = mysqli_query($link, $se);
+                                                        $row_se = mysqli_fetch_array($get_se, MYSQLI_ASSOC);
 
-                                            $st = "select * from staffs where st_id = '".$service['st_id']."'";
-                                            $get_st = mysqli_query($link, $st);
-                                            $row_st = mysqli_fetch_array($get_st, MYSQLI_ASSOC);
-                                    ?>
-                                    <div class="card-body">
-                                        <div class="section-title mt-0"><?php echo $row_se['se_name']; ?></div>
-                                        <div class="form-group">
-                                            <div class="rating text-center">
-                                                <label>
-                                                    <input type="radio" name="stars<?php echo $i; ?>" value="1" />
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars<?php echo $i; ?>" value="2" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars<?php echo $i; ?>" value="3" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>   
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars<?php echo $i; ?>" value="4" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                </label>
-                                                <label>
-                                                    <input type="radio" name="stars<?php echo $i; ?>" value="5" />
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
-                                                    <span class="icon">★</span>
+                                                        $st = "select * from staffs where st_id = '".$service['st_id']."'";
+                                                        $get_st = mysqli_query($link, $st);
+                                                        $row_st = mysqli_fetch_array($get_st, MYSQLI_ASSOC);
+                                                ?>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            <?php echo $row_se['se_name']; ?>
+                                                            <br>
+                                                            <span style="font-size: 0.8em; color: #6c757d;"><b>Service By : </b><?php echo $row_st['st_name']; ?></span>
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="1" class="selectgroup-input">
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="2" class="selectgroup-input">
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="3" class="selectgroup-input">
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="4" class="selectgroup-input">
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="5" class="selectgroup-input">
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                        <input type="text" value="<?php echo $service['re_id']; ?>" name="review_id<?php echo $i; ?>" hidden>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                        $i++;
+                                                    }
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                        <br><br>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                                <h6>Would you visit Diva Lounge Spa again ? :</h6>
+                                            </label>
+                                            <div class="col-sm-12 col-md-3 text-center">
+                                                <label class="selectgroup-item">
+                                                    <b>Definitely</b>
+                                                    <input type="radio" name="return" value="1" class="selectgroup-input">
+                                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
-                                            <label>Service by <?php echo $row_st['st_name']; ?></label>
+                                            <div class="col-sm-12 col-md-3 text-center">
+                                                <label class="selectgroup-item">
+                                                    <b>Maybe</b>
+                                                    <input type="radio" name="return" value="2" class="selectgroup-input">
+                                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                </label>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3 text-center">
+                                                <label class="selectgroup-item">
+                                                    <b>Definitely Not</b>
+                                                    <input type="radio" name="return" value="3" class="selectgroup-input">
+                                                    <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <input type="text" value="<?php echo $service['re_id']; ?>" name="review_id<?php echo $i; ?>" hidden>
-                                    </div>
-                                    <?php
-                                            $i++;
-                                        }
-                                    ?>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <textarea name="cust_comment" id="" cols="30" rows="5" style="width: 100%"></textarea>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">
+                                                <h6>Additional Comments :</h6>
+                                            </label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <textarea name="cust_comment" cols="30" rows="4" style="width: 100%"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="card-footer text-center">
-                                        <input type="text" value="<?php echo $i - 1; ?>" name="total_count" hidden>
-                                        <input type="text" value="<?php echo $cust_id; ?>" name="cust_id" hidden>
-                                        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                                    </div>
-                                </form>
+                                        <div class="card-footer text-center">
+                                            <input type="text" value="<?php echo $i - 1; ?>" name="total_count" hidden>
+                                            <input type="text" value="<?php echo $cust_code; ?>" name="cust_code" hidden>
+                                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
 
                             <div class="gt">
@@ -206,7 +282,8 @@
                             <div class="simple-footer">
                                 Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
                                 <br>
-                                Developed by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
+                                Designed by <a href="#" target="_blank">Teciza Solution</a> & 
+                                Powered by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
                             </div>
                         </div>
                     </div>
