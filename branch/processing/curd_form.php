@@ -77,7 +77,9 @@
             echo "Something went wrong. Try again";
         }
     }
-    elseif(isset($_POST['total_count']) && isset($_POST['cust_comment']) && isset($_POST['cust_code']) && isset($_POST['return']))
+    elseif(isset($_POST['total_count']) && isset($_POST['cust_comment']) && isset($_POST['cust_code']) && isset($_POST['return']) && 
+        isset($_POST['eva_q1']) && isset($_POST['eva_q2']) && isset($_POST['eva_q3']) && isset($_POST['eva_q4']) && isset($_POST['eva_q5']) 
+        && isset($_POST['eva_q6']) && isset($_POST['eva_q7']))
     {
         // $count_re = count($_POST['review_id']);
 
@@ -94,7 +96,8 @@
             mysqli_query($link, $update);
         }
 
-        $update_cust = "update customers set c_comment = '$comment', c_status = '1', c_return = '".$_POST['return']."' where c_code = '$code'";
+        $update_cust = "update customers set c_q1 = '".$_POST['eva_q1']."', c_q2 = '".$_POST['eva_q2']."', c_q3 = '".$_POST['eva_q3']."', 
+        c_q4 = '".$_POST['eva_q4']."', c_q5 = '".$_POST['eva_q5']."', c_q6 = '".$_POST['eva_q6']."', c_q7 = '".$_POST['eva_q7']."', c_comment = '$comment', c_status = '1', c_return = '".$_POST['return']."' where c_code = '$code'";
         $done = mysqli_query($link, $update_cust);
 
         if($done)

@@ -53,6 +53,10 @@
             text-align: center; 
             font-size: 1.1em;
             }
+        .table-caption
+        {
+            display: none;
+        }
 
         /* 
         Max width before this PARTICULAR table gets nasty
@@ -97,6 +101,19 @@
             .form-link
             {
                 padding-left: 0 !important;
+            }
+
+            .table-caption
+            {
+                display: block;
+                text-align: center;
+                font-size: 1rem;
+                font-weight: bolder;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                background: #a5ce77;
+                color: #fff;
+                padding: 1vh;
             }
 
             td:before { 
@@ -153,9 +170,10 @@
                                 </div>
                                 <div class="card-body">
                                     <form class="feedback">
+                                        <div class="table-caption">Services</div>
                                         <table>
                                             <thead>
-                                                <th>Evaluation</th>
+                                                <th>Services</th>
                                                 <th>Very Poor</th>
                                                 <th>Poor</th>
                                                 <th>Average</th>
@@ -191,31 +209,31 @@
                                                     </td>
                                                     <td data-column="Very Poor">
                                                         <label class="selectgroup-item">
-                                                            <input type="radio" name="stars<?php echo $i; ?>" value="1" class="selectgroup-input">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="1" class="selectgroup-input" required>
                                                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                         </label>
                                                     </td>
                                                     <td data-column="Poor">
                                                         <label class="selectgroup-item">
-                                                            <input type="radio" name="stars<?php echo $i; ?>" value="2" class="selectgroup-input">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="2" class="selectgroup-input" required>
                                                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                         </label>
                                                     </td>
                                                     <td data-column="Average">
                                                         <label class="selectgroup-item">
-                                                            <input type="radio" name="stars<?php echo $i; ?>" value="3" class="selectgroup-input">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="3" class="selectgroup-input" required>
                                                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                         </label>
                                                     </td>
                                                     <td data-column="Very Good">
                                                         <label class="selectgroup-item">
-                                                            <input type="radio" name="stars<?php echo $i; ?>" value="4" class="selectgroup-input">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="4" class="selectgroup-input" required>
                                                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                         </label>
                                                     </td>
                                                     <td data-column="Excellent">
                                                         <label class="selectgroup-item">
-                                                            <input type="radio" name="stars<?php echo $i; ?>" value="5" class="selectgroup-input">
+                                                            <input type="radio" name="stars<?php echo $i; ?>" value="5" class="selectgroup-input" required>
                                                             <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                         </label>
                                                         <input type="text" value="<?php echo $service['re_id']; ?>" name="review_id<?php echo $i; ?>" hidden>
@@ -228,6 +246,279 @@
                                             </tbody>
                                         </table>
                                         <br><br>
+                                        <div class="table-caption">Evaluation</div>
+                                        <table>
+                                            <thead>
+                                                <th>Evaluation</th>
+                                                <th>Very Poor</th>
+                                                <th>Poor</th>
+                                                <th>Average</th>
+                                                <th>Very Good</th>
+                                                <th>Excellent</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Quality of Spa Reservation
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q1" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q1" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q1" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q1" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q1" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Spa Receptionist Service
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q2" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q2" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q2" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q2" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q2" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Treatment Room / Area Ambience
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q3" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q3" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q3" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q3" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q3" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Therapist Consultation skill
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q4" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q4" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q4" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q4" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q4" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Quality of Treatment
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q5" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q5" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q5" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q5" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q5" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Quality of time spent
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q6" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q6" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q6" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q6" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q6" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding-left: 1% !important">
+                                                        <div class="section-title">
+                                                            Over all Spa Experience
+                                                        </div>
+                                                    </td>
+                                                    <td data-column="Very Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q7" value="1" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Poor">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q7" value="2" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Average">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q7" value="3" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Very Good">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q7" value="4" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                    <td data-column="Excellent">
+                                                        <label class="selectgroup-item">
+                                                            <input type="radio" name="eva_q7" value="5" class="selectgroup-input" required>
+                                                            <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <br><br>
                                         <div class="form-group row">
                                             <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
                                                 <h6>Would you visit Diva Lounge Spa again ? :</h6>
@@ -235,21 +526,21 @@
                                             <div class="col-sm-12 col-md-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Definitely</b>
-                                                    <input type="radio" name="return" value="1" class="selectgroup-input">
+                                                    <input type="radio" name="return" value="1" class="selectgroup-input" required>
                                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
                                             <div class="col-sm-12 col-md-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Maybe</b>
-                                                    <input type="radio" name="return" value="2" class="selectgroup-input">
+                                                    <input type="radio" name="return" value="2" class="selectgroup-input" required>
                                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
                                             <div class="col-sm-12 col-md-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Definitely Not</b>
-                                                    <input type="radio" name="return" value="3" class="selectgroup-input">
+                                                    <input type="radio" name="return" value="3" class="selectgroup-input" required>
                                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
