@@ -34,106 +34,26 @@
         <link rel="stylesheet" href="../assets/css/components.css">
         <link rel="stylesheet" href="../assets/css/google.css">
 
-    <style>
-        
-        table { 
-        width: 100%; 
-        border-collapse: collapse; 
-        }
-
-        th { 
-            background: #a5ce77; 
-            color: #f4f6f9; 
-            font-weight: bold;
-            }
-
-        td, th { 
-            padding: 8px; 
-            border: 1px solid #a5ce77; 
-            text-align: center; 
-            font-size: 1.1em;
-            }
-        .table-caption
-        {
-            display: none;
-        }
-
-        /* 
-        Max width before this PARTICULAR table gets nasty
-        This query will take effect for any screen smaller than 760px
-        and also iPads specifically.
-        */
-        @media 
-        only screen and (max-width: 760px),
-        (min-device-width: 768px) and (max-device-width: 1024px)  {
-
-            table { 
-                width: 100%; 
-            }
-
-            /* Force table to not be like tables anymore */
-            table, thead, tbody, th, td, tr { 
-                display: block; 
-            }
-            
-            /* Hide table headers (but not display: none;, for accessibility) */
-            thead tr { 
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            
-            tr { border: 1px solid #ccc; }
-            
-            td { 
-                /* Behave  like a "row" */
-                border: none;
-                border-bottom: 1px solid #eee; 
-                position: relative;
-                padding-left: 50%; 
-            }
-
-            .copy-td
+        <style>
+            td
             {
-                padding-left: 0% !important;
+                text-align: left
             }
-
-            .form-link
+            th, .section-title
             {
-                padding-left: 0 !important;
-            }
-
-            .table-caption
-            {
-                display: block;
+                font-size: 0.9em !important;
                 text-align: center;
-                font-size: 1rem;
-                font-weight: bolder;
-                letter-spacing: 2px;
-                text-transform: uppercase;
-                background: #a5ce77;
-                color: #fff;
-                padding: 1vh;
+                padding: 2px;
+            }
+            td
+            {
+                text-align: center;
             }
 
-            td:before { 
-                /* Now like a table header */
-                position: absolute;
-                /* Top/left values mimic padding */
-                top: 6px;
-                left: 6px;
-                width: 45%; 
-                padding-right: 10px; 
-                white-space: nowrap;
-                /* Label the data */
-                content: attr(data-column);
-
-                color: #000;
-                font-weight: bold;
+            .card .card-body .section-title::before {
+                display: none;
             }
-
-        }
-    </style>
+        </style>
     </head>
     <body>
 
@@ -168,10 +88,9 @@
                                         Customer Contact : <?php echo $row['c_phone']; ?>
                                     </h6>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body" style="padding: 0.5em">
                                     <form class="feedback">
-                                        <div class="table-caption">Services</div>
-                                        <table>
+                                        <table class="col-sm-12 table-bordered table-striped table-condensed cf">
                                             <thead>
                                                 <th>Services</th>
                                                 <th>Very Poor</th>
@@ -201,7 +120,7 @@
                                                 ?>
                                                 <tr>
                                                     <td style="padding-left: 1% !important">
-                                                        <div class="section-title">
+                                                        <div class="section-title" style="font-size: 0.9em;">
                                                             <?php echo $row_se['se_name']; ?>
                                                             <br>
                                                             <span style="font-size: 0.8em; color: #6c757d;"><b>Service By : </b><?php echo $row_st['st_name']; ?></span>
@@ -246,15 +165,14 @@
                                             </tbody>
                                         </table>
                                         <br><br>
-                                        <div class="table-caption">Evaluation</div>
-                                        <table>
+                                        <table class="col-sm-12 table-bordered table-striped table-condensed cf">
                                             <thead>
-                                                <th>Evaluation</th>
-                                                <th>Very Poor</th>
-                                                <th>Poor</th>
-                                                <th>Average</th>
-                                                <th>Very Good</th>
-                                                <th>Excellent</th>
+                                                <th scope="col">Evaluation</th>
+                                                <th scope="col">Very Poor</th>
+                                                <th scope="col">Poor</th>
+                                                <th scope="col">Average</th>
+                                                <th scope="col">Very Good</th>
+                                                <th scope="col">Excellent</th>
                                             </thead>
                                             <tbody>
                                                 <tr>
