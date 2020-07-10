@@ -41,7 +41,7 @@
             }
             th, .section-title
             {
-                font-size: 0.9em !important;
+                font-size: 1em !important;
                 text-align: center;
                 padding: 2px;
             }
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="card-body" style="padding: 0.5em">
                                     <form class="feedback">
-                                        <table class="col-sm-12 table-bordered table-striped table-condensed cf">
+                                        <table class="col-sm-12 table-bordered table-condensed cf">
                                             <thead>
                                                 <th>Services</th>
                                                 <th>Very Poor</th>
@@ -165,7 +165,7 @@
                                             </tbody>
                                         </table>
                                         <br><br>
-                                        <table class="col-sm-12 table-bordered table-striped table-condensed cf">
+                                        <table class="col-sm-12 table-bordered table-condensed cf">
                                             <thead>
                                                 <th scope="col">Evaluation</th>
                                                 <th scope="col">Very Poor</th>
@@ -438,24 +438,24 @@
                                         </table>
                                         <br><br>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                            <label class="col-form-label text-md-right col-12 col-md-12 col-lg-3">
                                                 <h6>Would you visit Diva Lounge Spa again ? :</h6>
                                             </label>
-                                            <div class="col-sm-12 col-md-3 text-center">
+                                            <div class="col-sm-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Definitely</b>
                                                     <input type="radio" name="return" value="1" class="selectgroup-input" required>
                                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-12 col-md-3 text-center">
+                                            <div class="col-sm-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Maybe</b>
                                                     <input type="radio" name="return" value="2" class="selectgroup-input" required>
                                                     <span class="selectgroup-button selectgroup-button-icon"><i class="fas fa-star"></i></span>
                                                 </label>
                                             </div>
-                                            <div class="col-sm-12 col-md-3 text-center">
+                                            <div class="col-sm-3 text-center">
                                                 <label class="selectgroup-item">
                                                     <b>Definitely Not</b>
                                                     <input type="radio" name="return" value="3" class="selectgroup-input" required>
@@ -464,7 +464,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-md-right col-12 col-md-2 col-lg-2">
+                                            <label class="col-12 col-form-label text-md-right col-12 col-md-2 col-lg-2">
                                                 <h6>Additional Comments :</h6>
                                             </label>
                                             <div class="col-sm-12 col-md-10">

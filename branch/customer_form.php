@@ -50,19 +50,19 @@
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Name
                                                 </div>
-                                                <p><input type="text" class="form-control" name="newcustName"></p>
+                                                <p><input type="text" class="form-control" name="newcustName" required></p>
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Email
                                                 </div>
-                                                <p><input type="email" class="form-control" name="newcustEmail"></p>
+                                                <p><input type="email" class="form-control" name="newcustEmail" required></p>
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Phone
                                                 </div>
-                                                <p><input type="text" class="form-control" name="newcustPhone"></p>
+                                                <p><input type="text" class="form-control" name="newcustPhone" required></p>
                                             </div>
                                         </div>
                                     </div>  
