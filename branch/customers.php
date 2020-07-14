@@ -159,7 +159,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Ticket</th>
                                     <th>Phone</th>
                                     <th>Status</th>
                                     <th>Link</th>

@@ -11,6 +11,13 @@
     <title>Dashboard | diva lounge spa</title>
     <?php echo $head_tags; ?>
 
+    <style>
+        .canvasjs-chart-credit
+        {
+            display: none;
+        }
+    </style>
+
     <script type="text/javascript">
         window.onload = function () {
             var branch = new CanvasJS.Chart("branchChart",

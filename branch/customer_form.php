@@ -54,9 +54,9 @@
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                                    Email
+                                                    Ticket
                                                 </div>
-                                                <p><input type="email" class="form-control" name="newcustEmail" required></p>
+                                                <p><input type="text" class="form-control" name="newcustTicket" required></p>
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
@@ -148,6 +148,7 @@
                         {
                             location.href="customers";
                         }
+                        button_content.removeClass("disabled btn-progress");
                     }
                 });
                 e.preventDefault();

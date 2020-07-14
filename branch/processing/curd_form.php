@@ -29,13 +29,13 @@
 
     // }
 
-    if(isset($_POST['newcustName']) && isset($_POST['newcustEmail']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
+    if(isset($_POST['newcustName']) && isset($_POST['newcustTicket']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
     {
         $count = count($_POST['services']);
 
         date_default_timezone_set("Asia/Qatar");
-        $order_time = date('h:i A');
-        $order_date = date('d M, Y');
+        
+        $order_date = date('Y-m-d');
 
         function generateRandomString($length = 7)
         {
@@ -51,8 +51,8 @@
 
         $code = generateRandomString();
 
-        $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_email, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
-            '".$_POST['newcustName']."', '".$_POST['newcustEmail']."', '".$_POST['newcustPhone']."', '$order_date')");
+        $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
+            '".$_POST['newcustName']."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
 
         if($insert_cust)
         {

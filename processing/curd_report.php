@@ -8,13 +8,16 @@
     {
         $query = "SELECT * FROM customers where reg = '1'";
 
-        if(isset($_POST["active"]))
+        if(isset($_POST["branch"]))
         {
-            $query .= " AND c_status = '1'";
+            $query .= " AND branch_id = '".$_POST["branch"]."'";
         }
 
-        if(isset($_POST["inactive"]))
+        if(isset($_POST["start_date"]) && isset($_POST["end_date"]))
         {
+            $date = date_create("10 Jul, 2020");
+            echo date_format($date,"Y-m-d");
+
             $query .= " AND c_status = '2'";
         }
 
@@ -44,7 +47,7 @@
                             </div>
                             <div class="profile-widget-description">
                                 <div class="profile-widget-name">
-                                    '.$row['c_ticket'].' 
+                                    '.$row['c_email'].' 
                                     <div class="text-muted d-inline font-weight-normal">
                                         <div class="slash"></div>
                                         '.$row['c_phone'].'

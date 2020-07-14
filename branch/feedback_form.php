@@ -83,7 +83,7 @@
                                     <h6>
                                         Customer Name : <?php echo $row['c_name']; ?>
                                         <br>
-                                        Customer Email : <?php echo $row['c_email']; ?>
+                                        Customer Ticket : <?php echo $row['c_ticket']; ?>
                                         <br>
                                         Customer Contact : <?php echo $row['c_phone']; ?>
                                     </h6>

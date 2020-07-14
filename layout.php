@@ -61,6 +61,7 @@
                     <li class="categories"><a class="nav-link" href="categories"><i class="fas fa-list-ol"></i><span>Categories</span></a></li>
                     <li class="staffs"><a class="nav-link" href="staffs"><i class="fas fa-users"></i><span>Staffs</span></a></li>
                     <li class="customers"><a class="nav-link" href="customers"><i class="fas fa-smile"></i><span>Customers</span></a></li>
+                    <li class="reports"><a class="nav-link" href="reports"><i class="fas fa-chart-bar"></i><span>Reports</span></a></li>
                 </ul>
             </aside>
             

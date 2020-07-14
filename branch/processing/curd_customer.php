@@ -56,7 +56,7 @@
                     <tr>
                         <td data-column="Date">'.$row['c_date'].'</td>
                         <td data-column="Name">'.$row['c_name'].'</td>
-                        <td data-column="Email">'.$row['c_email'].'</td>
+                        <td data-column="Email">'.$row['c_ticket'].'</td>
                         <td data-column="Phone">'.$row['c_phone'].'</td>
                 ';
 
@@ -127,7 +127,7 @@
                                         <tr>
                                             <td data-column="Date">'.$row['c_date'].'</td>
                                             <td data-column="Name"><input type="text" class="form-control" name="edit_cust_name" value="'.$row['c_name'].'"></td>
-                                            <td data-column="Email"><input type="text" class="form-control" name="edit_cust_email" value="'.$row['c_email'].'"></td>
+                                            <td data-column="Email"><input type="text" class="form-control" name="edit_cust_email" value="'.$row['c_ticket'].'"></td>
                                             <td data-column="Phone"><input type="text" class="form-control" name="edit_cust_phone" value="'.$row['c_phone'].'"></td>
                                             <td data-column="Status">'.$status.'</td>
                                             <td data-column="Edit Details" colspan="2">
@@ -196,11 +196,11 @@
         echo $output;
 
     }
-    elseif(isset($_POST['newcustName']) && isset($_POST['newcustEmail']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
+    elseif(isset($_POST['newcustName']) && isset($_POST['newcustTicket']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
     {
         date_default_timezone_set("Asia/Qatar");
-        $order_time = date('h:i A');
-        $order_date = date('d M, Y');
+        
+        $order_date = date('Y-m-d');
 
         function generateRandomString($length = 7)
         {
@@ -216,8 +216,8 @@
 
         $code = generateRandomString();
 
-        mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_email, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
-            '".$_POST['newcustName']."', '".$_POST['newcustEmail']."', '".$_POST['newcustPhone']."', '$order_date')");
+        mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
+            '".$_POST['newcustName']."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
 
         echo "New customer registered";
 
