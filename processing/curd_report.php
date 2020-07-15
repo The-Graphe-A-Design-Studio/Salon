@@ -6,23 +6,53 @@
 
     if(isset($_POST["action"]))
     {
-        $query = "SELECT * FROM customers where reg = '1'";
+        $query = "select * from customers where c_status = '1'";
 
         if(isset($_POST["branch"]))
         {
-            $query .= " AND branch_id = '".$_POST["branch"]."'";
+            if(!empty($_POST["branch"]))
+            {
+                $query .= " and branch_id = '".$_POST["branch"]."'";
+            }
         }
 
-        if(isset($_POST["start_date"]) && isset($_POST["end_date"]))
+        if(!empty($_POST["start_date"]) && empty($_POST["end_date"]))
         {
-            $date = date_create("10 Jul, 2020");
-            echo date_format($date,"Y-m-d");
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
 
-            $query .= " AND c_status = '2'";
+            $query .= " and c_date >= '".$s_date."'";
+        }
+        elseif(empty($_POST["start_date"]) && !empty($_POST["end_date"]))
+        {
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
+
+            $query .= " and c_date <= '".$e_date."'";
+        }
+        elseif(!empty($_POST["start_date"]) && !empty($_POST["end_date"]))
+        {
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
+
+            $query .= " and c_date >= '".$s_date."' and c_date <= '".$e_date."'";
+        }
+        else
+        {
+            $query .= "";
         }
 
         $query .= " order by c_id desc";
-        
+
         $statement = $connect->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -32,90 +62,107 @@
         
         if($total_row > 0)
         {
+            $output .=
+            '
+                <div>
+                    <h2 class="section-title">Forms Submitted</h2>
+                </div>
+                <table>
+                    <thead>
+                        <th>Date</th>
+                        <th>Branch</th>
+                        <th>Guest Name</th>
+                        <th>Ticket Number</th>
+                        <th>Phone</th>
+                        <th>Services</th>
+                        <th>Visit Again</th>
+                        <th>Comment</th>
+                        <th>View</th>
+                    </thead>
+                    <tbody>
+            ';
+
             foreach($result as $row)
             {
-                $output .= 
+                $date = date_create($row['c_date']);
+                $date = date_format($date, "d M, Y");
+
+                $output .=
                 '
-                    <div class="col-12 col-md-3 col-lg-3">
-                        <div class="card profile-widget">
-                            <div class="profile-widget-header">
-                                <div class="profile-widget-items">
-                                    <div class="profile-widget-item">
-                                        <div class="profile-widget-item-value">'.$row['c_name'].'</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile-widget-description">
-                                <div class="profile-widget-name">
-                                    '.$row['c_email'].' 
-                                    <div class="text-muted d-inline font-weight-normal">
-                                        <div class="slash"></div>
-                                        '.$row['c_phone'].'
-                                    </div>
-                                </div>
-                                <div class="card" style="box-shadow: 0 !important; margin-bottom: 0 !important;">
-                                    <div class="card-header" style="padding: 0 !important; min-height: 20px !important;">
-                                        <h4>Services used</h4>
-                                    </div>
-                                    <div class="card-body" style="padding: 0 !important">
-                                        <ul class="list-group">
+                    <tr>
+                        <td data-column="Date">'.$date.'</td>
                 ';
 
-                                            $re = "select * from review_form where c_code = '".$row['c_code']."'";
-                                            $get_re = mysqli_query($link, $re);
-                                            while($row_re = mysqli_fetch_array($get_re, MYSQLI_ASSOC))
-                                            {
-                                                $service = "select * from services where se_id = '".$row_re['se_id']."'";
-                                                $get_service = mysqli_query($link, $service);
-                                                $row_service = mysqli_fetch_array($get_service, MYSQLI_ASSOC);
+                $branch = "select * from locations where l_id = '".$row['branch_id']."'";
+                $g_b = mysqli_query($link, $branch);
+                $r_b = mysqli_fetch_array($g_b, MYSQLI_ASSOC);
+
+                if($row['c_return'] == 1)
+                {
+                    $visit = "Definitely";
+                }
+                elseif($row['c_return'] == 2)
+                {
+                    $visit = "May be";
+                }
+                else
+                {
+                    $visit = "Definitely not";
+                }
+                
+                $output .=
+                '       <td data-column="Branch">'.$r_b['l_name'].'</td>
+                        <td data-column="Guest Name">'.$row['c_name'].'</td>
+                        <td data-column="Ticket Number">'.$row['c_ticket'].'</td>
+                        <td data-column="Phone">'.$row['c_phone'].'</td>
+                        <td data-column="Services" style="text-align: left">
+                ';
+
+                $r = 1;
+                $re = "select * from review_form where c_code = '".$row['c_code']."'";
+                $g_re = mysqli_query($link, $re);
+                while($r_re = mysqli_fetch_array($g_re, MYSQLI_ASSOC))
+                {
+                    $ser = "select * from services where se_id = '".$r_re['se_id']."'";
+                    $g_ser = mysqli_query($link, $ser);
+                    $r_ser = mysqli_fetch_array($g_ser, MYSQLI_ASSOC);
+
+                    $st = "select * from staffs where st_id = '".$r_re['st_id']."'";
+                    $g_st = mysqli_query($link, $st);
+                    $r_st = mysqli_fetch_array($g_st, MYSQLI_ASSOC);
+
+                    $output .=
+                    '
+                        <b>'.$r.'.</b>&nbsp;&nbsp;'.$r_ser['se_name'].'<br>
+                    ';
+
+                    $r++;
+                }
+
                 $output .=
                 '
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    '.$row_service['se_name'].'
-                                                    <span class="badge badge-primary badge-pill">'.$row_re['rating'].'/5</span>
-                                                </li>
+                        </td>
+                        <td data-column="Visit Again">'.$visit.'</td>
+                        <td data-column="Comment">'.$row['c_comment'].'</td>
+                        <td data-column="View">
+                            <a href="feedback?cust='.$row['c_code'].'&id='.$row['c_id'].'" target="_blank"><i class="fas fa-eye"></i></a>
+                        </td>
+                    <tr>
                 ';
-                                            }
-                                            if($row['c_return'] == 1)
-                                            {
-                                                $return = "Definitely";
-                                            }
-                                            elseif($row['c_return'] == 2)
-                                            {
-                                                $return = "May be";
-                                            }
-                                            elseif($row['c_return'] == 3)
-                                            {
-                                                $return = "Definitely Not";
-                                            }
-                                            else
-                                            {
-                                                $return = "Form not submitted";
-                                            }
-                $output .=
-                '
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <b>Visit Again : </b>'.$return.'
-                                                </li>
-                                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                    <b>Comment : </b>'.$row['c_comment'].'
-                                                </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ';
+            
             }
+
+            $output .=
+            '
+                    </tbody>
+                </table>
+            ';
         }
         else
         {
             $output = 
             '
-            <tr>
-                <td colspan="8"><h5>No Data Found</h5></td>
-            </tr>
+                No Data Found
             ';
         }
         
