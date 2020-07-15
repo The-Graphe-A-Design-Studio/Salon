@@ -28,7 +28,7 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
-                            <div class="card-icon bg-primary">
+                            <div class="card-icon bg-primary" style="background-color: #a5ce77d1 !important;">
                                 <i class="far fa-user"></i>
                             </div>
                             <div class="card-wrap">
@@ -50,7 +50,7 @@
                     
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
-                            <div class="card-icon bg-warning">
+                            <div class="card-icon bg-primary">
                                 <i class="far fa-file"></i>
                             </div>
                             <div class="card-wrap">
@@ -72,7 +72,7 @@
                     
                     <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
-                            <div class="card-icon bg-success">
+                            <div class="card-icon bg-success" style="background-color: #8bc251 !important;">
                                 <i class="far fa-newspaper"></i>
                             </div>
                             <div class="card-wrap">

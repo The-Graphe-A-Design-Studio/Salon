@@ -127,7 +127,7 @@
                                         <tr>
                                             <td data-column="Date">'.$row['c_date'].'</td>
                                             <td data-column="Name"><input type="text" class="form-control" name="edit_cust_name" value="'.$row['c_name'].'"></td>
-                                            <td data-column="Email"><input type="text" class="form-control" name="edit_cust_email" value="'.$row['c_ticket'].'"></td>
+                                            <td data-column="Ticket"><input type="text" class="form-control" name="edit_cust_ticket" value="'.$row['c_ticket'].'"></td>
                                             <td data-column="Phone"><input type="text" class="form-control" name="edit_cust_phone" value="'.$row['c_phone'].'"></td>
                                             <td data-column="Status">'.$status.'</td>
                                             <td data-column="Edit Details" colspan="2">
@@ -219,12 +219,14 @@
         mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
             '".$_POST['newcustName']."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
 
+        mysqli_query($link, "insert into cust_name_phone (cust_name, cust_phone) values ('".$_POST['newcustName']."', '".$_POST['newcustPhone']."')");
+
         echo "New customer registered";
 
     }
-    elseif(isset($_POST['edit_cust_name']) && isset($_POST['edit_cust_email']) && isset($_POST['edit_cust_phone']) && isset($_POST['edit_cust_id']))
+    elseif(isset($_POST['edit_cust_name']) && isset($_POST['edit_cust_ticket']) && isset($_POST['edit_cust_phone']) && isset($_POST['edit_cust_id']))
     {
-        mysqli_query($link, "update customers set c_name = '".$_POST['edit_cust_name']."', c_email = '".$_POST['edit_cust_email']."', 
+        mysqli_query($link, "update customers set c_name = '".$_POST['edit_cust_name']."', c_ticket = '".$_POST['edit_cust_ticket']."', 
                     c_phone = '".$_POST['edit_cust_phone']."' where c_id = '".$_POST['edit_cust_id']."'");
 
         echo "Customer details updated";

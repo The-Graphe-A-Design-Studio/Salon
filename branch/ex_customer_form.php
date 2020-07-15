@@ -28,17 +28,17 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Customers Form</h1>
+                    <h1>Existing Customers Form</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="dashboard">Dashboard</a></div>
                         <div class="breadcrumb-item active"><a href="customers">Customers</a></div>
-                        <div class="breadcrumb-item">Customers Form</div>
+                        <div class="breadcrumb-item">Existing Customers Form</div>
                     </div>
                 </div>
 
                 <div class="section-body text-right">
                     <div class="buttons">
-                        <a href="ex_customer_form"><button class="btn btn-primary btn-lg">Add Existing Customer</button></a>
+                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add new Customer</button></a>
                     </div>
                 </div>
 
@@ -56,19 +56,31 @@
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Name
                                                 </div>
-                                                <p><input type="text" class="form-control" name="newcustName" required></p>
+                                                <p>
+                                                    <select class="form-control" id="cust_name" name="exCustomer" required>
+                                                    <option value="">-- Select Name --</option>
+                                                    <?php
+                                                            $name = "select * from cust_name_phone order by cust_name";
+                                                            $get_name = mysqli_query($link, $name);
+                                                            while($row_name = mysqli_fetch_array($get_name, MYSQLI_ASSOC))
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row_name['cust_name']; ?>"><?php echo $row_name['cust_name']; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </p>
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Ticket
                                                 </div>
-                                                <p><input type="text" class="form-control" name="newcustTicket" required></p>
+                                                <p><input type="text" class="form-control" name="exTicket" required></p>
                                             </div>
                                             <div class="col-12 col-md-4 col-lg-4">
                                                 <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                                     Phone
                                                 </div>
-                                                <p><input type="text" class="form-control" name="newcustPhone" required></p>
+                                                <p><input type="text" id="cust_phone" class="form-control" name="exPhone" required></p>
                                             </div>
                                         </div>
                                     </div>  
@@ -165,7 +177,24 @@
         $(document).ready(function(){
             $(".customers").addClass("active");
         });
-    </script>
+        
+        
+        $('#cust_name').on('change',function(){
+            var cName = $(this).val();
+            if(cName){
+                $.ajax({
+                type:'POST',
+                url:'processing/existing.php',
+                data:'cust_name='+cName,
+                success:function(html){
+                        $('#cust_phone').val(html);
+                }
+                }); 
+            }else{
+                $('#cust_phone').html('Select Name first');
+            }
+        });
+      </script>
 
     <script>
         $("#insert-more").click(function () {

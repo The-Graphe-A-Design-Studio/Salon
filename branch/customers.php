@@ -113,7 +113,10 @@
                 </div>
 
                 <div class="section-body text-right">
-                    <a href="customer_form"><button class="btn btn-primary btn-lg">Add new Customer</button></a>
+                    <div class="buttons">
+                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add new Customer</button></a>
+                        <a href="ex_customer_form"><button class="btn btn-primary btn-lg">Add Existing Customer</button></a>
+                    </div>
                 </div>
 
                 <div class="section-body" style="margin-top: 2vh">
