@@ -5,7 +5,7 @@
     if(!empty($_POST["cust_name"])){
         //Get all state data
         
-        $query = "SELECT * FROM cust_name_phone WHERE cust_id = '".$_POST["cust_name"]."'";
+        $query = "SELECT * FROM cust_name_phone WHERE cust_name = '".$_POST["cust_name"]."'";
         $run_query = mysqli_query($link, $query);
         
         //Count total number of rows
