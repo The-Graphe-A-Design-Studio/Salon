@@ -143,7 +143,7 @@
                         <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <div class="form-div">
-                                    <input class="form-control common_selector search_date" placeholder="Search Customer by Date" name="date"/>
+                                    <input type="date" class="form-control common_selector search_date" placeholder="Search Customer by Date" name="date"/>
                                 </div>
                             </div>
                         </div>
