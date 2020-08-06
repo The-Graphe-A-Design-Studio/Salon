@@ -201,7 +201,7 @@
                                                         </div>
                                                         <div class="card profile-widget services-widget">
                                                             <div class="profile-widget-description">
-                                                                <table class="table" id="mytable">
+                                                                <table class="table" id="mytable1">
                                                                     <tbody>
                                                                         <tr>
                                                                             <td class="form-group">
@@ -235,7 +235,7 @@
                                                                 </table>
 
                                                                 <div class="text-center">
-                                                                    <span id="insert-more" class="btn btn-primary btn-icon btn-lg" title="Add new Row" style="cursor: pointer"><i class="fas fa-plus"></i></span>
+                                                                    <span id="insert-more1" class="btn btn-primary btn-icon btn-lg" title="Add new Row" style="cursor: pointer"><i class="fas fa-plus"></i></span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -336,6 +336,21 @@
     <script>
         $("#insert-more").click(function () {
             $("#mytable").each(function () {
+                var tds = '<tr>';
+                jQuery.each($('tr:last td', this), function () {
+                    tds += '<td>' + $(this).html() + '</td>';
+                });
+                tds += '</tr>';
+                if ($('tbody', this).length > 0) {
+                    $('tbody', this).append(tds);
+                } else {
+                    $(this).append(tds);
+                }
+            });
+        });
+
+        $("#insert-more1").click(function () {
+            $("#mytable1").each(function () {
                 var tds = '<tr>';
                 jQuery.each($('tr:last td', this), function () {
                     tds += '<td>' + $(this).html() + '</td>';
