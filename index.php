@@ -47,7 +47,7 @@
                             <div class="simple-footer">
                                 Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
                                 <br>
-                                Designed by <a href="#" target="_blank">Teciza Solution</a> & Powered by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
+                                Designed by <a href="https://tecizasolutions.com/" target="_blank">Teciza Solution</a> & Powered by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
                             </div>
                         </div>
                     </div>
