@@ -80,7 +80,7 @@
                     ';
 
                     $link =
-                    'https://developers.thegraphe.com/salon/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
+                    'https://www.divaspaqatar.com/feedback/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
                 }
                 else
                 {
