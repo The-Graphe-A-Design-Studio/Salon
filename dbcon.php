@@ -9,6 +9,11 @@
     // define('DB_PASSWORD', '.2019@TheGraphe');
     // define('DB_NAME', 'thegrhmw_salon');
 
+    // define('DB_SERVER', 'localhost');
+    // define('DB_USERNAME', 'tan5981k_rohit');
+    // define('DB_PASSWORD', 'iloveu3000');
+    // define('DB_NAME', 'tan5981k_feedback');
+
     $hostName = DB_SERVER;
     $dbName = DB_NAME;
     $userName = DB_USERNAME;
