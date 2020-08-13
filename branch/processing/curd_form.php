@@ -4,7 +4,7 @@
 
     if(isset($_POST['newcustName']) && isset($_POST['newcustTicket']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
     {
-        $count = count($_POST['services']);
+        $count1 = count($_POST['services']);
 
         date_default_timezone_set("Asia/Qatar");
         
@@ -39,7 +39,7 @@
 
             if($insert_cust)
             {
-                for ($i=0; $i < $count ; $i++)
+                for ($i=0; $i < $count1 ; $i++)
                 {
                     $cat = "select * from services where se_id = '".$_POST['services'][$i]."'";
                     $get_cat = mysqli_query($link, $cat);
