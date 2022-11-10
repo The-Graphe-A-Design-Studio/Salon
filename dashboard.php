@@ -538,7 +538,7 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary" style="background-color: #a5ce7791 !important">
+                        <div class="card-icon bg-primary">
                             <i class="far fa-user"></i>
                         </div>
                         <div class="card-wrap">
@@ -560,7 +560,7 @@
                 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-danger" style="background-color: #b8da8c !important">
+                        <div class="card-icon bg-primary">
                             <i class="fas fa-circle"></i>
                         </div>
                         <div class="card-wrap">
@@ -604,7 +604,7 @@
                 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary" style="background-color: #8bc251 !important">
+                        <div class="card-icon bg-primary">
                             <i class="far fa-newspaper"></i>
                         </div>
                         <div class="card-wrap">
@@ -630,7 +630,7 @@
 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-primary"  style="background-color: #a5ce7791 !important">
+                        <div class="card-icon bg-primary">
                             <i class="fas fa-list-ol"></i>
                         </div>
                         <div class="card-wrap">
@@ -652,7 +652,7 @@
                 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon" style="background-color: #b8da8c !important">
+                        <div class="card-icon bg-primary">
                             <i class="fas fa-concierge-bell"></i>
                         </div>
                         <div class="card-wrap">
@@ -696,7 +696,7 @@
                 
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                     <div class="card card-statistic-1">
-                        <div class="card-icon bg-success" style="background-color: #8bc251 !important">
+                        <div class="card-icon bg-primary">
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                         <div class="card-wrap">

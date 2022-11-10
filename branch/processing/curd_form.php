@@ -2,7 +2,10 @@
 
     include("../../dbcon.php");
 
-    if(isset($_POST['newcustName']) && isset($_POST['newcustTicket']) && isset($_POST['newcustPhone']) && isset($_POST['branch_id']))
+    if(isset($_POST['newcustTicket']) && isset($_POST['newcustName']) && isset($_POST['newcustLastName']) && isset($_POST['newcustPhone']) && isset($_POST['newcustWhatsapp']) &&
+        isset($_POST['newcustEmail']) && isset($_POST['newcustBday']) && isset($_POST['newcustAday']) && isset($_POST['newcustWorkPhoneNum']) &&
+        isset($_POST['newcustQatarId']) && isset($_POST['newcustAddress1']) && isset($_POST['newcustAddress2']) && isset($_POST['newcustCity']) &&
+        isset($_POST['newcustZip']) && isset($_POST['newcustState']) && isset($_POST['newcustCountry']) && isset($_POST['newcustOthers']) && isset($_POST['branch_id']))
     {
         $count1 = count($_POST['services']);
 
@@ -34,8 +37,10 @@
         }
         else
         {
+            $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
+
             $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
-            '".$_POST['newcustName']."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
+            '".$name."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
 
             if($insert_cust)
             {
@@ -53,7 +58,12 @@
                 $sql2 = "update customers set c_status = '2' where c_code = '$code'";
                 mysqli_query($link, $sql2);
 
-                mysqli_query($link, "insert into cust_name_phone (cust_name, cust_phone) values ('".$_POST['newcustName']."', '".$_POST['newcustPhone']."')");
+                mysqli_query($link, "insert into cust_name_phone (`cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`,
+                            `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`) values ('".$_POST['newcustName']."',
+                            '".$_POST['newcustLastName']."', '".$_POST['newcustPhone']."', '".$_POST['newcustWhatsapp']."', '".$_POST['newcustEmail']."', 
+                            '".$_POST['newcustBday']."', '".$_POST['newcustAday']."', '".$_POST['newcustWorkPhoneNum']."', '".$_POST['newcustQatarId']."', 
+                            '".$_POST['newcustAddress1']."', '".$_POST['newcustAddress2']."', '".$_POST['newcustCity']."', '".$_POST['newcustZip']."', 
+                            '".$_POST['newcustState']."', '".$_POST['newcustCountry']."', '".$_POST['newcustOthers']."')");
                 
                 echo "Customer registered and form created";
             }
