@@ -78,7 +78,7 @@
 
                 <div class="section-body text-right">
                     <div class="buttons">
-                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add new Customer</button></a>
+                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add Customer</button></a>
                     </div>
                 </div>
                 
@@ -92,17 +92,21 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Phone Number</th>
+                                                <th>Phone</th>
+                                                <th>Whatsapp</th>
+                                                <th class="text-center" style="width: 10%">#</th>
                                             </tr>
                                             <tr>
                                                 <th><input type="text" class="form-control common_selector search_bar" name="name" placeholder="Search Name"></th>
-                                                <th><input type="text" class="form-control common_selector search_num" name="number" placeholder="Search Number"></th>
+                                                <th><input type="text" class="form-control common_selector search_num" name="number" placeholder="Search Phone"></th>
+                                                <th><input type="text" class="form-control common_selector search_whts" name="number" placeholder="Search Whastapp"></th>
+                                                <th class="text-center" style="width: 10%">#</th>
                                             </tr>
                                         </thead>
                                     </table>
                                 </div>
                                 <div class="tbl-content">
-                                    <table cellpadding="0" cellspacing="0" border="0">
+                                    <table cellpadding="0" cellspacing="0" border="0" style="table-layout: auto !important;">
                                         <tbody class="filter_data">
                                         
                                         </tbody>
@@ -137,11 +141,12 @@
                 var action = 'fetch_data';
                 var search = get_key('search_bar');
                 var number = get_num('search_num');
+                var whatsapp = get_whts('search_whts');
                 var branch_id = <?php echo $branch_id_session; ?>;
                 $.ajax({
                     url:"processing/new_existing.php",
                     method:"POST",
-                    data:{action:action, branch_id:branch_id, search: search, number: number},
+                    data:{action:action, branch_id:branch_id, search: search, number: number, whatsapp: whatsapp},
                     success:function(data){
                         $('.filter_data').html(data);
                     }
@@ -156,13 +161,18 @@
             function get_num()
             {
                 return $('.search_num').val();
-                
+            }
+
+            function get_whts()
+            {
+                return $('.search_whts').val();
             }
 
             $('.common_selector').on('keyup change',function(){
                 filter_data();
                 get_key();
                 get_num();
+                get_whts();
             });
 
         });

@@ -56,8 +56,9 @@
                     <tr>
                         <td data-column="Date">'.$row['c_date'].'</td>
                         <td data-column="Name">'.$row['c_name'].'</td>
-                        <td data-column="Email">'.$row['c_ticket'].'</td>
-                        <td data-column="Phone">'.$row['c_phone'].'</td>
+                        <td data-column="Ticket">'.$row['c_ticket'].'</td>
+                        <td data-column="Phone"><a href="tel:'.$row['c_phone'].'" target="_blank">'.$row['c_phone'].'</td>
+                        <td data-column="Whatsapp"><a href="https://wa.me/'.$row['c_whatsapp'].'" target="_blank">'.$row['c_whatsapp'].'</td>
                 ';
 
                 if($row['c_status'] == 0)
@@ -121,7 +122,7 @@
                             aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
                         </td> -->
                         <td data-column="Share">
-                            <a href="https://wa.me/'.$row['whatsapp_num'].'?text=We%20appreciate%20your%20business%20and%20we%20want%20to%20make%20sure%20we%20meet%20your%20expectations%2C%20providing%20the%20right%20treatment%20is%20very%20important%20and%20we%20would%20like%20to%20hear%20your%20feedback%20on%20your%20Spa%20experience.%0A%0AFeedback%20form%20-%20http%3A%2F%2Fwww.divaspaqatar.com%2Ffeedback%2Fbranch%2Ffeedback_form%3Fcust%3DaoJrxis%26id%3D2%0A%0AThanks%20%26%20Regards%0ADiva%20Lounge%20Spa" target="_blank" class="btn btn-success">
+                            <a href="https://wa.me/'.$row['c_whatsapp'].'?text=We%20appreciate%20your%20business%20and%20we%20want%20to%20make%20sure%20we%20meet%20your%20expectations%2C%20providing%20the%20right%20treatment%20is%20very%20important%20and%20we%20would%20like%20to%20hear%20your%20feedback%20on%20your%20Spa%20experience.%0A%0AFeedback%20form%20-%20'.urlencode($link).'%0A%0AThanks%20%26%20Regards%0ADiva%20Lounge%20Spa" target="_blank" class="btn btn-success">
                             <i class="fab fa-whatsapp"></i>
                             </a>                            
                         </td>

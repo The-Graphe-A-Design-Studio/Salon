@@ -39,8 +39,29 @@
         {
             $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
 
-            $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
-            '".$name."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '$order_date')");
+            $json_data = [
+                "cust_name" => $_POST['newcustName'],
+                "last_name" => $_POST['newcustLastName'],
+                "cust_phone" => $_POST['newcustPhone'],
+                "whatsapp_num" => $_POST['newcustWhatsapp'],
+                "email" => $_POST['newcustEmail'],
+                "birthday" => $_POST['newcustBday'],
+                "anniversary" => $_POST['newcustAday'],
+                "work_phone" => $_POST['newcustWorkPhoneNum'],
+                "qatar_id" => $_POST['newcustQatarId'],
+                "address_1" => $_POST['newcustAddress1'],
+                "address_2" => $_POST['newcustAddress2'],
+                "city" => $_POST['newcustCity'],
+                "zip" => $_POST['newcustZip'],
+                "state" => $_POST['newcustState'],
+                "country" => $_POST['newcustCountry'],
+                "others" => $_POST['newcustOthers'],
+            ];
+
+            $json_data = json_encode($json_data);
+
+            $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_whatsapp, c_date, json_data) values ('$code', '".$_POST['branch_id']."', 
+            '".$name."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '".$_POST['newcustWhatsapp']."', '$order_date', '$json_data')");
 
             if($insert_cust)
             {
@@ -73,7 +94,7 @@
             }
         }
     }
-    elseif(isset($_POST['exCustomer']) && isset($_POST['exTicket']) && isset($_POST['exPhone']) && isset($_POST['branch_id']))
+    elseif(isset($_POST['exCustomer']) && isset($_POST['exTicket']) && isset($_POST['exPhone']) && isset($_POST['exWhatsapp']) && isset($_POST['branch_id']))
     {
         $count = count($_POST['services']);
 
@@ -95,8 +116,19 @@
 
         $code = generateRandomString();
 
-        $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_date) values ('$code', '".$_POST['branch_id']."', 
-            '".$_POST['exCustomer']."', '".$_POST['exTicket']."', '".$_POST['exPhone']."', '$order_date')");
+        $cust = "select * from cust_name_phone where cust_phone = '".$_POST['exPhone']."' and whatsapp_num = '".$_POST['exWhatsapp']."'";
+        $get_cust = mysqli_query($link, $cust);
+        $cust_row = mysqli_fetch_array($get_cust, MYSQLI_ASSOC);
+
+        $json = json_encode($cust_row);
+
+        // print_r($cust_row);
+
+        $name = $cust_row['cust_name']." ".$cust_row['last_name'];
+
+        $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_whatsapp, c_date, json_data) values 
+                        ('$code', '".$_POST['branch_id']."', '".$name."', '".$_POST['exTicket']."', '".$_POST['exPhone']."', 
+                        '".$_POST['exWhatsapp']."', '$order_date', '$json')");
 
         if($insert_cust)
         {

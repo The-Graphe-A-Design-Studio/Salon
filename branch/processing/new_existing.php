@@ -14,6 +14,12 @@
             $query .= " AND cust_phone LIKE '$ses%'";
         }
 
+        if(isset($_POST['whatsapp']))
+        {
+            $ses = $_POST['whatsapp'];
+            $query .= " AND whatsapp_num LIKE '$ses%'";
+        }
+
         if(isset($_POST['search']))
         {
             $se = $_POST['search'];
@@ -38,11 +44,12 @@
                     <tr>
                         <td>'.$row['cust_name'].'</td>
                         <td>'.$row['cust_phone'].'</td>
-                        <td>
+                        <td>'.$row['whatsapp_num'].'</td>
+                        <td style="width: 10%">
                             <label class="custom-switch">
                                 <input type="radio" name="option" class="custom-switch-input common_selector use" value="'.$row['cust_id'].'">
                                 <span class="custom-switch-indicator"></span>
-                                <span class="custom-switch-description">Use</span>
+                                <span class="custom-switch-description">Select</span>
                             </label>
                             <input type="button" id="refresh_btn" value="Refresh" hidden>
                         </td>
@@ -142,21 +149,29 @@
                             <div class="row">
                                 <div class="col-12 col-md-4 col-lg-4">
                                     <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                        Name
-                                    </div>
-                                    <p><input type="text" id="cust_name" value="'.$row['cust_name'].'" class="form-control" name="exCustomer" required></p>
-                                </div>
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                         Ticket
                                     </div>
-                                    <p><input type="text" class="form-control" name="exTicket" required></p>
+                                    <p><input type="text" class="form-control" name="exTicket" required placeholder="Enter ticket number"></p>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
+                                        Name
+                                    </div>
+                                    <p><input type="text" id="cust_name" value="'.$row['cust_name'].'" class="form-control" name="exCustomer" readonly></p>
+                                </div>                                
                                 <div class="col-12 col-md-4 col-lg-4">
                                     <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                         Phone
                                     </div>
-                                    <p><input type="text" id="cust_phone" value="'.$row['cust_phone'].'" class="form-control" name="exPhone" required></p>
+                                    <p><input type="text" id="cust_phone" value="'.$row['cust_phone'].'" class="form-control" name="exPhone" readonly></p>
+                                </div>
+                                <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
+                                        Whatsapp
+                                    </div>
+                                    <p><input type="text" id="whatsapp" value="'.$row['whatsapp_num'].'" class="form-control" name="exWhatsapp" readonly></p>
                                 </div>
                             </div>
                         </div>
@@ -209,7 +224,7 @@
                                     </span>
                                     <br><br>
                                     <input type="text" name="branch_id" value="'.$branch_id.'" hidden>
-                                    <button class="btn btn-primary btn-lg" type="submit">Create Form</button>
+                                    <button class="btn btn-primary btn-lg" type="submit">Create Feedback Link</button>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +267,7 @@
                             alert(data);
                             if(data === "Customer registered and form created")
                             {
-                                location.href="customers";
+                                location.href="links";
                             }
                             button_content.removeClass("disabled btn-progress");
                         }

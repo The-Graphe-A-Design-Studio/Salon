@@ -115,8 +115,7 @@
 
                 <div class="section-body text-right">
                     <div class="buttons">
-                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add New Customer</button></a>
-                        <a href="ex_customer_form"><button class="btn btn-primary btn-lg">Add Existing Customer</button></a>
+                        <a href="ex_customer_form"><button class="btn btn-primary btn-lg">Create Feedback Link</button></a>
                     </div>
                 </div>
 
@@ -166,6 +165,7 @@
                                         <th>Name</th>
                                         <th>Ticket</th>
                                         <th>Phone</th>
+                                        <th>Whatsapp</th>
                                         <th>Status</th>
                                         <th>Link</th>
                                         <!-- <th>Edit Details</th> -->
