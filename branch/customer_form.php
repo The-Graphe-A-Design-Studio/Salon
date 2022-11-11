@@ -133,7 +133,7 @@
                                         </div>
                                         <div class="col-12 form-group">
                                             <label>Others</label>
-                                            <textarea class="form-control" name="newcustOthers" placeholder="Enter other details" cols="5"></textarea>
+                                            <textarea class="form-control" name="newcustOthers" placeholder="Enter other details" style="height: 15vh;"></textarea>
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -191,7 +191,7 @@
                         <div class="col-12 text-center">
                             <!-- <input type="text" name="customer_id" value="<?php echo $cust_id; ?>" hidden> -->
                             <input type="text" name="branch_id" value="<?php echo $branch_id_session; ?>" hidden>
-                            <button class="btn btn-primary btn-lg" type="submit">Create Form</button>
+                            <button class="btn btn-primary btn-lg" type="submit">Create Feedback Link</button>
                         </div>
                     </div>
                 </form>
@@ -210,7 +210,7 @@
             $("#create_form_for_customer").submit(function(e)
             {
                 var form_data = $(this).serialize();
-                alert(form_data);
+                // alert(form_data);
                 var button_content = $(this).find('button[type=submit]');
                 button_content.addClass("disabled btn-progress");
                 $.ajax({
@@ -222,7 +222,7 @@
                         alert(data);
                         if(data === "Customer registered and form created")
                         {
-                            location.href="customers";
+                            location.href="links";
                         }
                         button_content.removeClass("disabled btn-progress");
                     }

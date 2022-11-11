@@ -79,8 +79,16 @@
                         <i class="fas fa-clipboard-list" title="Pending" style="color: #495ae1; font-size: 1.5em"></i>
                     ';
 
-                    $link =
-                    'https://www.divaspaqatar.com/feedback/branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
+                    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+                    {
+                        $url = "https://www.divaspaqatar.com/feedback/";
+                    }
+                    else 
+                    {
+                        $url = "http://www.divaspaqatar.com/feedback/";
+                    }
+
+                    $link = $url.'branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
                 }
                 else
                 {
@@ -99,18 +107,23 @@
                 '
                         <td data-column="Status">'.$status.'</td>
                         <td data-column="Link" class="copy'.$row['c_id'].'">
-                            <div class="form-group">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" value="'.$link.'" readonly>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="input-group">
+                                    <input type="text" style="width: 250px;" class="form-control" value="'.$link.'" readonly>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-info" type="button">Copy</button>
                                     </div>
                                 </div>
                             </div>
                         </td>
-                        <td data-column="Edit Details">
+                        <!-- <td data-column="Edit Details">
                             <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
                             aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
+                        </td> -->
+                        <td data-column="Share">
+                            <a href="https://wa.me/'.$row['whatsapp_num'].'?text=We%20appreciate%20your%20business%20and%20we%20want%20to%20make%20sure%20we%20meet%20your%20expectations%2C%20providing%20the%20right%20treatment%20is%20very%20important%20and%20we%20would%20like%20to%20hear%20your%20feedback%20on%20your%20Spa%20experience.%0A%0AFeedback%20form%20-%20http%3A%2F%2Fwww.divaspaqatar.com%2Ffeedback%2Fbranch%2Ffeedback_form%3Fcust%3DaoJrxis%26id%3D2%0A%0AThanks%20%26%20Regards%0ADiva%20Lounge%20Spa" target="_blank" class="btn btn-success">
+                            <i class="fab fa-whatsapp"></i>
+                            </a>                            
                         </td>
                         <td data-column="Delete">
                             <form class="edit_cust'.$row['c_id'].'">

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+        <title>Thank You | diva lounge spa</title>
+        <link rel="icon" href="assets/img/diva-logo-sm.png" type="image/gif" sizes="32x32">
+        <!-- General CSS Files -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <!-- Template CSS -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/components.css">
+        <link rel="stylesheet" href="assets/css/google.css">
+
+    </head>
+    <body>
+
+        <div class="d-flex flex-column justify-content-center align-items-center px-3" style="width: 100vw; height: 100vh;">
+            <div class="login-brand" style="margin-bottom: 5rem;">
+                <img src="assets/img/diva-logo.png" alt="diva lounge spa logo" width="350">
+            </div>
+            <h3>Registration Success</h3>
+            <div class="mt-4">
+                Thanks a bunch for filling that out. It means a lot to us, just like you do! We really appreciate you giving us a moment of your time today.
+                <br><br>
+                Thanks for being you.
+            </div>
+            <div class="simple-footer mt-5">
+                Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
+                <br>
+                Designed by <a href="https://tecizasolutions.com/" target="_blank">Teciza Solution</a> &
+                Powered by <a href="https://thegraphe.com" target="_blank">The Graphē - A Design Studio</a>
+            </div>
+        </div>
+        
+        <div class="gt">
+            <div class="gt__box">
+                <div class="gt__select">
+                    <div id="google_translate_element"></div>
+                </div>
+            </div>
+        </div>
+            
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        
+        <!-- Google Translater -->
+        <script src="assets/js/google.js"></script>
+
+    </body>
+</html>
