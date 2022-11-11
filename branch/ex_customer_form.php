@@ -68,11 +68,10 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Existing Customers Form</h1>
+                    <h1>Create Link</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item active"><a href="customers">Customers</a></div>
-                        <div class="breadcrumb-item">Existing Customers Form</div>
+                        <div class="breadcrumb-item">Create Link</div>
                     </div>
                 </div>
 
@@ -178,7 +177,7 @@
         });
 
         $(document).ready(function(){
-            $(".customers").addClass("active");
+            $(".ex_customer_form").addClass("active");
         });
         
     </script>

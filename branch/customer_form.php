@@ -28,11 +28,10 @@
         <div class="main-content">
             <section class="section">
                 <div class="section-header">
-                    <h1>Add New Customer</h1>
+                    <h1>Add Customer</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item active"><a href="customers">Customers</a></div>
-                        <div class="breadcrumb-item">Add New Customer</div>
+                        <div class="breadcrumb-item">Add Customer</div>
                     </div>
                 </div>
 

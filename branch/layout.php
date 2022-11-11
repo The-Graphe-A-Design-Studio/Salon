@@ -57,7 +57,8 @@
                     <li class="menu-header" style="margin-bottom: 50px"></li>
                     <li class="dashboard"><a class="nav-link" href="dashboard"><i class="fas fa-fire"></i><span>Dashboard</span></a></li>
                     <li class="customers"><a class="nav-link" href="customers"><i class="fas fa-smile"></i><span>Add Customer</span></a></li>
-                    <li class="links"><a class="nav-link" href="links"><i class="fas fa-link"></i><span>Links</span></a></li>
+                    <li class="links"><a class="nav-link" href="links"><i class="fas fa-link"></i><span>All Links</span></a></li>
+                    <li class="ex_customer_form"><a class="nav-link" href="ex_customer_form"><i class="fas fa-link"></i><span>Create Link</span></a></li>
                 </ul>
             </aside>
         </div>
