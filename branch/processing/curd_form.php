@@ -63,6 +63,8 @@
             $insert_cust = mysqli_query($link, "insert into customers (c_code, branch_id, c_name, c_ticket, c_phone, c_whatsapp, c_date, json_data) values ('$code', '".$_POST['branch_id']."', 
             '".$name."', '".$_POST['newcustTicket']."', '".$_POST['newcustPhone']."', '".$_POST['newcustWhatsapp']."', '$order_date', '$json_data')");
 
+            // echo "<script>alert('".print_r($insert_cust)."')</script>";
+
             if($insert_cust)
             {
                 for ($i=0; $i < $count1 ; $i++)

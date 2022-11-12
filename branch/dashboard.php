@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="card-body">
                                 <?php
-                                    $cust = "select * from customers where branch_id = '$branch_id_session'";
+                                    $cust = "select distinct(c_phone) from customers where branch_id = '$branch_id_session'";
                                     $cust_get = mysqli_query($link, $cust);
                                     $count_cust = mysqli_num_rows($cust_get);
 
@@ -55,7 +55,7 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                <h4>Total Pending</h4>
+                                <h4>Total Feedback Pending</h4>
                                 </div>
                                 <div class="card-body">
                                 <?php

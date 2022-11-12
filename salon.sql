@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2022 at 02:45 PM
+-- Generation Time: Nov 12, 2022 at 02:25 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -379,11 +379,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`c_id`, `c_code`, `branch_id`, `c_name`, `c_ticket`, `c_phone`, `c_whatsapp`, `c_date`, `c_q1`, `c_q2`, `c_q3`, `c_q4`, `c_q5`, `c_q6`, `c_q7`, `c_comment`, `c_status`, `c_return`, `reg`, `json_data`) VALUES
-(1, 'YYkepPq', 1, 'Rohit Singh', '2342342', '9876787656', '7908024082', '2022-11-11', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"Rohit\",\"last_name\":\"Singh\",\"cust_phone\":\"9876787656\",\"whatsapp_num\":\"7908024082\",\"email\":\"rohit@thegrpahge.com\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}'),
-(2, 'wvki1MC', 1, 'bfdbf dfbdbf', '354453', '345345', '34565675', '2022-11-11', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"bfdbf\",\"last_name\":\"dfbdbf\",\"cust_phone\":\"345345\",\"whatsapp_num\":\"34565675\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}'),
-(3, 'tPQQvoE', 1, 'Rohit', '34534534', '9876787656', '7908024082', '2022-11-11', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"1\",\"cust_name\":\"Rohit\",\"last_name\":\"Singh\",\"cust_phone\":\"9876787656\",\"whatsapp_num\":\"7908024082\",\"email\":\"rohit@thegrpahge.com\",\"birthday\":\"0000-00-00\",\"anniversary\":\"0000-00-00\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
-(4, 'Q0Ftlan', 1, 'bfdbf dfbdbf', '345345', '345345', '34565675', '2022-11-11', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"2\",\"cust_name\":\"bfdbf\",\"last_name\":\"dfbdbf\",\"cust_phone\":\"345345\",\"whatsapp_num\":\"34565675\",\"email\":\"\",\"birthday\":\"0000-00-00\",\"anniversary\":\"0000-00-00\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
-(5, 'QI4kn1Q', 1, 'Rohit Singh', '57656756', '9876787656', '7908024082', '2022-11-11', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"1\",\"cust_name\":\"Rohit\",\"last_name\":\"Singh\",\"cust_phone\":\"9876787656\",\"whatsapp_num\":\"7908024082\",\"email\":\"rohit@thegrpahge.com\",\"birthday\":\"0000-00-00\",\"anniversary\":\"0000-00-00\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}');
+(1, 'YhmkMea', 1, 'jhfgw jkjgjskdg', '234234', '27635478625', '732885732', '2022-11-12', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"jhfgw\",\"last_name\":\"jkjgjskdg\",\"cust_phone\":\"27635478625\",\"whatsapp_num\":\"732885732\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}');
 
 -- --------------------------------------------------------
 
@@ -398,8 +394,8 @@ CREATE TABLE `cust_name_phone` (
   `cust_phone` varchar(50) NOT NULL,
   `whatsapp_num` varchar(50) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
-  `anniversary` date DEFAULT NULL,
+  `birthday` varchar(50) DEFAULT NULL,
+  `anniversary` varchar(50) DEFAULT NULL,
   `work_phone` varchar(50) DEFAULT NULL,
   `qatar_id` varchar(100) DEFAULT NULL,
   `address_1` varchar(150) DEFAULT NULL,
@@ -417,8 +413,7 @@ CREATE TABLE `cust_name_phone` (
 --
 
 INSERT INTO `cust_name_phone` (`cust_id`, `cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`, `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`, `reg`) VALUES
-(1, 'Rohit', 'Singh', '9876787656', '7908024082', 'rohit@thegrpahge.com', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', '', '', 1),
-(2, 'bfdbf', 'dfbdbf', '345345', '34565675', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', '', '', 1);
+(1, 'Rohit', 'jkjgjskdg', '1234567890', '1234567890', '', '', '', '', '', '', '', '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -473,7 +468,10 @@ INSERT INTO `review_form` (`re_id`, `c_code`, `l_id`, `s_id`, `se_id`, `st_id`, 
 (4, 'wvki1MC', 1, 10, 254, 22, 0),
 (5, 'tPQQvoE', 1, 1, 98, 14, 0),
 (6, 'Q0Ftlan', 1, 1, 98, 14, 0),
-(7, 'QI4kn1Q', 1, 1, 98, 14, 0);
+(7, 'QI4kn1Q', 1, 1, 98, 14, 0),
+(8, 'uZpZy3F', 1, 1, 98, 14, 0),
+(9, 'XtTbv6N', 1, 1, 89, 19, 0),
+(10, 'YhmkMea', 1, 1, 89, 23, 0);
 
 -- --------------------------------------------------------
 
@@ -2867,13 +2865,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cust_name_phone`
 --
 ALTER TABLE `cust_name_phone`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -2885,7 +2883,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `review_form`
 --
 ALTER TABLE `review_form`
-  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `services`

@@ -245,6 +245,76 @@
 
         echo "Customer details updated";
     }
+    elseif(isset($_POST['newcustName']) && isset($_POST['newcustLastName']) && isset($_POST['newcustPhone']) && isset($_POST['newcustWhatsapp']) &&
+        isset($_POST['newcustEmail']) && isset($_POST['newcustBday']) && isset($_POST['newcustAday']) && isset($_POST['newcustWorkPhoneNum']) &&
+        isset($_POST['newcustQatarId']) && isset($_POST['newcustAddress1']) && isset($_POST['newcustAddress2']) && isset($_POST['newcustCity']) &&
+        isset($_POST['newcustZip']) && isset($_POST['newcustState']) && isset($_POST['newcustCountry']) && isset($_POST['newcustOthers']) && isset($_POST['branch_id'])
+        && isset($_POST['customer_id']))
+    {
+        date_default_timezone_set("Asia/Qatar");
+
+        $sql_old = "SELECT * FROM cust_name_phone where cust_id <> '".$_POST['customer_id']."'";
+        $check_old = mysqli_query($link, $sql_old);
+        $row_old = mysqli_fetch_array($check_old, MYSQLI_ASSOC);
+
+        $old_phn = $row_old['cust_phone'];
+        $old_whatsapp = $row_old['whatsapp_num'];
+        
+        $sqlr = "SELECT * FROM cust_name_phone where cust_phone = '".$_POST['newcustPhone']."' and cust_id <> '".$_POST['customer_id']."'";
+        $checkr = mysqli_query($link, $sqlr);
+        $rowr = mysqli_fetch_array($checkr, MYSQLI_ASSOC);
+        $count = mysqli_num_rows($checkr);
+        if($count >= 1)
+        {
+            echo "This Phone Number is already registered";
+        }
+        else
+        {
+            $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
+
+            $json_data = [
+                "cust_name" => $_POST['newcustName'],
+                "last_name" => $_POST['newcustLastName'],
+                "cust_phone" => $_POST['newcustPhone'],
+                "whatsapp_num" => $_POST['newcustWhatsapp'],
+                "email" => $_POST['newcustEmail'],
+                "birthday" => $_POST['newcustBday'],
+                "anniversary" => $_POST['newcustAday'],
+                "work_phone" => $_POST['newcustWorkPhoneNum'],
+                "qatar_id" => $_POST['newcustQatarId'],
+                "address_1" => $_POST['newcustAddress1'],
+                "address_2" => $_POST['newcustAddress2'],
+                "city" => $_POST['newcustCity'],
+                "zip" => $_POST['newcustZip'],
+                "state" => $_POST['newcustState'],
+                "country" => $_POST['newcustCountry'],
+                "others" => $_POST['newcustOthers'],
+            ];
+
+            $json_data = json_encode($json_data);
+
+            $sqluc = "UPDATE `cust_name_phone` SET `cust_name`='".$_POST['newcustName']."',`last_name`='".$_POST['newcustLastName']."',`cust_phone`='".$_POST['newcustPhone']."',
+                    `whatsapp_num`='".$_POST['newcustWhatsapp']."',`email`='".$_POST['newcustEmail']."',`birthday`='".$_POST['newcustBday']."',`anniversary`='".$_POST['newcustAday']."',`work_phone`='".$_POST['newcustWorkPhoneNum']."',
+                    `qatar_id`='".$_POST['newcustQatarId']."',`address_1`='".$_POST['newcustAddress1']."',`address_2`='".$_POST['newcustAddress2']."',`city`='".$_POST['newcustCity']."',`zip`='".$_POST['newcustZip']."',
+                    `state`='".$_POST['newcustState']."',`country`='".$_POST['newcustCountry']."',`others`='".$_POST['newcustOthers']."' WHERE `cust_id` = '".$_POST['customer_id']."'";
+            
+            $updateuc = mysqli_query($link, $sqluc);
+
+            if($updateuc)
+            {
+                $sqluc2 = "UPDATE `customers` SET `c_name`='".$name."', `c_phone`='".$_POST['newcustPhone']."', `c_whatsapp`='".$_POST['newcustWhatsapp']."', 
+                            `json_data` = '".$json_data."' WHERE `c_phone` = '".$old_phn."' AND `c_whatsapp` = '".$old_whatsapp."'";
+            
+                $updateuc2 = mysqli_query($link, $sqluc2);
+
+                echo "Customer details updated.";
+            }
+            else
+            {
+                echo "Something went wrong. Try again.";
+            }
+        }
+    }
     elseif($_POST['delete_customer'])
     {
         mysqli_query($link, "delete from customers where c_id = '".$_POST['delete_customer']."'");
