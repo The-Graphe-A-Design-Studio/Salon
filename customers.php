@@ -107,13 +107,13 @@
                     <h1>Customers</h1>
                     <div class="section-header-breadcrumb">
                         <div class="breadcrumb-item active"><a href="dashboard">Dashboard</a></div>
-                        <div class="breadcrumb-item">Cutomers</div>
+                        <div class="breadcrumb-item">Customers</div>
                     </div>
                 </div>
                 <div class="section-body">
 
                     <div class="row">
-                        <div class="col-12 col-md-3">
+                        <!-- <div class="col-12 col-md-3">
                             <div class="form-group">
                                 <label>Branch</label>
                                 <select class="form-control common_selector branch">
@@ -128,14 +128,14 @@
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-12 col-md-3">
                             <div class="form-group">
                                 <label>Name</label>
-                                <input type="text" class="form-control common_selector name" placeholder="Search by name">
+                                <input type="text" class="form-control common_selector branch" placeholder="Search by name">
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <!-- <div class="col-12 col-md-3">
                             <div class="form-group">
                                 <label>Start Date</label>
                                 <input type="date" placeholder="MM/DD/YYYY" class="form-control common_selector s_date" name="start_date"/>
@@ -146,12 +146,13 @@
                                 <label>End Date</label>
                                 <input type="date" placeholder="MM/DD/YYYY" class="form-control common_selector e_date" name="end_date"/>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    
-                    <div class="row mt-sm-4 filter_data">
 
-                    </div>
+                    <div class="container-fluid">
+                        <div class="row filter_data"></div>
+                    </div>                    
+                    
                 </div>
             </section>
         </div>
@@ -188,7 +189,7 @@
 
             function branchw()
             {
-                return $('.branch').find('option:selected').val();
+                return $('.branch').val();
             }
 
             function start_datee()
