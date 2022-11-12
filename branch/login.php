@@ -148,6 +148,9 @@
                      <i class="fas fa-long-arrow-alt-left"></i> Go to <a href="../login">Admin Login</a>
                   </div>
                   <div class="simple-footer">
+                     <a href="../new_customer">Add New Customer</a>
+                  </div>
+                  <div class="simple-footer">
                      Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
                      <br>
                      Designed by <a href="https://tecizasolutions.com/" target="_blank">Teciza Solution</a> &
