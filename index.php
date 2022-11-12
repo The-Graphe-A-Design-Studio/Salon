@@ -29,7 +29,7 @@
                                     <a href="login">
                                         <div class="card card-primary">
                                             <div class="card-body text-center">
-                                                <h4><p><span style="font-size: 1.5em;">Admin Login</span></p></h4>
+                                                <span style="font-size: 2rem;">Admin Login</span>
                                             </div>
                                         </div>
                                     </a>
@@ -38,11 +38,22 @@
                                     <a href="branch/login">
                                         <div class="card card-primary">
                                             <div class="card-body text-center">
-                                                <h4><p><span style="font-size: 1.5em;">Branch Login</span></p></h4>
+                                                <span style="font-size: 2rem;">Branch Login</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
+                                <div class="col-12 col-md-3 col-lg-3"> </div>
+                                <div class="col-12 col-md-6 col-lg-6">
+                                    <a href="new_customer">
+                                        <div class="card card-primary">
+                                            <div class="card-body text-center">
+                                                <span style="font-size: 2rem;">New Customer</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-12 col-md-3 col-lg-3"> </div>
                             </div>
                             <div class="simple-footer">
                                 Copyright &copy; <script>document.write(new Date().getFullYear());</script> Diva Lounge Spa
