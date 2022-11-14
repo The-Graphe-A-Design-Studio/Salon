@@ -10,6 +10,11 @@
     // define('DB_NAME', 'thegrhmw_salon');
 
     // define('DB_SERVER', 'localhost');
+    // define('DB_USERNAME', 'smpoeip2_rohit');
+    // define('DB_PASSWORD', '.2019@TheGraphe');
+    // define('DB_NAME', 'smpoeip2_salon2');
+
+    // define('DB_SERVER', 'localhost');
     // define('DB_USERNAME', 'tan5981k_rohit');
     // define('DB_PASSWORD', 'iloveu3000');
     // define('DB_NAME', 'tan5981k_feedback');
