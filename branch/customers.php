@@ -48,8 +48,13 @@
                     <div class="row mt-sm-4">
                     
                         <div class="col-12">
-                            <div class="card profile-widget services-widget">
+                            <div class="card profile-widget services-widget">                                
                                 <div class="profile-widget-description">
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            Create feedback link for new customer.
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-12 col-md-4 col-lg-4 form-group">
                                             <label>Ticket Num *</label>
@@ -92,12 +97,88 @@
                                             <input type="email" class="form-control" name="newcustEmail" placeholder="Enter customer's email address">
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
-                                            <label>Birthday</label>
-                                            <input type="date" class="form-control" name="newcustBday" placeholder="Enter customer's birthday">
+                                            <label>Birthday (Year optional)</label>
+                                            <div class="input-group">
+                                                <select class="form-control" name="bday_date" id="">
+                                                    <option value="">DD</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 31; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>">
+                                                            <?php echo $i; ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="bday_month" id="">
+                                                    <option value="">MM</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 12; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>">
+                                                            <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="bday_year" id="">
+                                                    <option value="">YY</option>
+                                                    <?php
+                                                        for($i = 1950; $i <= 2030; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>                                                        
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
-                                            <label>Anniversary</label>
-                                            <input type="date" class="form-control" name="newcustAday" placeholder="Enter customer's anniversary">
+                                            <label>Anniversary (Year optional)</label>
+                                            <div class="input-group">
+                                                <select class="form-control" name="aday_date" id="">
+                                                    <option value="">DD</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 31; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>">
+                                                            <?php echo $i; ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="aday_month" id="">
+                                                    <option value="">MM</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 12; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>">
+                                                            <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="aday_year" id="">
+                                                    <option value="">YY</option>
+                                                    <?php
+                                                        for($i = 1950; $i <= 2030; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>                                                        
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
                                             <label>Work Phone Num</label>
@@ -175,6 +256,13 @@
                                                             <?php } ?>
                                                         </select>
                                                     </td>
+                                                    <td style="padding: 0 !important;">
+                                                        <div class="d-flex justify-content-center align-items-end" style="height: 120% !important;">
+                                                        <button class="btn btn-danger btn-icon delete-service-button">
+                                                                <i class="fas fa-trash"></i>
+                                                        </button> 
+                                                        </div>
+                                                    </td>                                                    
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -252,6 +340,10 @@
                 }
             });
         });
+
+        $("body").on("click", ".delete-service-button", function () {
+            $(this).parents("tr").remove();
+        })
     </script>
 </body>
 </html>

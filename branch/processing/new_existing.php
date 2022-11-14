@@ -26,7 +26,7 @@
             $query .= " AND cust_name LIKE '$se%'";
         }
 
-        $query .= " order by cust_name limit 8";
+        $query .= " order by cust_name limit 15";
 
         $statement = $connect->prepare($query);
         $statement->execute();
@@ -147,27 +147,21 @@
                     <div class="card profile-widget services-widget">
                         <div class="profile-widget-description">
                             <div class="row">
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                        Ticket
-                                    </div>
-                                    <p><input type="text" class="form-control" name="exTicket" required placeholder="Enter ticket number"></p>
+                                <div class="col-12 col-md-4 col-lg-4 form-group">
+                                    <label>Ticket</label>
+                                    <input type="text" class="form-control" name="exTicket" required placeholder="Enter ticket number"></p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                        Name
-                                    </div>
-                                    <p><input type="text" id="cust_name" value="'.$row['cust_name'].'" class="form-control" name="exCustomer" readonly></p>
+                                <div class="col-12 col-md-4 col-lg-4 form-group">
+                                    <label>Name</label>
+                                    <input type="text" id="cust_name" value="'.$row['cust_name'].'" class="form-control" name="exCustomer" readonly></p>
                                 </div>                                
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="profile-widget-name" style="margin-bottom: 0 !important">
-                                        Phone
-                                    </div>
-                                    <p><input type="text" id="cust_phone" value="'.$row['cust_phone'].'" class="form-control" name="exPhone" readonly></p>
+                                <div class="col-12 col-md-4 col-lg-4 form-group">
+                                    <label>Phone</label>
+                                    <input type="text" id="cust_phone" value="'.$row['cust_phone'].'" class="form-control" name="exPhone" readonly></p>
                                 </div>
-                                <div class="col-12 col-md-4 col-lg-4">
+                                <div class="col-12 col-md-4 col-lg-4 form-group">
                                     <div class="profile-widget-name" style="margin-bottom: 0 !important">
                                         Whatsapp
                                     </div>
@@ -214,6 +208,13 @@
                 '
                                                 </select>
                                             </td>
+                                            <td style="padding: 0 !important;">
+                                                <div class="d-flex justify-content-center align-items-end" style="height: 120% !important;">
+                                                <button class="btn btn-danger btn-icon delete-service-button">
+                                                        <i class="fas fa-trash"></i>
+                                                </button> 
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -249,6 +250,10 @@
                     }
                 });
             });
+
+            $("body").on("click", ".delete-service-button", function () {
+                $(this).parents("tr").remove();
+            })
 
             $(document).ready(function(){
 

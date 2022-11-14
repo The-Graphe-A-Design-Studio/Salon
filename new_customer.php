@@ -1,15 +1,16 @@
 <?php
     include('dbcon.php');
 
-    $firstName = $lastName = $phone = $whatsapp = $email = $bday = $aday = $workPhoneNum = null;
+    $firstName = $lastName = $phone = $whatsapp = $email = $bday_date = $bday_month = $bday_year = $aday_date = $aday_month = $aday_year = $workPhoneNum = null;
     $qatarId = $address1 = $address2 = $city = $zip = $state = $country = $others = null;
 
-    $firstName_err = $lastName_err = $phone_err = $whatsapp_err = $email_err = $bday_err = $aday_err = $workPhoneNum_err = null;
-    $qatarId_err = $address1_err = $address2_err = $city_err = $zip_err = $state_err = $country_err = $others_err = null;
+    $firstName_err = $lastName_err = $phone_err = $whatsapp_err = $email_err = $bday_date_err = $bday_month_err = $bday_year_err = $aday_date_err = null;
+    $aday_month_err = $aday_year_err = $workPhoneNum_err = $qatarId_err = $address1_err = $address2_err = $city_err = $zip_err = $state_err = null;
+    $country_err = $others_err = null;    
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-        // fields
+        // Required fields
             if(empty(trim($_POST["firstName"])))
             {
                 $firstName_err = "Please enter your first name.";
@@ -71,12 +72,90 @@
                     $whatsapp = trim($_POST["whatsapp"]);
                 }
             }
-        // End fields
 
-        // Not fields
+            // Birthday
+            if($_POST["bday_date"] === '' && !empty(trim($_POST["bday_month"])))
+            {
+                $bday_date_err = "Please select birthday date.";
+            }
+            else
+            {
+                $bday_date = trim($_POST["bday_date"]);
+            }
+
+            if(!empty(trim($_POST["bday_date"])) && $_POST["bday_month"] === '')
+            {
+                $bday_month_err = "Please select birthday month.";
+            }
+            else
+            {
+                $bday_month = trim($_POST["bday_month"]);
+            }
+
+            if(!empty(trim($_POST["bday_year"])) && $_POST["bday_month"] === '')
+            {
+                $bday_year_err = "Please select birthday date & month also.";
+            }
+            else
+            {
+                $bday_year = trim($_POST["bday_year"]);
+            }
+
+            if(!empty(trim($_POST["bday_year"])) && $_POST["bday_date"] === '')
+            {
+                $bday_year_err = "Please select birthday date & month also.";
+            }
+            else
+            {
+                $bday_year = trim($_POST["bday_year"]);
+            }
+
+            // Anniversary
+            if($_POST["aday_date"] === '' && !empty(trim($_POST["aday_month"])))
+            {
+                $aday_date_err = "Please select anniversary date.";
+            }
+            else
+            {
+                $aday_date = trim($_POST["aday_date"]);
+            }
+
+            if(!empty(trim($_POST["aday_date"])) && $_POST["aday_month"] === '')
+            {
+                $aday_month_err = "Please select anniversary month.";
+            }
+            else
+            {
+                $aday_month = trim($_POST["aday_month"]);
+            }
+
+            if(!empty(trim($_POST["aday_year"])) && $_POST["aday_month"] === '')
+            {
+                $aday_year_err = "Please select anniversary date & month also.";
+            }
+            else
+            {
+                $aday_year = trim($_POST["aday_year"]);
+            }
+
+            if(!empty(trim($_POST["aday_year"])) && $_POST["aday_date"] === '')
+            {
+                $aday_year_err = "Please select anniversary date & month also.";
+            }
+            else
+            {
+                $aday_year = trim($_POST["aday_year"]);
+            }
+        // End required fields
+
+        // Not required fields
             $email = trim($_POST['email'] ? : null);
-            if($_POST['bday'] == '0000-00-00'){ $bday = null; }else{ $bday = $_POST['bday']; };
-            if($_POST['aday'] == '0000-00-00'){ $aday = null; }else{ $aday = $_POST['aday']; };
+            $bday_date = trim($_POST['bday_date'] ? : null);
+            $bday_month = trim($_POST['bday_month'] ? : null);
+            $bday_year = trim($_POST['bday_year'] ? : null);
+            $aday_date = trim($_POST['aday_date'] ? : null);
+            $aday_month = trim($_POST['aday_month'] ? : null);
+            $aday_year = trim($_POST['aday_year'] ? : null);
             $workPhoneNum = trim($_POST['workPhoneNum'] ? : null);
             $qatarId = trim($_POST['qatarId'] ? : null);
             $address1 = trim($_POST['address1'] ? : null);
@@ -86,9 +165,10 @@
             $state = trim($_POST['state'] ? : null);
             $country = trim($_POST['country'] ? : null);
             $others = trim($_POST['others'] ? : null);
-        // End not fields
+        // End not required fields
 
-        if(empty($firstName_err) && empty($lastName_err) && empty($phone_err) && empty($whatsapp_err))
+        if(empty($firstName_err) && empty($lastName_err) && empty($phone_err) && empty($whatsapp_err) && empty($bday_date_err)
+        && empty($bday_month_err) && empty($bday_year_err) && empty($aday_date_err) && empty($aday_month_err) && empty($aday_year_err))
         {
             $address1 = mysqli_real_escape_string($link, $address1);
             $address2 = mysqli_real_escape_string($link, $address2);
@@ -97,6 +177,30 @@
             $state = mysqli_real_escape_string($link, $state);
             $country = mysqli_real_escape_string($link, $country);
             $others = mysqli_real_escape_string($link, $others);
+
+            if(!empty($bday_date) && !empty($bday_month))
+            {
+                if(empty($bday_year))
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-".$bday_year), 'd M, Y');
+                }
+            }
+
+            if(!empty($aday_date) && !empty($aday_month))
+            {
+                if(empty($aday_year))
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-".$aday_year), 'd M, Y');
+                }
+            }
 
             $sql = "insert into cust_name_phone (`cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`,
                     `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`) values ('$firstName', '$lastName', 
@@ -170,7 +274,7 @@
                                                     <label>First Name *</label>
                                                     <input type="text" class="form-control" name="firstName" 
                                                     placeholder="Enter your first name" value="<?php echo $firstName; ?>">
-                                                    <span class="error-msg"><?php echo $firstName_err; ?></span> 
+                                                    <span class="error-msg"><?php echo $firstName_err; ?></span>
                                                 </div>
                                                 <div class="col-12 col-md-6 form-group <?php echo (!empty($lastName_err)) ? 'has-error' : ''; ?>">
                                                     <label>Last Name *</label>
@@ -199,13 +303,153 @@
                                                     <label>Email</label>
                                                     <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Enter your email address">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
-                                                    <label>Birthday</label>
-                                                    <input type="date" class="form-control" name="bday" value="<?php echo $bday; ?>" placeholder="Enter your birthday">
+                                                <div class="col-12 col-md-4 col-lg-3 form-group <?php echo (!empty($bday_date_err)) ? ' has-error' : ''; 
+                                                                                                      echo (!empty($bday_month_err)) ? ' has-error' : '';
+                                                                                                      echo (!empty($bday_year_err)) ? ' has-error' : ''; ?>">
+                                                    <label>Birthday (Year optional)</label>
+                                                    <div class="input-group">
+                                                        <select class="form-control" name="bday_date" id="">
+                                                            <option value="">DD</option>
+                                                            <?php
+                                                                for($i = 1; $i <= 31; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>"
+                                                                    <?php
+                                                                        if($i == $bday_date)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                >
+                                                                    <?php echo $i; ?>
+                                                                </option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                        <select class="form-control" name="bday_month" id="">
+                                                            <option value="">MM</option>
+                                                            <?php
+                                                                for($i = 1; $i <= 12; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>"
+                                                                    <?php
+                                                                        if($i == $bday_month)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                >
+                                                                    <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                                </option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                        <select class="form-control" name="bday_year" id="">
+                                                            <option value="">YY</option>
+                                                            <?php
+                                                                for($i = 1950; $i <= 2030; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo $i; ?>"
+                                                                    <?php
+                                                                        if($i == $bday_year)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                ><?php echo $i; ?></option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>                                                        
+                                                    </div>
+                                                    <span class="error-msg"><?php echo $bday_date_err; ?></span>
+                                                    <span class="error-msg"><?php echo $bday_month_err; ?></span>
+                                                    <span class="error-msg"><?php echo $bday_year_err; ?></span>
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
-                                                    <label>Anniversary</label>
-                                                    <input type="date" class="form-control" name="aday" value="<?php echo $aday; ?>" placeholder="Enter your anniversary">
+                                                <div class="col-12 col-md-4 col-lg-3 form-group <?php echo (!empty($aday_date_err)) ? ' has-error' : ''; 
+                                                                                                      echo (!empty($aday_month_err)) ? ' has-error' : '';
+                                                                                                      echo (!empty($aday_year_err)) ? ' has-error' : ''; ?>">
+                                                    <label>Anniversary (Year optional)</label>
+                                                    <div class="input-group">
+                                                        <select class="form-control" name="aday_date" id="">
+                                                            <option value="">DD</option>
+                                                            <?php
+                                                                for($i = 1; $i <= 31; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>"
+                                                                    <?php
+                                                                        if($i == $aday_date)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                >
+                                                                    <?php echo $i; ?>
+                                                                </option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                        <select class="form-control" name="aday_month" id="">
+                                                            <option value="">MM</option>
+                                                            <?php
+                                                                for($i = 1; $i <= 12; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>"
+                                                                    <?php
+                                                                        if($i == $aday_month)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                >
+                                                                    <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                                </option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>
+                                                        <select class="form-control" name="aday_year" id="">
+                                                            <option value="">YY</option>
+                                                            <?php
+                                                                for($i = 1950; $i <= 2030; $i++)
+                                                                {
+                                                            ?>
+                                                                <option value="<?php echo $i; ?>"
+                                                                    <?php
+                                                                        if($i == $aday_year)
+                                                                        {
+                                                                    ?>
+                                                                        selected
+                                                                    <?php
+                                                                        }
+                                                                    ?>
+                                                                ><?php echo $i; ?></option>
+                                                            <?php
+                                                                }
+                                                            ?>
+                                                        </select>                                                        
+                                                    </div>
+                                                    <span class="error-msg"><?php echo $aday_date_err; ?></span>
+                                                    <span class="error-msg"><?php echo $aday_month_err; ?></span>
+                                                    <span class="error-msg"><?php echo $aday_year_err; ?></span>
                                                 </div>
                                                 <div class="col-12 col-md-4 col-lg-3 form-group">
                                                     <label>Work Phone Num</label>
@@ -276,31 +520,6 @@
         
         <!-- Google Translater -->
         <script src="assets/js/google.js"></script>
-
-        <script type="text/javascript">
-            $(".feedback").submit(function(e)
-            {
-                var form_data = $(this).serialize();
-                alert(form_data);
-                var button_content = $(this).find('button[type=submit]');
-                button_content.addClass("disabled btn-progress");
-                // $.ajax({
-                //     url: 'processing/curd_form.php',
-                //     data: form_data,
-                //     type: 'POST',
-                //     success: function(data)
-                //     {
-                //         alert(data);
-                //         button_content.removeClass("disabled btn-progress");
-                //         if(data === "Feedback Submited")
-                //         {
-                //             location.href="thankyou";
-                //         }
-                //     }
-                // });
-                e.preventDefault();
-            });
-        </script>
-
+    
     </body>
 </html>

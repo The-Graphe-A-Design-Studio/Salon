@@ -3,7 +3,8 @@
     include("../../dbcon.php");
 
     if(isset($_POST['newcustTicket']) && isset($_POST['newcustName']) && isset($_POST['newcustLastName']) && isset($_POST['newcustPhone']) && isset($_POST['newcustWhatsapp']) &&
-        isset($_POST['newcustEmail']) && isset($_POST['newcustBday']) && isset($_POST['newcustAday']) && isset($_POST['newcustWorkPhoneNum']) &&
+        isset($_POST['newcustEmail']) && isset($_POST['bday_date']) && isset($_POST['bday_month']) && isset($_POST['bday_year']) && 
+        isset($_POST['aday_date']) && isset($_POST['aday_month']) && isset($_POST['aday_year']) &&
         isset($_POST['newcustQatarId']) && isset($_POST['newcustAddress1']) && isset($_POST['newcustAddress2']) && isset($_POST['newcustCity']) &&
         isset($_POST['newcustZip']) && isset($_POST['newcustState']) && isset($_POST['newcustCountry']) && isset($_POST['newcustOthers']) && isset($_POST['branch_id']))
     {
@@ -39,14 +40,53 @@
         {
             $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
 
+            $bday_date = trim($_POST['bday_date'] ? : null);
+            $bday_month = trim($_POST['bday_month'] ? : null);
+            $bday_year = trim($_POST['bday_year'] ? : null);
+            $aday_date = trim($_POST['aday_date'] ? : null);
+            $aday_month = trim($_POST['aday_month'] ? : null);
+            $aday_year = trim($_POST['aday_year'] ? : null);
+
+            if(!empty($bday_date) && !empty($bday_month))
+            {
+                if(empty($bday_year))
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-".$bday_year), 'd M, Y');
+                }
+            }
+            else
+            {
+                $bday = null;
+            }
+
+            if(!empty($aday_date) && !empty($aday_month))
+            {
+                if(empty($aday_year))
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-".$aday_year), 'd M, Y');
+                }
+            }
+            else
+            {
+                $aday = null;
+            }
+
             $json_data = [
                 "cust_name" => $_POST['newcustName'],
                 "last_name" => $_POST['newcustLastName'],
                 "cust_phone" => $_POST['newcustPhone'],
                 "whatsapp_num" => $_POST['newcustWhatsapp'],
                 "email" => $_POST['newcustEmail'],
-                "birthday" => $_POST['newcustBday'],
-                "anniversary" => $_POST['newcustAday'],
+                "birthday" => $bday,
+                "anniversary" => $aday,
                 "work_phone" => $_POST['newcustWorkPhoneNum'],
                 "qatar_id" => $_POST['newcustQatarId'],
                 "address_1" => $_POST['newcustAddress1'],
@@ -84,7 +124,7 @@
                 mysqli_query($link, "insert into cust_name_phone (`cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`,
                             `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`) values ('".$_POST['newcustName']."',
                             '".$_POST['newcustLastName']."', '".$_POST['newcustPhone']."', '".$_POST['newcustWhatsapp']."', '".$_POST['newcustEmail']."', 
-                            '".$_POST['newcustBday']."', '".$_POST['newcustAday']."', '".$_POST['newcustWorkPhoneNum']."', '".$_POST['newcustQatarId']."', 
+                            '".$bday."', '".$aday."', '".$_POST['newcustWorkPhoneNum']."', '".$_POST['newcustQatarId']."', 
                             '".$_POST['newcustAddress1']."', '".$_POST['newcustAddress2']."', '".$_POST['newcustCity']."', '".$_POST['newcustZip']."', 
                             '".$_POST['newcustState']."', '".$_POST['newcustCountry']."', '".$_POST['newcustOthers']."')");
                 

@@ -82,11 +82,11 @@
 
                     if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
                     {
-                        $url = "https://www.divaspaqatar.com/feedback/";
+                        $url = "https://www.developers-thegraphe.com/php/salon2/";
                     }
                     else 
                     {
-                        $url = "http://www.divaspaqatar.com/feedback/";
+                        $url = "http://www.developers-thegraphe.com/php/salon2/";
                     }
 
                     $link = $url.'branch/feedback_form?cust='.$row['c_code'].'&id='.$row['c_id'].'';
@@ -110,21 +110,21 @@
                         <td data-column="Link" class="copy'.$row['c_id'].'">
                             <div class="d-flex justify-content-center align-items-center">
                                 <div class="input-group">
-                                    <input type="text" style="width: 250px;" class="form-control" value="'.$link.'" readonly>
+                                    <input type="text" style="width: 65%;" class="form-control" value="'.$link.'" readonly>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary btn-info" type="button">Copy</button>
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <!-- <td data-column="Edit Details">
-                            <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
-                            aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'">Edit</button>
-                        </td> -->
+                        </td>                        
                         <td data-column="Share">
                             <a href="https://wa.me/'.$row['c_whatsapp'].'?text=We%20appreciate%20your%20business%20and%20we%20want%20to%20make%20sure%20we%20meet%20your%20expectations%2C%20providing%20the%20right%20treatment%20is%20very%20important%20and%20we%20would%20like%20to%20hear%20your%20feedback%20on%20your%20Spa%20experience.%0A%0AFeedback%20form%20-%20'.urlencode($link).'%0A%0AThanks%20%26%20Regards%0ADiva%20Lounge%20Spa" target="_blank" class="btn btn-success">
                             <i class="fab fa-whatsapp"></i>
                             </a>                            
+                        </td>
+                        <td data-column="Edit">
+                            <button class="btn btn-warning btn-md" data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
+                            aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'" title="Edit Ticket Number">Edit</button>
                         </td>
                         <td data-column="Delete">
                             <form class="edit_cust'.$row['c_id'].'">
@@ -139,14 +139,20 @@
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td data-column="Date">'.$row['c_date'].'</td>
-                                            <td data-column="Name"><input type="text" class="form-control" name="edit_cust_name" value="'.$row['c_name'].'"></td>
-                                            <td data-column="Ticket"><input type="text" class="form-control" name="edit_cust_ticket" value="'.$row['c_ticket'].'"></td>
-                                            <td data-column="Phone"><input type="text" class="form-control" name="edit_cust_phone" value="'.$row['c_phone'].'"></td>
+                                            <td data-column="Date">Edit Ticket</td>
+                                            <td data-column="Name">'.$row['c_name'].'</td>
+                                            <td data-column="Ticket">
+                                                <input type="text" class="form-control" name="edit_cust_ticket" value="'.$row['c_ticket'].'">
+                                            </td>
+                                            <td data-column="Phone">'.$row['c_phone'].'</td>
                                             <td data-column="Status">'.$status.'</td>
-                                            <td data-column="Edit Details" colspan="2">
+                                            <td data-column="Edit Details">
                                                 <input type="text" class="form-control" name="edit_cust_id" value="'.$row['c_id'].'" hidden>
-                                                <button type="submit" class="btn btn-info btn-md">Update</button>
+                                                <button type="submit" class="btn btn-success btn-md">Update</button>
+                                            </td>
+                                            <td data-column="Delete">
+                                                <button type="button" class="btn btn-info btn-md btn-icon " data-toggle="collapse" data-target="#collapse_'.$row['c_id'].'" 
+                                                    aria-expanded="true" aria-controls="collapse_'.$row['c_id'].'" title="Close">&#10006;</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -166,7 +172,7 @@
                                         success: function(data)
                                         {
                                             alert(data);
-                                            if(data === "Customer details updated" || data === "Customer removed")
+                                            if(data === "Customer details updated" || data === "Link deleted.")
                                             {
                                                 $( "#refresh_btn" ).trigger( "click" );
                                             }
@@ -238,15 +244,15 @@
         echo "New customer registered";
 
     }
-    elseif(isset($_POST['edit_cust_name']) && isset($_POST['edit_cust_ticket']) && isset($_POST['edit_cust_phone']) && isset($_POST['edit_cust_id']))
+    elseif(isset($_POST['edit_cust_ticket']) && isset($_POST['edit_cust_id']))
     {
-        mysqli_query($link, "update customers set c_name = '".$_POST['edit_cust_name']."', c_ticket = '".$_POST['edit_cust_ticket']."', 
-                    c_phone = '".$_POST['edit_cust_phone']."' where c_id = '".$_POST['edit_cust_id']."'");
+        mysqli_query($link, "update customers set c_ticket = '".$_POST['edit_cust_ticket']."' where c_id = '".$_POST['edit_cust_id']."'");
 
         echo "Customer details updated";
     }
     elseif(isset($_POST['newcustName']) && isset($_POST['newcustLastName']) && isset($_POST['newcustPhone']) && isset($_POST['newcustWhatsapp']) &&
-        isset($_POST['newcustEmail']) && isset($_POST['newcustBday']) && isset($_POST['newcustAday']) && isset($_POST['newcustWorkPhoneNum']) &&
+        isset($_POST['newcustEmail']) && isset($_POST['bday_date']) && isset($_POST['bday_month']) && isset($_POST['bday_year']) && 
+        isset($_POST['aday_date']) && isset($_POST['aday_month']) && isset($_POST['aday_year']) && isset($_POST['newcustWorkPhoneNum']) &&
         isset($_POST['newcustQatarId']) && isset($_POST['newcustAddress1']) && isset($_POST['newcustAddress2']) && isset($_POST['newcustCity']) &&
         isset($_POST['newcustZip']) && isset($_POST['newcustState']) && isset($_POST['newcustCountry']) && isset($_POST['newcustOthers']) && isset($_POST['branch_id'])
         && isset($_POST['customer_id']))
@@ -272,14 +278,53 @@
         {
             $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
 
+            $bday_date = trim($_POST['bday_date'] ? : null);
+            $bday_month = trim($_POST['bday_month'] ? : null);
+            $bday_year = trim($_POST['bday_year'] ? : null);
+            $aday_date = trim($_POST['aday_date'] ? : null);
+            $aday_month = trim($_POST['aday_month'] ? : null);
+            $aday_year = trim($_POST['aday_year'] ? : null);
+
+            if(!empty($bday_date) && !empty($bday_month))
+            {
+                if(empty($bday_year))
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $bday = date_format(date_create($bday_date."-".$bday_month."-".$bday_year), 'd M, Y');
+                }
+            }
+            else
+            {
+                $bday = null;
+            }
+
+            if(!empty($aday_date) && !empty($aday_month))
+            {
+                if(empty($aday_year))
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-1994"), 'd M');
+                }
+                else
+                {
+                    $aday = date_format(date_create($aday_date."-".$aday_month."-".$aday_year), 'd M, Y');
+                }
+            }
+            else
+            {
+                $aday = null;
+            }
+
             $json_data = [
                 "cust_name" => $_POST['newcustName'],
                 "last_name" => $_POST['newcustLastName'],
                 "cust_phone" => $_POST['newcustPhone'],
                 "whatsapp_num" => $_POST['newcustWhatsapp'],
                 "email" => $_POST['newcustEmail'],
-                "birthday" => $_POST['newcustBday'],
-                "anniversary" => $_POST['newcustAday'],
+                "birthday" => $bday,
+                "anniversary" => $aday,
                 "work_phone" => $_POST['newcustWorkPhoneNum'],
                 "qatar_id" => $_POST['newcustQatarId'],
                 "address_1" => $_POST['newcustAddress1'],
@@ -294,7 +339,7 @@
             $json_data = json_encode($json_data);
 
             $sqluc = "UPDATE `cust_name_phone` SET `cust_name`='".$_POST['newcustName']."',`last_name`='".$_POST['newcustLastName']."',`cust_phone`='".$_POST['newcustPhone']."',
-                    `whatsapp_num`='".$_POST['newcustWhatsapp']."',`email`='".$_POST['newcustEmail']."',`birthday`='".$_POST['newcustBday']."',`anniversary`='".$_POST['newcustAday']."',`work_phone`='".$_POST['newcustWorkPhoneNum']."',
+                    `whatsapp_num`='".$_POST['newcustWhatsapp']."',`email`='".$_POST['newcustEmail']."',`birthday`='".$bday."',`anniversary`='".$aday."',`work_phone`='".$_POST['newcustWorkPhoneNum']."',
                     `qatar_id`='".$_POST['newcustQatarId']."',`address_1`='".$_POST['newcustAddress1']."',`address_2`='".$_POST['newcustAddress2']."',`city`='".$_POST['newcustCity']."',`zip`='".$_POST['newcustZip']."',
                     `state`='".$_POST['newcustState']."',`country`='".$_POST['newcustCountry']."',`others`='".$_POST['newcustOthers']."' WHERE `cust_id` = '".$_POST['customer_id']."'";
             
@@ -319,7 +364,7 @@
     {
         mysqli_query($link, "delete from customers where c_id = '".$_POST['delete_customer']."'");
 
-        echo "Customer removed";
+        echo "Link deleted.";
     }
     else
     {

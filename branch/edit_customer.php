@@ -91,12 +91,170 @@
                                             <input type="email" class="form-control" value="<?php echo $row['email']; ?>" name="newcustEmail" placeholder="Enter customer's email address">
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
-                                            <label>Birthday</label>
-                                            <input type="date" class="form-control" value="<?php echo $row['birthday']; ?>" name="newcustBday" placeholder="Enter customer's birthday">
+                                            <label>Birthday (Year optional)</label>
+                                            <div class="input-group">
+                                                <select class="form-control" name="bday_date" id="">
+                                                    <option value="">DD</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 31; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>"
+                                                            <?php
+                                                            if(!empty($row['birthday']))
+                                                            {
+                                                                if($i == date_format(date_create($row['birthday']), 'd'))
+                                                                {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        >
+                                                            <?php echo $i; ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="bday_month" id="">
+                                                    <option value="">MM</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 12; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>"
+                                                            <?php
+                                                            if(!empty($row['birthday']))
+                                                            {
+                                                                if($i == date_format(date_create($row['birthday']), 'm'))
+                                                                {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        >
+                                                            <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="bday_year" id="">
+                                                    <option value="">YY</option>
+                                                    <?php
+                                                        for($i = 1950; $i <= 2030; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo $i; ?>"
+                                                            <?php
+                                                            if(!empty($row['birthday']))
+                                                            {
+                                                                $yr = date_format(date_create($row['birthday']), 'Y');
+                                                                if($yr == date('Y'))
+                                                                {
+                                                                    $yr = null;
+                                                                }
+                                                                if($i == $yr)
+                                                                {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        ><?php echo $i; ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>     
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
-                                            <label>Anniversary</label>
-                                            <input type="date" class="form-control" value="<?php echo $row['anniversary']; ?>" name="newcustAday" placeholder="Enter customer's anniversary">
+                                            <label>Anniversary (Year optional)</label>
+                                            <div class="input-group">
+                                                <select class="form-control" name="aday_date" id="">
+                                                    <option value="">DD</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 31; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create($i."-08-1994"), 'd'); ?>"
+                                                            <?php
+                                                            if(!empty($row['anniversary']))
+                                                            {
+                                                                if($i == date_format(date_create($row['anniversary']), 'd'))
+                                                                {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        >
+                                                            <?php echo $i; ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="aday_month" id="">
+                                                    <option value="">MM</option>
+                                                    <?php
+                                                        for($i = 1; $i <= 12; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo date_format(date_create("01-".$i."-1994"), 'm'); ?>"
+                                                            <?php
+                                                            if(!empty($row['anniversary']))
+                                                            {
+                                                                if($i == date_format(date_create($row['anniversary']), 'm'))
+                                                                {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                }
+                                                            }
+                                                            ?>
+                                                        >
+                                                            <?php echo date_format(date_create("01-".$i."-1994"), 'M'); ?>
+                                                        </option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>
+                                                <select class="form-control" name="aday_year" id="">
+                                                    <option value="">YY</option>
+                                                    <?php
+                                                        for($i = 1950; $i <= 2030; $i++)
+                                                        {
+                                                    ?>
+                                                        <option value="<?php echo $i; ?>"
+                                                            <?php
+                                                                if(!empty($row['anniversary']))
+                                                                {
+                                                                    $yr2 = date_format(date_create($row['anniversary']), 'Y');
+                                                                    if($yr2 == date('Y'))
+                                                                    {
+                                                                        $yr2 = null;
+                                                                    }
+                                                                    if($i == $yr2)
+                                                                    {
+                                                            ?>
+                                                                selected
+                                                            <?php
+                                                                    }
+                                                                }
+                                                            ?>
+                                                        ><?php echo $i; ?></option>
+                                                    <?php
+                                                        }
+                                                    ?>
+                                                </select>                                                        
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-4 col-lg-3 form-group">
                                             <label>Work Phone Num</label>
@@ -173,7 +331,7 @@
                         alert(data);
                         if(data === "Customer details updated.")
                         {
-                            location.href="all_customers";
+                            location.reload();
                         }
                         button_content.removeClass("disabled btn-progress");
                     }

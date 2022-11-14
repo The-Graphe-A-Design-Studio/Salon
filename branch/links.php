@@ -168,8 +168,8 @@
                                         <th>Whatsapp</th>
                                         <th>Status</th>
                                         <th>Link</th>
-                                        <!-- <th>Edit Details</th> -->
                                         <th>Share</th>
+                                        <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
                                 </thead>

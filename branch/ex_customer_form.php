@@ -77,7 +77,7 @@
 
                 <div class="section-body text-right">
                     <div class="buttons">
-                        <a href="customer_form"><button class="btn btn-primary btn-lg">Add Customer</button></a>
+                        <a href="customer_form"><button class="btn btn-primary btn-lg">Create Link for New Customer</button></a>
                     </div>
                 </div>
                 
@@ -86,6 +86,7 @@
                         <div class="row mt-sm-4">
 
                             <div class="col-12 col-md-6 cl-lg-6">
+                                <h6>Search customer and select to create feedback link.</h6>
                                 <div class="tbl-header">
                                     <table cellpadding="0" cellspacing="0" border="0">
                                         <thead>

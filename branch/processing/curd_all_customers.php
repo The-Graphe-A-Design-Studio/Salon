@@ -133,10 +133,10 @@
                                                 <b>Email : </b><a href="mailto:'.$row['email'].'" class="text-primary">'.$row['email'].'</a>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Birthday : </b>'.$row['cust_phone'].'
+                                                <b>Birthday : </b>'.$row['birthday'].'
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Anniversary : </b>'.$row['cust_phone'].'
+                                                <b>Anniversary : </b>'.$row['anniversary'].'
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <b>Work Phone : </b><a href="tel:'.$row['work_phone'].'" class="text-primary">'.$row['work_phone'].'</a>
