@@ -208,7 +208,7 @@
             $output = 
             '
             <tr>
-                <td colspan="8"><h5>No Data Found</h5></td>
+                <td colspan="10"><h5>No Data Found</h5></td>
             </tr>
             ';
         }
