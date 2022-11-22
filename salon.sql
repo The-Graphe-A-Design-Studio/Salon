@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2022 at 02:35 PM
+-- Generation Time: Nov 22, 2022 at 03:01 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -374,20 +374,6 @@ CREATE TABLE `customers` (
   `json_data` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`c_id`, `c_code`, `branch_id`, `c_name`, `c_ticket`, `c_phone`, `c_whatsapp`, `c_date`, `c_q1`, `c_q2`, `c_q3`, `c_q4`, `c_q5`, `c_q6`, `c_q7`, `c_comment`, `c_status`, `c_return`, `reg`, `json_data`) VALUES
-(2, 'JZou2fR', 1, 'Rohit Singh', '12312', '9765678765', '3456545678', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"12\",\"cust_name\":\"Rohit\",\"last_name\":\"Singh\",\"cust_phone\":\"9765678765\",\"whatsapp_num\":\"3456545678\",\"email\":\"rohit@thegraphe.com\",\"birthday\":\"01 Aug, 1994\",\"anniversary\":\"01 Feb, 1995\",\"work_phone\":\"7908412548\",\"qatar_id\":\"UWJBKJIUIG\",\"address_1\":\"11/1, Edison Road (B-Zone)\",\"address_2\":\"\",\"city\":\"Durgapur\",\"zip\":\"713205\",\"state\":\"West Bengal\",\"country\":\"India\",\"others\":\"Hello World\",\"reg\":\"1\"}'),
-(3, 'XD1LqHS', 1, 'dfbdbf dfbdf', '0987654', '9877', '78978', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"6\",\"cust_name\":\"dfbdbf\",\"last_name\":\"dfbdf\",\"cust_phone\":\"9877\",\"whatsapp_num\":\"78978\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
-(4, 'u7vh28W', 1, 'dfbdfb dfbd', '4364345', '687645', '656754', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"dfbdfb\",\"last_name\":\"dfbd\",\"cust_phone\":\"687645\",\"whatsapp_num\":\"656754\",\"email\":\"\",\"birthday\":null,\"anniversary\":null,\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}'),
-(5, 'iRVR6Mv', 1, 'dfbdfb dfbd', '4364345', '687645', '656754', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"dfbdfb\",\"last_name\":\"dfbd\",\"cust_phone\":\"687645\",\"whatsapp_num\":\"656754\",\"email\":\"\",\"birthday\":null,\"anniversary\":null,\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}'),
-(6, 'LxvE4UO', 1, 'ngfdbf 3453rdsv', '5643453', '35456', '2345675', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_name\":\"ngfdbf\",\"last_name\":\"3453rdsv\",\"cust_phone\":\"35456\",\"whatsapp_num\":\"2345675\",\"email\":\"\",\"birthday\":\"04 May, 1959\",\"anniversary\":\"09 Aug\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\"}'),
-(7, 'k2nW8lu', 1, 'Rohit jkjgjskdg', '46456456', '1234567890', '1234567890', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"1\",\"cust_name\":\"Rohit\",\"last_name\":\"jkjgjskdg\",\"cust_phone\":\"1234567890\",\"whatsapp_num\":\"1234567890\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
-(8, 'PAeOyjr', 1, 'Rohit jkjgjskdg', '456', '1234567890', '1234567890', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"1\",\"cust_name\":\"Rohit\",\"last_name\":\"jkjgjskdg\",\"cust_phone\":\"1234567890\",\"whatsapp_num\":\"1234567890\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
-(9, '9c7HPfs', 1, 'Rohit jkjgjskdg', '65756', '1234567890', '1234567890', '2022-11-14', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"1\",\"cust_name\":\"Rohit\",\"last_name\":\"jkjgjskdg\",\"cust_phone\":\"1234567890\",\"whatsapp_num\":\"1234567890\",\"email\":\"\",\"birthday\":\"\",\"anniversary\":\"\",\"work_phone\":\"\",\"qatar_id\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"\",\"others\":\"\",\"reg\":\"1\"}');
-
 -- --------------------------------------------------------
 
 --
@@ -398,19 +384,27 @@ CREATE TABLE `cust_name_phone` (
   `cust_id` int(11) NOT NULL,
   `cust_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
+  `con_cust_phone` int(11) DEFAULT NULL,
   `cust_phone` varchar(50) NOT NULL,
+  `con_whatsapp_num` int(11) DEFAULT NULL,
   `whatsapp_num` varchar(50) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `birthday` varchar(50) DEFAULT NULL,
   `anniversary` varchar(50) DEFAULT NULL,
   `work_phone` varchar(50) DEFAULT NULL,
   `qatar_id` varchar(100) DEFAULT NULL,
+  `cust_category` varchar(150) DEFAULT NULL,
   `address_1` varchar(150) DEFAULT NULL,
   `address_2` varchar(150) DEFAULT NULL,
+  `address_3` varchar(150) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `zip` varchar(100) DEFAULT NULL,
   `state` varchar(100) DEFAULT NULL,
   `country` varchar(100) DEFAULT NULL,
+  `skin_allergy` varchar(150) DEFAULT NULL,
+  `back_problem` varchar(150) DEFAULT NULL,
+  `blood_pressure` varchar(150) DEFAULT NULL,
+  `hear_ab_us` varchar(150) DEFAULT NULL,
   `others` text DEFAULT NULL,
   `reg` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -419,21 +413,9 @@ CREATE TABLE `cust_name_phone` (
 -- Dumping data for table `cust_name_phone`
 --
 
-INSERT INTO `cust_name_phone` (`cust_id`, `cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`, `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`, `reg`) VALUES
-(1, 'Rohit', 'jkjgjskdg', '1234567890', '1234567890', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(2, 'dfbdfb', 'fbdfb', '345345', '345345345', '', 'Array', '', '', '', '', '', '', '', '', '', '', 1),
-(3, 'dfbdfb', 'dfbdfb', '3534', '345345', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(4, 'dfbdfb', 'dfbdfb', '3534234', '3453454324', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(5, 'ddfb', 'dfb', '4456', '34243', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(6, 'dfbdbf', 'dfbdf', '9877', '78978', '', '15 Jul, 1961', '07 Jun, 1964', '', '', '', '', '', '', '', '', '', 1),
-(7, 'dfbdbf', 'dfbdf', '98776575', '78978675', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(8, 'dfbdbf', 'dfbdf', '987765753434', '789786753534', '', '05 Jul', '15 Aug', '', '', '', '', '', '', '', '', '', 1),
-(9, 'dfbdbf', 'dfbdf', '123123', '1242334', '', '05 Jul, 54', '15 Aug, 63', '', '', '', '', '', '', '', '', '', 1),
-(10, 'dfbdbf', 'dfbdf', '789789', '567567', '', '05 Jul, 1954', '15 Aug, 1963', '', '', '', '', '', '', '', '', '', 1),
-(11, 'erereter', 'dfbdfb', '43235354645', '58543352545', '', '', '', '', '', '', '', '', '', '', '', '', 1),
-(12, 'Rohit', 'Singh', '9765678765', '3456545678', 'rohit@thegraphe.com', '01 Aug, 1994', '01 Feb, 1995', '7908412548', 'UWJBKJIUIG', '11/1, Edison Road (B-Zone)', '', 'Durgapur', '713205', 'West Bengal', 'India', 'Hello World', 1),
-(14, 'dfbdfb', 'dfbd', '687645', '656754', '', '09 Sep, 1959', '17 May, 1962', '', '', '', '', '', '', '', '', '', 1),
-(15, 'ngfdbf', '3453rdsv', '35456', '2345675', '', '04 May, 1959', '09 Aug, 1961', '', '', '', '', '', '', '', '', '', 1);
+INSERT INTO `cust_name_phone` (`cust_id`, `cust_name`, `last_name`, `con_cust_phone`, `cust_phone`, `con_whatsapp_num`, `whatsapp_num`, `email`, `birthday`, `anniversary`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, `zip`, `state`, `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`, `reg`) VALUES
+(1, 'fgnfgn', 'fgnfgn', 974, '4644', 974, '5456456', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Yes', 'No', 'High', 'Walk in', '', 1),
+(2, 'vdsdvsvd', 'sdvsvd', 974, '345345', 960, 'ddfbdbf', 'vskjg@g.com', '10 Sep, 1960', '17 Aug, 1962', '45645645', 'JHFJHFJ', 'kjdkjj', 'kjbkvjw', 'ioioghvoiwh', 'iohdiokvhg', 'ikhsdh', '3543345', 'dghvksih', 'ikhikhvds', 'Yes', 'Yes', 'Normal', 'Walk in', 'iukjghdikujfbiufb', 1);
 
 -- --------------------------------------------------------
 
@@ -476,36 +458,6 @@ CREATE TABLE `review_form` (
   `st_id` int(11) NOT NULL COMMENT 'staff id',
   `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `review_form`
---
-
-INSERT INTO `review_form` (`re_id`, `c_code`, `l_id`, `s_id`, `se_id`, `st_id`, `rating`) VALUES
-(1, 'YYkepPq', 1, 1, 94, 24, 0),
-(2, 'YYkepPq', 1, 17, 331, 58, 0),
-(3, 'YYkepPq', 1, 9, 182, 62, 0),
-(4, 'wvki1MC', 1, 10, 254, 22, 0),
-(5, 'tPQQvoE', 1, 1, 98, 14, 0),
-(6, 'Q0Ftlan', 1, 1, 98, 14, 0),
-(7, 'QI4kn1Q', 1, 1, 98, 14, 0),
-(8, 'uZpZy3F', 1, 1, 98, 14, 0),
-(9, 'XtTbv6N', 1, 1, 89, 19, 0),
-(10, 'YhmkMea', 1, 1, 89, 23, 0),
-(11, 'JZou2fR', 1, 1, 94, 23, 0),
-(12, 'XD1LqHS', 1, 1, 98, 14, 0),
-(13, 'u7vh28W', 1, 11, 280, 25, 0),
-(14, 'iRVR6Mv', 1, 11, 280, 25, 0),
-(15, 'LxvE4UO', 1, 11, 296, 59, 0),
-(16, 'k2nW8lu', 1, 11, 280, 23, 0),
-(17, 'k2nW8lu', 1, 9, 244, 58, 0),
-(18, 'k2nW8lu', 1, 9, 244, 61, 0),
-(19, 'k2nW8lu', 1, 11, 288, 61, 0),
-(20, 'PAeOyjr', 1, 2, 116, 62, 0),
-(21, 'PAeOyjr', 1, 14, 313, 59, 0),
-(22, '9c7HPfs', 1, 1, 98, 14, 0),
-(23, '9c7HPfs', 1, 17, 340, 61, 0),
-(24, '9c7HPfs', 1, 9, 197, 58, 0);
 
 -- --------------------------------------------------------
 
@@ -2899,13 +2851,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cust_name_phone`
 --
 ALTER TABLE `cust_name_phone`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -2917,7 +2869,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `review_form`
 --
 ALTER TABLE `review_form`
-  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `services`

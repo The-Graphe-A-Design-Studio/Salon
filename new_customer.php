@@ -2,11 +2,14 @@
     include('dbcon.php');
 
     $firstName = $lastName = $phone = $whatsapp = $email = $bday_date = $bday_month = $bday_year = $aday_date = $aday_month = $aday_year = $workPhoneNum = null;
-    $qatarId = $address1 = $address2 = $city = $zip = $state = $country = $others = null;
+    $qatarId = $cust_category = $address1 = $address2 = $address3 = $city = $zip = $state = $country = $skin_allergy = $back_problem = $blood_pressure = null;
+    $hear_ab_us = $others = null;
+
+    $con_phone = $con_whatsapp = 974;
 
     $firstName_err = $lastName_err = $phone_err = $whatsapp_err = $email_err = $bday_date_err = $bday_month_err = $bday_year_err = $aday_date_err = null;
-    $aday_month_err = $aday_year_err = $workPhoneNum_err = $qatarId_err = $address1_err = $address2_err = $city_err = $zip_err = $state_err = null;
-    $country_err = $others_err = null;    
+    $aday_month_err = $aday_year_err = $workPhoneNum_err = $qatarId_err = $cust_category_err = $address1_err = $address2_err = $address3_err = null;
+    $city_err = $zip_err = $state_err = $country_err = $skin_allergy_err = $back_problem_err = $blood_pressure_err = $hear_ab_us_err = $others_err = null;    
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
@@ -149,6 +152,8 @@
         // End required fields
 
         // Not required fields
+            $con_phone = $_POST['con_phone'] ? : 974;
+            $con_whatsapp = $_POST['con_whatsapp'] ? : 974;
             $email = trim($_POST['email'] ? : null);
             $bday_date = trim($_POST['bday_date'] ? : null);
             $bday_month = trim($_POST['bday_month'] ? : null);
@@ -158,20 +163,28 @@
             $aday_year = trim($_POST['aday_year'] ? : null);
             $workPhoneNum = trim($_POST['workPhoneNum'] ? : null);
             $qatarId = trim($_POST['qatarId'] ? : null);
+            $cust_category = trim($_POST['cust_category'] ? : null);
             $address1 = trim($_POST['address1'] ? : null);
             $address2 = trim($_POST['address2'] ? : null);
+            $address3 = trim($_POST['address3'] ? : null);
             $city = trim($_POST['city'] ? : null);
             $zip = trim($_POST['zip'] ? : null);
             $state = trim($_POST['state'] ? : null);
             $country = trim($_POST['country'] ? : null);
+            $skin_allergy = trim($_POST['skin_allergy'] ? : null);
+            $back_problem = trim($_POST['back_problem'] ? : null);
+            $blood_pressure = trim($_POST['blood_pressure'] ? : null);
+            $hear_ab_us = trim($_POST['hear_ab_us'] ? : null);
             $others = trim($_POST['others'] ? : null);
         // End not required fields
 
         if(empty($firstName_err) && empty($lastName_err) && empty($phone_err) && empty($whatsapp_err) && empty($bday_date_err)
         && empty($bday_month_err) && empty($bday_year_err) && empty($aday_date_err) && empty($aday_month_err) && empty($aday_year_err))
         {
+            $cust_category = mysqli_real_escape_string($link, $cust_category);
             $address1 = mysqli_real_escape_string($link, $address1);
             $address2 = mysqli_real_escape_string($link, $address2);
+            $address3 = mysqli_real_escape_string($link, $address3);
             $city = mysqli_real_escape_string($link, $city);
             $zip = mysqli_real_escape_string($link, $zip);
             $state = mysqli_real_escape_string($link, $state);
@@ -202,10 +215,12 @@
                 }
             }
 
-            $sql = "insert into cust_name_phone (`cust_name`, `last_name`, `cust_phone`, `whatsapp_num`, `email`, `birthday`, `anniversary`,
-                    `work_phone`, `qatar_id`, `address_1`, `address_2`, `city`, `zip`, `state`, `country`, `others`) values ('$firstName', '$lastName', 
-                    '$phone', '$whatsapp', '$email', '$bday', '$aday', '$workPhoneNum', '$qatarId', '$address1', '$address2', '$city', '$zip', '$state', 
-                    '$country', '$others')";
+            $sql = "insert into cust_name_phone (`cust_name`, `last_name`, `con_cust_phone`, `cust_phone`, `con_whatsapp_num`, `whatsapp_num`, `email`, 
+                    `birthday`, `anniversary`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, `zip`, `state`, 
+                    `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`) values ('$firstName', '$lastName', '$con_phone', 
+                    '$phone', '$con_whatsapp', '$whatsapp', '$email', '$bday', '$aday', '$workPhoneNum', '$qatarId', '$cust_category', '$address1', 
+                    '$address2', '$address3', '$city', '$zip', '$state', '$country', '$skin_allergy', '$back_problem', '$blood_pressure', '$hear_ab_us', 
+                    '$others')";
 
             $done = mysqli_query($link, $sql);
 
@@ -261,7 +276,7 @@
                                     <h3 class="card-title">New Customer</h3>
                                 </div>
                                 <div class="card-body">
-                                    <div class="container">
+                                    <div class="container m-0 p-0">
                                         <form enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                                             <div class="row my-1">
                                                 <div class="col-12">
@@ -283,18 +298,46 @@
                                                 </div>
                                                 <div class="col-12 col-md-6 form-group <?php echo (!empty($phone_err)) ? 'has-error' : ''; ?>">
                                                     <label>Phone Num *</label>
-                                                    <input type="tel" class="form-control" name="phone" value="<?php echo $phone; ?>" placeholder="Enter your phone number 974xxxxxxx">
+                                                    <div class="d-flex">
+                                                        <select class="form-control w-auto mr-3" name="con_phone">
+                                                        <?php
+                                                            $con_code1 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                            $get_con_code1 = mysqli_query($link, $con_code1);
+                                                            while($row_con_code1 = mysqli_fetch_array($get_con_code1, MYSQLI_ASSOC))
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row_con_code1['dial_code']; ?>" <?php if($row_con_code1['dial_code'] == $con_phone){ ?> selected="true" <?php } ?>>
+                                                                <?php echo $row_con_code1['dial_code']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                        </select>
+                                                        <input type="tel" class="form-control w-100" name="phone" value="<?php echo $phone; ?>" placeholder="Enter your phone number 974xxxxxxx">
+                                                    </div>                                                    
                                                     <span class="error-msg"><?php echo $phone_err; ?></span>
                                                 </div>
                                                 <div class="col-12 col-md-6 form-group <?php echo (!empty($whatsapp_err)) ? 'has-error' : ''; ?>">
                                                     <label>Whatsapp Num *</label>
-                                                    <input type="tel" class="form-control" name="whatsapp" value="<?php echo $whatsapp; ?>" placeholder="Enter your whatsapp number 974xxxxxxx">
+                                                    <div class="d-flex">
+                                                        <select class="form-control w-auto mr-3" name="con_whatsapp">
+                                                        <?php
+                                                            $con_code2 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                            $get_con_code2 = mysqli_query($link, $con_code2);
+                                                            while($row_con_code2 = mysqli_fetch_array($get_con_code2, MYSQLI_ASSOC))
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row_con_code2['dial_code']; ?>" <?php if($row_con_code2['dial_code'] == $con_whatsapp){ ?> selected="true" <?php } ?>>
+                                                                <?php echo $row_con_code2['dial_code']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                        </select>
+                                                        <input type="tel" class="form-control w-100" name="whatsapp" value="<?php echo $whatsapp; ?>" placeholder="Enter your whatsapp number 974xxxxxxx">
+                                                    </div>
                                                     <span class="error-msg"><?php echo $whatsapp_err; ?></span>
                                                 </div>
                                             </div>
                                             <div class="row my-1">
                                                 <div class="col-12">
-                                                    <span>Other Details (Optional)</span>
+                                                    <span>Personal Details (Optional)</span>
                                                     <hr>
                                                 </div>
                                             </div>
@@ -460,12 +503,20 @@
                                                     <input type="text" class="form-control" name="qatarId" value="<?php echo $qatarId; ?>" placeholder="Enter your Qatar ID">
                                                 </div>
                                                 <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                    <label>Customer Category</label>
+                                                    <input type="text" class="form-control" name="cust_category" value="<?php echo $cust_category; ?>" placeholder="Customer category">
+                                                </div>
+                                                <div class="col-12 col-md-4 col-lg-3 form-group">
                                                     <label>Address Line 1</label>
                                                     <input type="text" class="form-control" name="address1" value="<?php echo $address1; ?>" placeholder="Enter your address line 1">
                                                 </div>
                                                 <div class="col-12 col-md-4 col-lg-3 form-group">
                                                     <label>Address Line 2</label>
                                                     <input type="text" class="form-control" name="address2" value="<?php echo $address2; ?>" placeholder="Enter your address line 2">
+                                                </div>
+                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                    <label>Address Line 3</label>
+                                                    <input type="text" class="form-control" name="address3" value="<?php echo $address3; ?>" placeholder="Enter your address line 3">
                                                 </div>
                                                 <div class="col-12 col-md-4 col-lg-3 form-group">
                                                     <label>City</label>
@@ -482,7 +533,61 @@
                                                 <div class="col-12 col-md-4 col-lg-3 form-group">
                                                     <label>Country</label>
                                                     <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>" placeholder="Enter your country">
-                                                </div>                                                                                                
+                                                </div>
+                                            </div>
+                                            <div class="row my-1">
+                                                <div class="col-12">
+                                                    <span>Health Details</span>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-4 form-group">
+                                                    <label>Do you have skin allergies?</label>
+                                                    <select class="form-control" name="skin_allergy">
+                                                        <option value="">--Select --</option>
+                                                        <option value="Yes" <?php if($skin_allergy === 'Yes') { ?> selected <?php } ?>>Yes</option>
+                                                        <option value="No" <?php if($skin_allergy === 'No') { ?> selected <?php } ?>>No</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-md-4 form-group">
+                                                    <label>Do you have back problem?</label>
+                                                    <select class="form-control" name="back_problem">
+                                                        <option value="">--Select --</option>
+                                                        <option value="Yes" <?php if($back_problem === 'Yes') { ?> selected <?php } ?>>Yes</option>
+                                                        <option value="No" <?php if($back_problem === 'No') { ?> selected <?php } ?>>No</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-md-4 form-group">
+                                                    <label>Blood Pressure</label>
+                                                    <select class="form-control" name="blood_pressure">
+                                                        <option value="">--Select --</option>
+                                                        <option value="Low" <?php if($blood_pressure === 'Low') { ?> selected <?php } ?>>Low</option>
+                                                        <option value="Normal" <?php if($blood_pressure === 'Normal') { ?> selected <?php } ?>>Normal</option>
+                                                        <option value="High" <?php if($blood_pressure === 'High') { ?> selected <?php } ?>>High</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row my-1">
+                                                <div class="col-12">
+                                                    <span>Other Details</span>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-md-4 form-group">
+                                                    <label>How did you hear about us?</label>
+                                                    <select class="form-control" name="hear_ab_us">
+                                                        <option value="">--Select --</option>
+                                                        <option value="Word of mouth" <?php if($hear_ab_us === 'Word of mouth') { ?> selected <?php } ?>>Word of mouth</option>
+                                                        <option value="Referral" <?php if($hear_ab_us === 'Referral') { ?> selected <?php } ?>>Referral</option>
+                                                        <option value="Program" <?php if($hear_ab_us === 'Program') { ?> selected <?php } ?>>Program</option>
+                                                        <option value="SMS" <?php if($hear_ab_us === 'SMS') { ?> selected <?php } ?>>SMS</option>
+                                                        <option value="Walk in" <?php if($hear_ab_us === 'Walk in') { ?> selected <?php } ?>>Walk in</option>
+                                                        <option value="Social media" <?php if($hear_ab_us === 'Social media') { ?> selected <?php } ?>>Social media</option>
+                                                        <option value="Other" <?php if($hear_ab_us === 'Other') { ?> selected <?php } ?>>Other</option>
+                                                    </select>
+                                                </div>
                                                 <div class="col-12 form-group">
                                                     <label>Others</label>
                                                     <textarea class="form-control" name="others" value="<?php echo $others; ?>" placeholder="Enter other details" style="height: 15vh;"></textarea>
@@ -490,9 +595,9 @@
                                             </div>
                                             <div class="card-footer text-center">
                                                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                                            </div>
+                                            </div>                                            
                                         </form>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
 
