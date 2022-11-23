@@ -113,40 +113,25 @@
                 <div class="section-body">
 
                     <div class="row">
-                        <!-- <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label>Branch</label>
-                                <select class="form-control common_selector branch">
-                                    <option value="">All</option>
-                                    <?php
-                                        $branch = "select * from locations";
-                                        $get_branch = mysqli_query($link, $branch);
-                                        while($row_branch = mysqli_fetch_array($get_branch, MYSQLI_ASSOC))
-                                        {
-                                    ?>
-                                    <option value="<?php echo $row_branch['l_id']; ?>"><?php echo $row_branch['l_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div> -->
                         <div class="col-12 col-md-3">
                             <div class="form-group">
-                                <label>Name</label>
-                                <input type="text" class="form-control common_selector branch" placeholder="Search by name">
-                            </div>
-                        </div>
-                        <!-- <div class="col-12 col-md-3">
-                            <div class="form-group">
-                                <label>Start Date</label>
-                                <input type="date" placeholder="MM/DD/YYYY" class="form-control common_selector s_date" name="start_date"/>
+                                <input type="text" class="form-control common_selector searchID" placeholder="Search by ID">
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="form-group">
-                                <label>End Date</label>
-                                <input type="date" placeholder="MM/DD/YYYY" class="form-control common_selector e_date" name="end_date"/>
+                                <input type="text" class="form-control common_selector searchName" placeholder="Search by name">
                             </div>
-                        </div> -->
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control common_selector searchPhone" placeholder="Search by phone number">
+                            </div>
+                        </div><div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control common_selector searchWhatsapp" placeholder="Search by whatsapp number">
+                            </div>
+                        </div>
                     </div>
 
                     <div class="container-fluid">
@@ -171,43 +156,46 @@
             function filter_data()
             {
                 var action = 'fetch_data';
-                var branch = branchw();
-                var start_date = start_datee();
-                var end_date = end_datee();
-                // alert(branch);
-                // alert(start_date);
-                // alert(end_date);
+                var searchID = searchIDF();
+                var searchName = searchNameF();
+                var searchPhone = searchPhoneF();
+                var searchWhatsapp = searchWhatsappF();                
                 $.ajax({
                     url:"processing/curd_all_customers.php",
                     method:"POST",
-                    data:{action:action, branch:branch, start_date:start_date, end_date:end_date},
+                    data:{action:action, searchID:searchID, searchName:searchName, searchPhone:searchPhone, searchWhatsapp:searchWhatsapp},
                     success:function(data){
                         $('.filter_data').html(data);
                     }
                 });
             }
 
-            function branchw()
+            function searchIDF()
             {
-                return $('.branch').val();
+                return $('.searchID').val();
             }
 
-            function start_datee()
+            function searchNameF()
             {
-                return $('.s_date').val();
+                return $('.searchName').val();
             }
 
-            function end_datee()
+            function searchPhoneF()
             {
-                return $('.e_date').val();
+                return $('.searchPhone').val();
+            }
+
+            function searchWhatsappF()
+            {
+                return $('.searchWhatsapp').val();
             }
 
             $('.common_selector').on('keyup change',function(){
-                // alert("jdhfj");
                 filter_data();
-                branchw();
-                start_datee();
-                end_datee();
+                searchIDF();
+                searchNameF();
+                searchPhoneF();
+                searchWhatsappF();
             });
 
             $(".customers").addClass("active");

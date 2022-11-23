@@ -6,54 +6,47 @@
 
     if(isset($_POST["action"]))
     {
-        $query = "select distinct(t1.c_phone), t1.branch_id, t1.reg, t2.* from customers as t1 cross join cust_name_phone as t2 where 
-                    t1.branch_id = '".$_POST['branch_id']."' and t1.reg = 1 and t1.c_phone = t2.cust_phone";
+        $query = "select distinct(t1.c_phone), t1.*, t2.* from customers as t1, cust_name_phone as t2 where t1.reg = 1 and t1.c_phone = t2.cust_phone";
 
-        if(isset($_POST["branch"]))
+        if(isset($_POST["searchID"]))
         {
-            if(!empty($_POST["branch"]))
+            if(!empty($_POST["searchID"]))
             {
-                $se = $_POST['branch'];
-                $query .= " and t2.cust_name like '$se%' or t2.last_name like '$se%'";
+                $se1 = $_POST['searchID'];
+                $query .= " and t2.cust_id like '%$se1%'";
             }
         }
 
-        // if(!empty($_POST["start_date"]) && empty($_POST["end_date"]))
-        // {
-        //     $s_date = date_create($_POST["start_date"]);
-        //     $s_date = date_format($s_date, "Y-m-d");
-            
-        //     $e_date = date_create($_POST["end_date"]);
-        //     $e_date = date_format($e_date, "Y-m-d");
+        if(isset($_POST["searchName"]))
+        {
+            if(!empty($_POST["searchName"]))
+            {
+                $se2 = $_POST['searchName'];
+                $query .= " and t1.c_name like '%$se2%'";
+            }
+        }
 
-        //     $query .= " and c_date >= '".$s_date."'";
-        // }
-        // elseif(empty($_POST["start_date"]) && !empty($_POST["end_date"]))
-        // {
-        //     $s_date = date_create($_POST["start_date"]);
-        //     $s_date = date_format($s_date, "Y-m-d");
-            
-        //     $e_date = date_create($_POST["end_date"]);
-        //     $e_date = date_format($e_date, "Y-m-d");
+        if(isset($_POST["searchPhone"]))
+        {
+            if(!empty($_POST["searchPhone"]))
+            {
+                $se3 = $_POST['searchPhone'];
+                $query .= " and t1.c_phone like '%$se3%'";
+            }
+        }
 
-        //     $query .= " and c_date <= '".$e_date."'";
-        // }
-        // elseif(!empty($_POST["start_date"]) && !empty($_POST["end_date"]))
-        // {
-        //     $s_date = date_create($_POST["start_date"]);
-        //     $s_date = date_format($s_date, "Y-m-d");
-            
-        //     $e_date = date_create($_POST["end_date"]);
-        //     $e_date = date_format($e_date, "Y-m-d");
+        if(isset($_POST["searchWhatsapp"]))
+        {
+            if(!empty($_POST["searchWhatsapp"]))
+            {
+                $se4 = $_POST['searchWhatsapp'];
+                $query .= " and t1.c_whatsapp like '%$se4%'";
+            }
+        }
+        
+        $query .= " and t1.branch_id = ".$_POST['branch_id']." order by t2.cust_id desc";
 
-        //     $query .= " and c_date >= '".$s_date."' and c_date <= '".$e_date."'";
-        // }
-        // else
-        // {
-        //     $query .= "";
-        // }
-
-        $query .= " order by t2.cust_id desc";
+        // echo $query;
 
         $statement = $connect->prepare($query);
         $statement->execute();
@@ -68,6 +61,7 @@
             '
                 <table>
                     <thead>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Whatsapp</th>
@@ -83,6 +77,7 @@
                 $output .=
                 '
                     <tr>
+                        <td data-column="ID">'.$row['cust_id'].'</td>
                         <td data-column="Name">'.$row['cust_name'].' '.$row['last_name'].'</td>
                         <td data-column="Phone"><a href="tel:'.$row['cust_phone'].'" class="text-primary">'.$row['cust_phone'].'</a></td>
                         <td data-column="Whatsapp"><a href="https://wa.me/'.$row['whatsapp_num'].'" target="_blank" class="text-primary">'.$row['whatsapp_num'].'</a></td>
