@@ -399,7 +399,7 @@
                                         </div>
                                         <div class="col-12 form-group">
                                             <label>Others</label>
-                                            <textarea class="form-control" value="<?php echo $row['others']; ?>" name="others" placeholder="Enter other details" style="height: 15vh;"></textarea>
+                                            <textarea class="form-control" name="others" placeholder="Enter other details" style="height: 15vh;"><?php echo $row['others']; ?></textarea>
                                         </div>
                                     </div>
                                 </div>  
