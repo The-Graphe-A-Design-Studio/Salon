@@ -28,6 +28,11 @@
         <link rel="stylesheet" href="assets/css/components.css">
         <link rel="stylesheet" href="assets/css/google.css">
 
+        <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" 
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+        <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
         <style>
             table, th, td
             {
@@ -47,7 +52,7 @@
                 <div class="container mt-4">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
+                            <div class="card canvas_div_pdf">
                                 <div class="login-brand" style="position: relative;">
                                     <div style="position: absolute; top: 50%; left: 2%;">
                                         <span style="font-size: 0.6rem; letter-spacing: 2px;"><?php echo $row_branch['l_name']; ?></span>
@@ -433,8 +438,11 @@
                                             </td>
                                         </tr>
                                     </table>
-                                </div>
+                                </div>                                
                             </div>
+                            <button class="btn btn-primary btn-sm" onclick="getPDF()" title="Save as PDF" id="downloadbtn">
+                                <i class="fas fa-file-pdf mr-1"></i> Save as PDF
+                            </button>
 
                             <div class="gt">
                                 <div class="gt__box">
@@ -458,6 +466,37 @@
 
         <!-- Google Translater -->
         <script src="assets/js/google.js"></script>
+
+        <script>
+            function getPDF(){
+            var HTML_Width = $(".canvas_div_pdf").width();
+            var HTML_Height = $(".canvas_div_pdf").height();
+            var top_left_margin = 15;
+            var PDF_Width = HTML_Width+(top_left_margin*2);
+            var PDF_Height = HTML_Height+(top_left_margin*2);
+            var canvas_image_width = HTML_Width;
+            var canvas_image_height = HTML_Height;
+            var totalPDFPages = Math.ceil(HTML_Height/PDF_Height)-1;
+            html2canvas($(".canvas_div_pdf")[0],{allowTaint:true}).then(function(canvas) {
+                canvas.getContext('2d');
+                
+                console.log(canvas.height+"  "+canvas.width);
+                
+                
+                var imgData = canvas.toDataURL("image/jpeg", 1);
+                var pdf = new jsPDF('p', 'pt',  [PDF_Width, PDF_Height]);
+                pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin,canvas_image_width,canvas_image_height);
+                
+                
+                for (var i = 1; i <= totalPDFPages; i++) { 
+                    pdf.addPage(PDF_Width, PDF_Height);
+                    pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height*i)+(top_left_margin*4),canvas_image_width,canvas_image_height);
+                }
+                
+                pdf.save("feedback.pdf");
+            });
+            };
+        </script>
 
     </body>
 </html>
