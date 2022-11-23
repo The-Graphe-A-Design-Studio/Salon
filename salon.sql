@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 22, 2022 at 03:01 PM
+-- Generation Time: Nov 23, 2022 at 02:43 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -374,6 +374,14 @@ CREATE TABLE `customers` (
   `json_data` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`c_id`, `c_code`, `branch_id`, `c_name`, `c_ticket`, `c_phone`, `c_whatsapp`, `c_date`, `c_q1`, `c_q2`, `c_q3`, `c_q4`, `c_q5`, `c_q6`, `c_q7`, `c_comment`, `c_status`, `c_return`, `reg`, `json_data`) VALUES
+(1, 'ldvERDC', 1, 'Rohit Singh', '345345345', '575675', '4564565', '2022-11-23', 0, 0, 0, 0, 0, 0, 0, 'No comment', 2, 0, 1, '{\"cust_id\":\"4\",\"cust_name\":\"Rohit\",\"last_name\":\"Singh\",\"con_cust_phone\":\"974\",\"cust_phone\":\"575675\",\"con_whatsapp_num\":\"974\",\"whatsapp_num\":\"4564565\",\"email\":\"dfbdb@g.com\",\"birthday\":\"\",\"anniversary\":\"\",\"con_work_phone\":\"974\",\"work_phone\":\"\",\"qatar_id\":\"\",\"cust_category\":\"\",\"address_1\":\"\",\"address_2\":\"\",\"address_3\":\"\",\"city\":\"\",\"zip\":\"\",\"state\":\"\",\"country\":\"India\",\"skin_allergy\":\"\",\"back_problem\":\"\",\"blood_pressure\":\"\",\"hear_ab_us\":\"\",\"others\":\"\",\"reg\":\"1\"}'),
+(2, 'zofbfMA', 1, 'dfbdfb dfbdbfd', '4564645', '343453', '345345', '2022-11-23', 4, 5, 4, 3, 4, 3, 5, 'Hello World', 1, 1, 1, '{\"cust_id\":\"3\",\"cust_name\":\"dfbdfb\",\"last_name\":\"dfbdbfd\",\"con_cust_phone\":\"974\",\"cust_phone\":\"343453\",\"con_whatsapp_num\":\"974\",\"whatsapp_num\":\"345345\",\"email\":\"dfbdbf@g.com\",\"birthday\":\"04 May, 1956\",\"anniversary\":\"08 Jun, 1956\",\"con_work_phone\":\"974\",\"work_phone\":\"645464\",\"qatar_id\":\"KJGJKGKG\",\"cust_category\":\"kjhfbkj\",\"address_1\":\"kjdfkjb\",\"address_2\":\"kjvbd\",\"address_3\":\"hvbdf\",\"city\":\"khkjf\",\"zip\":\"498576894\",\"state\":\"kjfhbhb\",\"country\":\"khvdlkshd\",\"skin_allergy\":\"Yes\",\"back_problem\":\"Yes\",\"blood_pressure\":\"High\",\"hear_ab_us\":\"SMS\",\"others\":\"sdvsdvsv\",\"reg\":\"1\"}');
+
 -- --------------------------------------------------------
 
 --
@@ -391,6 +399,7 @@ CREATE TABLE `cust_name_phone` (
   `email` varchar(100) DEFAULT NULL,
   `birthday` varchar(50) DEFAULT NULL,
   `anniversary` varchar(50) DEFAULT NULL,
+  `con_work_phone` int(11) DEFAULT NULL,
   `work_phone` varchar(50) DEFAULT NULL,
   `qatar_id` varchar(100) DEFAULT NULL,
   `cust_category` varchar(150) DEFAULT NULL,
@@ -406,6 +415,7 @@ CREATE TABLE `cust_name_phone` (
   `blood_pressure` varchar(150) DEFAULT NULL,
   `hear_ab_us` varchar(150) DEFAULT NULL,
   `others` text DEFAULT NULL,
+  `joined_on` timestamp NOT NULL DEFAULT current_timestamp(),
   `reg` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -413,9 +423,12 @@ CREATE TABLE `cust_name_phone` (
 -- Dumping data for table `cust_name_phone`
 --
 
-INSERT INTO `cust_name_phone` (`cust_id`, `cust_name`, `last_name`, `con_cust_phone`, `cust_phone`, `con_whatsapp_num`, `whatsapp_num`, `email`, `birthday`, `anniversary`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, `zip`, `state`, `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`, `reg`) VALUES
-(1, 'fgnfgn', 'fgnfgn', 974, '4644', 974, '5456456', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Yes', 'No', 'High', 'Walk in', '', 1),
-(2, 'vdsdvsvd', 'sdvsvd', 974, '345345', 960, 'ddfbdbf', 'vskjg@g.com', '10 Sep, 1960', '17 Aug, 1962', '45645645', 'JHFJHFJ', 'kjdkjj', 'kjbkvjw', 'ioioghvoiwh', 'iohdiokvhg', 'ikhsdh', '3543345', 'dghvksih', 'ikhikhvds', 'Yes', 'Yes', 'Normal', 'Walk in', 'iukjghdikujfbiufb', 1);
+INSERT INTO `cust_name_phone` (`cust_id`, `cust_name`, `last_name`, `con_cust_phone`, `cust_phone`, `con_whatsapp_num`, `whatsapp_num`, `email`, `birthday`, `anniversary`, `con_work_phone`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, `zip`, `state`, `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`, `joined_on`, `reg`) VALUES
+(1, 'fgnfgn', 'fgnfgn', 974, '4644', 974, '5456456', '', '', '', NULL, '', '', '', '', '', '', '', '', '', '', 'Yes', 'No', 'High', 'Walk in', '', '2022-11-22 18:30:00', 1),
+(2, 'vdsdvsvd', 'sdvsvd', 974, '345345', 960, 'ddfbdbf', 'vskjg@g.com', '10 Sep, 1960', '17 Aug, 1962', NULL, '45645645', 'JHFJHFJ', 'kjdkjj', 'kjbkvjw', 'ioioghvoiwh', 'iohdiokvhg', 'ikhsdh', '3543345', 'dghvksih', 'ikhikhvds', 'Yes', 'Yes', 'Normal', 'Walk in', 'iukjghdikujfbiufb', '2022-11-22 18:30:00', 1),
+(3, 'dfbdfb', 'dfbdbfd', 974, '343453', 974, '345345', 'dfbdbf@g.com', '04 May, 1956', '08 Jun, 1956', 974, '645464', 'KJGJKGKG', 'kjhfbkj', 'kjdfkjb', 'kjvbd', 'hvbdf', 'khkjf', '498576894', 'kjfhbhb', 'khvdlkshd', 'Yes', 'Yes', 'High', 'SMS', 'sdvsdvsv', '2022-11-22 18:30:00', 1),
+(4, 'Rohit', 'Singh', 974, '575675', 974, '4564565', 'dfbdb@g.com', '', '', 974, '', '', '', '', '', '', '', '', '', 'India', '', '', '', '', '', '2022-11-22 18:30:00', 1),
+(5, 'jvkjsdkjv', 'kjhkjvh', 345, '783264785', 3784, '23487234', 'kjh@g.com', '2022-08-01', '2022-08-01', 354, '345454534', 'JHYGFHJJHGJH', 'New', 'jhjhsvg', 'kjgsvjk', 'kjsgdjvkg', 'kvkg', '374564', 'sdsdvv', 'sdvdvvd', 'Yes', 'Yes', 'High', 'Social Media', 'Hello World', '2022-11-22 18:30:00', 1);
 
 -- --------------------------------------------------------
 
@@ -458,6 +471,15 @@ CREATE TABLE `review_form` (
   `st_id` int(11) NOT NULL COMMENT 'staff id',
   `rating` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `review_form`
+--
+
+INSERT INTO `review_form` (`re_id`, `c_code`, `l_id`, `s_id`, `se_id`, `st_id`, `rating`) VALUES
+(1, 'ldvERDC', 1, 1, 98, 14, 0),
+(2, 'ldvERDC', 1, 1, 94, 59, 0),
+(3, 'zofbfMA', 1, 1, 98, 14, 4);
 
 -- --------------------------------------------------------
 
@@ -2851,13 +2873,13 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cust_name_phone`
 --
 ALTER TABLE `cust_name_phone`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -2869,7 +2891,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `review_form`
 --
 ALTER TABLE `review_form`
-  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `re_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `services`
