@@ -621,9 +621,17 @@
                                                     <label>Others</label>
                                                     <textarea class="form-control" name="others" value="<?php echo $others; ?>" placeholder="Enter other details" style="height: 15vh;"></textarea>
                                                 </div>
+                                                <div class="col-12">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" id="confirmCheck" style="position: unset !important;">
+                                                        <label class="form-check-label ml-3" for="confirmCheck">
+                                                            I hereby confirm that the above information to my knowledege is correct.
+                                                        </label>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="card-footer text-center">
-                                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                            <div class="card-footer mt-2 text-center">
+                                                <button type="submit" id="submitBtn" class="btn btn-primary btn-lg" disabled>Submit</button>
                                             </div>                                            
                                         </form>
                                     </div>
@@ -654,6 +662,14 @@
         
         <!-- Google Translater -->
         <script src="assets/js/google.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#confirmCheck').click(function () {
+                    $('#submitBtn').prop("disabled", !$("#confirmCheck").prop("checked")); 
+                })
+            });
+        </script>
     
     </body>
 </html>
