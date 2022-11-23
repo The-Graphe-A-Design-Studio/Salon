@@ -145,7 +145,10 @@
                         <td data-column="Visit Again">'.$visit.'</td>
                         <td data-column="Comment">'.$row['c_comment'].'</td>
                         <td data-column="View">
-                            <a href="feedback?cust='.$row['c_code'].'&id='.$row['c_id'].'" target="_blank"><i class="fas fa-eye"></i></a>
+                            <div class="d-flex justify-content-center align-items-center" style="gap: 10px;">
+                                <a title="View" href="feedback?cust='.$row['c_code'].'&id='.$row['c_id'].'" target="_blank"><i class="fas fa-eye"></i></a>
+                                <a title="Print" href="feedback?cust='.$row['c_code'].'&id='.$row['c_id'].'&print=yes" target="_blank"><i class="fas fa-print"></i></a>
+                            </div>                            
                         </td>
                     <tr>
                 ';
