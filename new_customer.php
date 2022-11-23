@@ -5,7 +5,9 @@
     $qatarId = $cust_category = $address1 = $address2 = $address3 = $city = $zip = $state = $country = $skin_allergy = $back_problem = $blood_pressure = null;
     $hear_ab_us = $others = null;
 
-    $con_phone = $con_whatsapp = 974;
+    $con_phone = $con_whatsapp = $con_work_phone = 974;
+
+    $country = 'Qatar';
 
     $firstName_err = $lastName_err = $phone_err = $whatsapp_err = $email_err = $bday_date_err = $bday_month_err = $bday_year_err = $aday_date_err = null;
     $aday_month_err = $aday_year_err = $workPhoneNum_err = $qatarId_err = $cust_category_err = $address1_err = $address2_err = $address3_err = null;
@@ -161,6 +163,7 @@
             $aday_date = trim($_POST['aday_date'] ? : null);
             $aday_month = trim($_POST['aday_month'] ? : null);
             $aday_year = trim($_POST['aday_year'] ? : null);
+            $con_work_phone = $_POST['con_work_phone'] ? : 974;
             $workPhoneNum = trim($_POST['workPhoneNum'] ? : null);
             $qatarId = trim($_POST['qatarId'] ? : null);
             $cust_category = trim($_POST['cust_category'] ? : null);
@@ -216,11 +219,11 @@
             }
 
             $sql = "insert into cust_name_phone (`cust_name`, `last_name`, `con_cust_phone`, `cust_phone`, `con_whatsapp_num`, `whatsapp_num`, `email`, 
-                    `birthday`, `anniversary`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, `zip`, `state`, 
-                    `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`) values ('$firstName', '$lastName', '$con_phone', 
-                    '$phone', '$con_whatsapp', '$whatsapp', '$email', '$bday', '$aday', '$workPhoneNum', '$qatarId', '$cust_category', '$address1', 
-                    '$address2', '$address3', '$city', '$zip', '$state', '$country', '$skin_allergy', '$back_problem', '$blood_pressure', '$hear_ab_us', 
-                    '$others')";
+                    `birthday`, `anniversary`, `con_work_phone`, `work_phone`, `qatar_id`, `cust_category`, `address_1`, `address_2`, `address_3`, `city`, 
+                    `zip`, `state`, `country`, `skin_allergy`, `back_problem`, `blood_pressure`, `hear_ab_us`, `others`) values ('$firstName', '$lastName', 
+                    '$con_phone', '$phone', '$con_whatsapp', '$whatsapp', '$email', '$bday', '$aday', '$con_work_phone', '$workPhoneNum', '$qatarId', 
+                    '$cust_category', '$address1', '$address2', '$address3', '$city', '$zip', '$state', '$country', '$skin_allergy', '$back_problem', 
+                    '$blood_pressure', '$hear_ab_us', '$others')";
 
             $done = mysqli_query($link, $sql);
 
@@ -342,11 +345,11 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Email</label>
                                                     <input type="email" class="form-control" name="email" value="<?php echo $email; ?>" placeholder="Enter your email address">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group <?php echo (!empty($bday_date_err)) ? ' has-error' : ''; 
+                                                <div class="col-12 col-md-4 form-group <?php echo (!empty($bday_date_err)) ? ' has-error' : ''; 
                                                                                                       echo (!empty($bday_month_err)) ? ' has-error' : '';
                                                                                                       echo (!empty($bday_year_err)) ? ' has-error' : ''; ?>">
                                                     <label>Birthday (Year optional)</label>
@@ -420,7 +423,7 @@
                                                     <span class="error-msg"><?php echo $bday_month_err; ?></span>
                                                     <span class="error-msg"><?php echo $bday_year_err; ?></span>
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group <?php echo (!empty($aday_date_err)) ? ' has-error' : ''; 
+                                                <div class="col-12 col-md-4 form-group <?php echo (!empty($aday_date_err)) ? ' has-error' : ''; 
                                                                                                       echo (!empty($aday_month_err)) ? ' has-error' : '';
                                                                                                       echo (!empty($aday_year_err)) ? ' has-error' : ''; ?>">
                                                     <label>Anniversary (Year optional)</label>
@@ -494,45 +497,71 @@
                                                     <span class="error-msg"><?php echo $aday_month_err; ?></span>
                                                     <span class="error-msg"><?php echo $aday_year_err; ?></span>
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Work Phone Num</label>
-                                                    <input type="tel" class="form-control" name="workPhoneNum" value="<?php echo $workPhoneNum; ?>" placeholder="Enter your work phone number 974xxxxxxx">
+                                                    <div class="d-flex">
+                                                        <select class="form-control w-auto mr-3" name="con_work_phone">
+                                                        <?php
+                                                            $con_code3 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                            $get_con_code3 = mysqli_query($link, $con_code3);
+                                                            while($row_con_code3 = mysqli_fetch_array($get_con_code3, MYSQLI_ASSOC))
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row_con_code3['dial_code']; ?>" <?php if($row_con_code3['dial_code'] == $con_work_phone){ ?> selected="true" <?php } ?>>
+                                                                <?php echo $row_con_code3['dial_code']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                        </select>
+                                                        <input type="tel" class="form-control" name="workPhoneNum" value="<?php echo $workPhoneNum; ?>" placeholder="Enter your work phone number 974xxxxxxx">
+                                                    </div>
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Qatar ID</label>
                                                     <input type="text" class="form-control" name="qatarId" value="<?php echo $qatarId; ?>" placeholder="Enter your Qatar ID">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Customer Category</label>
                                                     <input type="text" class="form-control" name="cust_category" value="<?php echo $cust_category; ?>" placeholder="Customer category">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Address Line 1</label>
                                                     <input type="text" class="form-control" name="address1" value="<?php echo $address1; ?>" placeholder="Enter your address line 1">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Address Line 2</label>
                                                     <input type="text" class="form-control" name="address2" value="<?php echo $address2; ?>" placeholder="Enter your address line 2">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Address Line 3</label>
                                                     <input type="text" class="form-control" name="address3" value="<?php echo $address3; ?>" placeholder="Enter your address line 3">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>City</label>
                                                     <input type="text" class="form-control" name="city" value="<?php echo $city; ?>" placeholder="Enter your city">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Zipcode/Zone</label>
                                                     <input type="text" class="form-control" name="zip" value="<?php echo $zip; ?>" placeholder="Enter your zipcode/zone">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>State</label>
                                                     <input type="text" class="form-control" name="state" id="state" value="<?php echo $state; ?>" placeholder="Enter your state">
                                                 </div>
-                                                <div class="col-12 col-md-4 col-lg-3 form-group">
+                                                <div class="col-12 col-md-4 form-group">
                                                     <label>Country</label>
-                                                    <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>" placeholder="Enter your country">
+                                                    <select class="form-control w-auto mr-3" name="country">
+                                                        <?php
+                                                            $con_select = "select distinct(name) from countries order by name asc";
+                                                            $get_con_select = mysqli_query($link, $con_select);
+                                                            while($row_con_select = mysqli_fetch_array($get_con_select, MYSQLI_ASSOC))
+                                                            {
+                                                        ?>
+                                                            <option value="<?php echo $row_con_select['name']; ?>" <?php if($row_con_select['name'] == $country){ ?> selected="true" <?php } ?>>
+                                                                <?php echo $row_con_select['name']; ?>
+                                                            </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <!-- <input type="text" class="form-control" name="country" id="country" value="<?php echo $country; ?>" placeholder="Enter your country"> -->
                                                 </div>
                                             </div>
                                             <div class="row my-1">
