@@ -70,33 +70,61 @@
                                     <div class="row">
                                         <div class="col-12 col-md-6 form-group">
                                             <label>First Name *</label>
-                                            <input type="text" class="form-control" name="newcustName" placeholder="Enter customer's first name" required>
+                                            <input type="text" class="form-control" name="firstName" placeholder="Enter your first name">
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label>Last Name *</label>
-                                            <input type="text" class="form-control" name="newcustLastName" placeholder="Enter customer's last name" required>
+                                            <input type="text" class="form-control" name="lastName" placeholder="Enter your last name">
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label>Phone Num *</label>
-                                            <input type="text" class="form-control" name="newcustPhone" placeholder="Enter customer's phone number 974xxxxxxx" required>
+                                            <div class="d-flex">
+                                                <select class="form-control w-auto mr-3" name="con_phone">
+                                                <?php
+                                                    $con_code1 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                    $get_con_code1 = mysqli_query($link, $con_code1);
+                                                    while($row_con_code1 = mysqli_fetch_array($get_con_code1, MYSQLI_ASSOC))
+                                                    {
+                                                ?>
+                                                    <option value="<?php echo $row_con_code1['dial_code']; ?>" <?php if($row_con_code1['dial_code'] == 974){ ?> selected="true" <?php } ?>>
+                                                        <?php echo $row_con_code1['dial_code']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                                </select>
+                                                <input type="tel" class="form-control w-100" name="phone" placeholder="Enter your phone number 974xxxxxxx">
+                                            </div>
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label>Whatsapp Num *</label>
-                                            <input type="text" class="form-control" name="newcustWhatsapp" placeholder="Enter customer's whatsapp number 974xxxxxxx" required>
+                                            <div class="d-flex">
+                                                <select class="form-control w-auto mr-3" name="con_whatsapp">
+                                                <?php
+                                                    $con_code2 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                    $get_con_code2 = mysqli_query($link, $con_code2);
+                                                    while($row_con_code2 = mysqli_fetch_array($get_con_code2, MYSQLI_ASSOC))
+                                                    {
+                                                ?>
+                                                    <option value="<?php echo $row_con_code2['dial_code']; ?>" <?php if($row_con_code2['dial_code'] == 974){ ?> selected="true" <?php } ?>>
+                                                        <?php echo $row_con_code2['dial_code']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                                </select>
+                                                <input type="tel" class="form-control w-100" name="whatsapp" placeholder="Enter your whatsapp number 974xxxxxxx">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row my-1">
                                         <div class="col-12">
-                                            <span>Other Details (Optional)</span>
+                                            <span>Personal Details (Optional)</span>
                                             <hr>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Email</label>
-                                            <input type="email" class="form-control" name="newcustEmail" placeholder="Enter customer's email address">
+                                            <input type="email" class="form-control" name="email" placeholder="Enter your email address">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Birthday (Year optional)</label>
                                             <div class="input-group">
                                                 <select class="form-control" name="bday_date" id="">
@@ -138,7 +166,7 @@
                                                 </select>                                                        
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Anniversary (Year optional)</label>
                                             <div class="input-group">
                                                 <select class="form-control" name="aday_date" id="">
@@ -180,41 +208,128 @@
                                                 </select>                                                        
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Work Phone Num</label>
-                                            <input type="text" class="form-control" name="newcustWorkPhoneNum" placeholder="Enter customer's work phone number 974xxxxxxx">
+                                            <div class="d-flex">
+                                                <select class="form-control w-auto mr-3" name="con_work_phone">
+                                                <?php
+                                                    $con_code3 = "select distinct(dial_code) from countries order by dial_code asc";
+                                                    $get_con_code3 = mysqli_query($link, $con_code3);
+                                                    while($row_con_code3 = mysqli_fetch_array($get_con_code3, MYSQLI_ASSOC))
+                                                    {
+                                                ?>
+                                                    <option value="<?php echo $row_con_code3['dial_code']; ?>" <?php if($row_con_code3['dial_code'] == 974){ ?> selected="true" <?php } ?>>
+                                                        <?php echo $row_con_code3['dial_code']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                                </select>
+                                                <input type="tel" class="form-control" name="workPhoneNum" placeholder="Enter your work phone number 974xxxxxxx">
+                                            </div>
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Qatar ID</label>
-                                            <input type="text" class="form-control" name="newcustQatarId" placeholder="Enter customer's Qatar ID">
+                                            <input type="text" class="form-control" name="qatarId" placeholder="Enter your Qatar ID">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>Customer Category</label>
+                                            <input type="text" class="form-control" name="cust_category" placeholder="Customer category">
+                                        </div>
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Address Line 1</label>
-                                            <input type="text" class="form-control" name="newcustAddress1" placeholder="Enter customer's address line 1">
+                                            <input type="text" class="form-control" name="address1" placeholder="Enter your address line 1">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Address Line 2</label>
-                                            <input type="text" class="form-control" name="newcustAddress2" placeholder="Enter customer's address line 2">
+                                            <input type="text" class="form-control" name="address2" placeholder="Enter your address line 2">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>Address Line 3</label>
+                                            <input type="text" class="form-control" name="address3" placeholder="Enter your address line 3">
+                                        </div>
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>City</label>
-                                            <input type="text" class="form-control" name="newcustCity" placeholder="Enter customer's city">
+                                            <input type="text" class="form-control" name="city" placeholder="Enter your city">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Zipcode/Zone</label>
-                                            <input type="text" class="form-control" name="newcustZip" placeholder="Enter customer's zipcode/zone">
+                                            <input type="text" class="form-control" name="zip" placeholder="Enter your zipcode/zone">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>State</label>
-                                            <input type="text" class="form-control" name="newcustState" placeholder="Enter customer's state">
+                                            <input type="text" class="form-control" name="state" id="state" placeholder="Enter your state">
                                         </div>
-                                        <div class="col-12 col-md-4 col-lg-3 form-group">
+                                        <div class="col-12 col-md-4 form-group">
                                             <label>Country</label>
-                                            <input type="text" class="form-control" name="newcustCountry" placeholder="Enter customer's country">
+                                            <select class="form-control w-auto mr-3" name="country">
+                                                <?php
+                                                    $con_select = "select distinct(name) from countries order by name asc";
+                                                    $get_con_select = mysqli_query($link, $con_select);
+                                                    while($row_con_select = mysqli_fetch_array($get_con_select, MYSQLI_ASSOC))
+                                                    {
+                                                ?>
+                                                    <option value="<?php echo $row_con_select['name']; ?>" <?php if($row_con_select['name'] == 'Qatar'){ ?> selected="true" <?php } ?>>
+                                                        <?php echo $row_con_select['name']; ?>
+                                                    </option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-12">
+                                            <span>Health Details</span>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>Do you have skin allergies?</label>
+                                            <select class="form-control" name="skin_allergy">
+                                                <option value="">--Select --</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>Do you have back problem?</label>
+                                            <select class="form-control" name="back_problem">
+                                                <option value="">--Select --</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>Blood Pressure</label>
+                                            <select class="form-control" name="blood_pressure">
+                                                <option value="">--Select --</option>
+                                                <option value="Low">Low</option>
+                                                <option value="Normal">Normal</option>
+                                                <option value="High">High</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row my-1">
+                                        <div class="col-12">
+                                            <span>Other Details</span>
+                                            <hr>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 col-md-4 form-group">
+                                            <label>How did you hear about us?</label>
+                                            <select class="form-control" name="hear_ab_us">
+                                                <option value="">--Select --</option>
+                                                <option value="Word of mouth">Word of mouth</option>
+                                                <option value="Referral">Referral</option>
+                                                <option value="Program">Program</option>
+                                                <option value="SMS">SMS</option>
+                                                <option value="Walk in">Walk in</option>
+                                                <option value="Social media">Social media</option>
+                                                <option value="Other">Other</option>
+                                            </select>
                                         </div>
                                         <div class="col-12 form-group">
                                             <label>Others</label>
-                                            <textarea class="form-control" name="newcustOthers" placeholder="Enter other details" style="height: 15vh;"></textarea>
+                                            <textarea class="form-control" name="others" placeholder="Enter other details" style="height: 15vh;"></textarea>
                                         </div>
                                     </div>
                                     <div class="row my-1">
@@ -298,7 +413,7 @@
             $("#create_form_for_customer").submit(function(e)
             {
                 var form_data = $(this).serialize();
-                // alert(form_data);
+                alert(form_data);
                 var button_content = $(this).find('button[type=submit]');
                 button_content.addClass("disabled btn-progress");
                 $.ajax({
