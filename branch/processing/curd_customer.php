@@ -23,10 +23,63 @@
         //     $query .= " AND c_status = '0'";
         // }
     
-        if(isset($_POST['date']))
+        // if(isset($_POST['date']))
+        // {
+        //     $ses = $_POST['date'];
+        //     $query .= " AND c_date LIKE '$ses%'";
+        // }
+
+        if(!empty($_POST["start_date"]) && empty($_POST["end_date"]))
         {
-            $ses = $_POST['date'];
-            $query .= " AND c_date LIKE '$ses%'";
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
+
+            $query .= " AND c_date >= '".$s_date."'";
+        }
+        elseif(empty($_POST["start_date"]) && !empty($_POST["end_date"]))
+        {
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
+
+            $query .= " AND c_date <= '".$e_date."'";
+        }
+        elseif(!empty($_POST["start_date"]) && !empty($_POST["end_date"]))
+        {
+            $s_date = date_create($_POST["start_date"]);
+            $s_date = date_format($s_date, "Y-m-d");
+            
+            $e_date = date_create($_POST["end_date"]);
+            $e_date = date_format($e_date, "Y-m-d");
+
+            $query .= " AND c_date >= '".$s_date."' AND c_date <= '".$e_date."'";
+        }
+        else
+        {
+            $query .= "";
+        }
+
+        if(isset($_POST["phone"]))
+        {
+            if(!empty($_POST["phone"]))
+            {
+                $se3 = $_POST['phone'];
+                $query .= " AND c_phone like '%$se3%'";
+            }
+        }
+
+        if(isset($_POST["whatsapp"]))
+        {
+            if(!empty($_POST["whatsapp"]))
+            {
+                $se4 = $_POST['whatsapp'];
+                $query .= " AND c_whatsapp like '%$se4%'";
+            }
         }
 
         if(isset($_POST['branch']))
@@ -37,7 +90,7 @@
         if(isset($_POST['search']))
         {
             $se = $_POST['search'];
-            $query .= " AND c_name LIKE '$se%' AND c_status = '2' order by c_id desc";
+            $query .= " AND c_name LIKE '%$se%' AND c_status = '2' order by c_id desc";
         }
 
         $statement = $connect->prepare($query);

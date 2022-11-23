@@ -119,43 +119,60 @@
                     </div>
                 </div>
 
-                <div class="section-body" style="margin-top: 2vh">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <!-- <div class="col-12 col-md-4">
-                                <div class="custom-switches-stacked mt-2" style="flex-direction: row">
-                                    <label class="custom-switch">
-                                        <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="custom-switch-description">Link not Generated</span>
-                                    </label>
-                                    <label class="custom-switch">
-                                        <input type="radio" name="option" class="custom-switch-input common_selector active" value="1">
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="custom-switch-description">Reviewed</span>
-                                    </label>
-                                    <label class="custom-switch">
-                                        <input type="radio" name="option" class="custom-switch-input common_selector inactive" value="2">
-                                        <span class="custom-switch-indicator"></span>
-                                        <span class="custom-switch-description">Pending</span>
-                                    </label>
-                                </div>
-                            </div> -->
-                            <div class="col-12 col-md-4">
-                                <div class="form-group">
-                                    <div class="form-div">
-                                        <input type="date" class="form-control common_selector search_date" placeholder="Search Customer by Date" name="date"/>
-                                    </div>
-                                </div>
+                <div class="section-body">
+                    <div class="row">
+                        <!-- <div class="col-12 col-md-4">
+                            <div class="custom-switches-stacked mt-2" style="flex-direction: row">
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector nothing" value="0">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Link not Generated</span>
+                                </label>
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector active" value="1">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Reviewed</span>
+                                </label>
+                                <label class="custom-switch">
+                                    <input type="radio" name="option" class="custom-switch-input common_selector inactive" value="2">
+                                    <span class="custom-switch-indicator"></span>
+                                    <span class="custom-switch-description">Pending</span>
+                                </label>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class="form-group">
-                                    <div class="form-div">
-                                        <input class="form-control common_selector search_bar" placeholder="Search Customer by Name" name="name"/>
-                                    </div>
-                                </div>
+                        </div> -->
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <label for="">Customer</label>
+                                <input class="form-control common_selector search_bar" placeholder="Search Customer by Name" name="name"/>
                             </div>
                         </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-group">
+                                <label for="">Phone</label>
+                                <input class="form-control common_selector search_phone" placeholder="Search Customer by Phone" name="name"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label for="">Whatsapp</label>
+                                <input class="form-control common_selector search_whatsapp" placeholder="Search Customer by whatsapp" name="name"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input type="date" class="form-control common_selector search_date" name="date"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label for="">End Date</label>
+                                <input type="date" class="form-control common_selector search_end_date" name="end_date"/>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="container-fluid">
+                        
                         <div class="row">
                             <input type="button" id="refresh_btn" value="Refresh" hidden>
                             <table>
@@ -201,12 +218,17 @@
                 var inactive = get_filter('inactive');
                 var nothing = get_filter('nothing');
                 var search = get_key('search_bar');
-                var date = get_date('search_date');
+                var phone = get_phone('search_phonr');
+                var whatsapp = get_whatsapp('search_whatsapp');
+                var start_date = get_date('search_date');
+                var end_date = get_end_date('search_end_date');
                 $.ajax({
                     url:"processing/curd_customer.php",
                     method:"POST",
-                    data:{action:action, active:active, inactive:inactive, nothing:nothing, search: search, date: date, branch: <?php echo $branch_id_session; ?>},
+                    data:{action:action, active:active, inactive:inactive, nothing:nothing, search: search, phone: phone, whatsapp: whatsapp, 
+                            start_date: start_date, end_date: end_date, branch: <?php echo $branch_id_session; ?>},
                     success:function(data){
+                        // console.log(data);
                         $('.filter_data').html(data);
                     }
                 });
@@ -226,16 +248,33 @@
                 return $('.search_bar').val();
             }
 
+            function get_phone()
+            {
+                return $('.search_phone').val();
+            }
+
+            function get_whatsapp()
+            {
+                return $('.search_whatsapp').val();
+            }
+
             function get_date()
             {
-                return $('.search_date').val();
-                
+                return $('.search_date').val();                
+            }
+
+            function get_end_date()
+            {
+                return $('.search_end_date').val();                
             }
 
             $('.common_selector').on('keyup change',function(){
                 filter_data();
                 get_key();
+                get_phone();
+                get_whatsapp();
                 get_date();
+                get_end_date();
             });
 
             $('#refresh_btn').on('click',function(){
