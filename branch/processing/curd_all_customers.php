@@ -112,46 +112,60 @@
                                     <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form class="branch_form text-left">
-                                    <div class="card-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Name : </b>'.$row['cust_name'].' '.$row['last_name'].'
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Phone : </b><a href="tel:'.$row['cust_phone'].'" class="text-primary">'.$row['cust_phone'].'</a>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Whatsapp : </b><a href="https://wa.me/'.$row['whatsapp_num'].'" target="_blank" class="text-primary">'.$row['whatsapp_num'].'</a>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Email : </b><a href="mailto:'.$row['email'].'" class="text-primary">'.$row['email'].'</a>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Birthday : </b>'.$row['birthday'].'
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Anniversary : </b>'.$row['anniversary'].'
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Work Phone : </b><a href="tel:'.$row['work_phone'].'" class="text-primary">'.$row['work_phone'].'</a>
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <b>Qatar ID : </b>'.$row['qatar_id'].'
-                                            </li>
-                                            <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
-                                                <span><b>Address : </b></span><span class="text-wrap">'.$row['address_1'].', '.$row['address_2'].', '.$row['city'].'- '.$row['zip'].', 
-                                                                '.$row['state'].', '.$row['country'].'</span>
-                                            </li>
-                                            <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
-                                                <span><b>Other : </b></span><span class="text-wrap">'.$row['others'].'</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Close</button>
-                                    </div>
-                                </form>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <b>ID : </b>'.$row['cust_id'].'
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><b>Name : </b>'.$row['cust_name'].' '.$row['last_name'].'</span>
+                                            <span><b>Email : </b><a href="mailto:'.$row['email'].'" class="text-primary">'.$row['email'].'</a></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                            <span title="Phone"><b><i class="fas fa-phone"></i> : </b><a href="tel:'.$row['con_cust_phone'].$row['cust_phone'].'" class="text-primary">
+                                                            '.$row['con_cust_phone'].' '.$row['cust_phone'].'</a></span>                                        
+                                            <span title="Whatsapp"><b><i class="fab fa-whatsapp"></i> : </b><a href="https://wa.me/'.$row['con_whatsapp_num'].$row['whatsapp_num'].'" target="_blank" class="text-primary">
+                                                                '.$row['con_whatsapp_num'].' '.$row['whatsapp_num'].'</a></span>
+                                            <span title="Work Phone"><b><i class="fas fa-briefcase"></i> : </b><a href="tel:'.$row['con_work_phone'].$row['work_phone'].'" class="text-primary">
+                                                                '.$row['con_work_phone'].' '.$row['work_phone'].'</a></span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><b>Birthday : </b>'.$row['birthday'].'</span>
+                                            <span><b>Anniversary : </b>'.$row['anniversary'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span><b>Qatar ID : </b>'.$row['qatar_id'].'</span>
+                                            <span><b>Category : </b>'.$row['cust_category'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Address : </b></span><span class="text-wrap">'.$row['address_1'].', '.$row['address_2'].', 
+                                                            '.$row['address_3'].', '.$row['city'].'- '.$row['zip'].', '.$row['state'].', 
+                                                            '.$row['country'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Do you have skin allergies? : </b></span>
+                                            <span class="text-wrap">'.$row['skin_allergy'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Do you have back problem? : </b></span>
+                                            <span class="text-wrap">'.$row['back_problem'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Blood Pressure : </b></span>
+                                            <span class="text-wrap">'.$row['blood_pressure'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>How did you hear about us? : </b></span>
+                                            <span class="text-wrap">'.$row['hear_ab_us'].'</span>
+                                        </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Other : </b></span><span class="text-wrap">'.$row['others'].'</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>

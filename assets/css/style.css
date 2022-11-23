@@ -2965,10 +2965,10 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
       font-size: 14px !important;
     }
 
-    .modal
+    /* .modal
     {
       top: 10vh;
-    }
+    } */
 
     .modal-content
     {
