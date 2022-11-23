@@ -8,27 +8,6 @@
     {
         $query = "SELECT * FROM customers where reg = '1'";
 
-        // if(isset($_POST["active"]))
-        // {
-        //     $query .= " AND c_status = '1'";
-        // }
-
-        // if(isset($_POST["inactive"]))
-        // {
-        //     $query .= " ";
-        // }
-
-        // if(isset($_POST["nothing"]))
-        // {
-        //     $query .= " AND c_status = '0'";
-        // }
-    
-        // if(isset($_POST['date']))
-        // {
-        //     $ses = $_POST['date'];
-        //     $query .= " AND c_date LIKE '$ses%'";
-        // }
-
         if(!empty($_POST["start_date"]) && empty($_POST["end_date"]))
         {
             $s_date = date_create($_POST["start_date"]);
@@ -303,11 +282,14 @@
 
         echo "Customer details updated";
     }
-    elseif(isset($_POST['newcustName']) && isset($_POST['newcustLastName']) && isset($_POST['newcustPhone']) && isset($_POST['newcustWhatsapp']) &&
-        isset($_POST['newcustEmail']) && isset($_POST['bday_date']) && isset($_POST['bday_month']) && isset($_POST['bday_year']) && 
-        isset($_POST['aday_date']) && isset($_POST['aday_month']) && isset($_POST['aday_year']) && isset($_POST['newcustWorkPhoneNum']) &&
-        isset($_POST['newcustQatarId']) && isset($_POST['newcustAddress1']) && isset($_POST['newcustAddress2']) && isset($_POST['newcustCity']) &&
-        isset($_POST['newcustZip']) && isset($_POST['newcustState']) && isset($_POST['newcustCountry']) && isset($_POST['newcustOthers']) && isset($_POST['branch_id'])
+    elseif(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['con_phone']) && 
+    isset($_POST['phone']) && isset($_POST['con_whatsapp']) && isset($_POST['whatsapp']) &&
+    isset($_POST['email']) && isset($_POST['bday_date']) && isset($_POST['bday_month']) && isset($_POST['bday_year']) && 
+    isset($_POST['aday_date']) && isset($_POST['aday_month']) && isset($_POST['aday_year']) && isset($_POST['con_work_phone']) && isset($_POST['workPhoneNum'])
+    && isset($_POST['qatarId']) && isset($_POST['cust_category']) && isset($_POST['address1']) && isset($_POST['address2']) && 
+    isset($_POST['address3']) && isset($_POST['city']) && isset($_POST['zip']) && isset($_POST['state']) && 
+    isset($_POST['country']) && isset($_POST['skin_allergy']) && isset($_POST['back_problem']) && isset($_POST['blood_pressure']) && 
+    isset($_POST['hear_ab_us']) && isset($_POST['others']) && isset($_POST['branch_id'])
         && isset($_POST['customer_id']))
     {
         date_default_timezone_set("Asia/Qatar");
@@ -319,7 +301,7 @@
         $old_phn = $row_old['cust_phone'];
         $old_whatsapp = $row_old['whatsapp_num'];
         
-        $sqlr = "SELECT * FROM cust_name_phone where cust_phone = '".$_POST['newcustPhone']."' and cust_id <> '".$_POST['customer_id']."'";
+        $sqlr = "SELECT * FROM cust_name_phone where cust_phone = '".$_POST['phone']."' and cust_id <> '".$_POST['customer_id']."'";
         $checkr = mysqli_query($link, $sqlr);
         $rowr = mysqli_fetch_array($checkr, MYSQLI_ASSOC);
         $count = mysqli_num_rows($checkr);
@@ -329,7 +311,7 @@
         }
         else
         {
-            $name = $_POST['newcustName']." ".$_POST['newcustLastName'];
+            $name = $_POST['firstName']." ".$_POST['lastName'];
 
             $bday_date = trim($_POST['bday_date'] ? : null);
             $bday_month = trim($_POST['bday_month'] ? : null);
@@ -371,36 +353,88 @@
             }
 
             $json_data = [
-                "cust_name" => $_POST['newcustName'],
-                "last_name" => $_POST['newcustLastName'],
-                "cust_phone" => $_POST['newcustPhone'],
-                "whatsapp_num" => $_POST['newcustWhatsapp'],
-                "email" => $_POST['newcustEmail'],
-                "birthday" => $bday,
-                "anniversary" => $aday,
-                "work_phone" => $_POST['newcustWorkPhoneNum'],
-                "qatar_id" => $_POST['newcustQatarId'],
-                "address_1" => $_POST['newcustAddress1'],
-                "address_2" => $_POST['newcustAddress2'],
-                "city" => $_POST['newcustCity'],
-                "zip" => $_POST['newcustZip'],
-                "state" => $_POST['newcustState'],
-                "country" => $_POST['newcustCountry'],
-                "others" => $_POST['newcustOthers'],
+                'firstName' => $_POST['firstName'],
+                'lastName' => $_POST['lastName'],
+                'con_phone' => $_POST['con_phone'],
+                'phone' => $_POST['phone'],
+                'con_whatsapp' => $_POST['con_whatsapp'],
+                'whatsapp' => $_POST['whatsapp'],
+                'email' => $_POST['email'],
+                'birthday' => $bday,
+                'anniversary' => $aday,
+                'con_work_phone' => $_POST['con_work_phone'],
+                'workPhoneNum' => $_POST['workPhoneNum'],
+                'qatarId' => $_POST['qatarId'],
+                'cust_category' => $_POST['cust_category'],
+                'address1' => $_POST['address1'],
+                'address2' => $_POST['address2'],
+                'address3' => $_POST['address3'],
+                'city' => $_POST['city'],
+                'zip' => $_POST['zip'],
+                'state' => $_POST['state'],
+                'country' => $_POST['country'],
+                'skin_allergy' => $_POST['skin_allergy'],
+                'back_problem' => $_POST['back_problem'],
+                'blood_pressure' => $_POST['blood_pressure'],
+                'hear_ab_us' => $_POST['hear_ab_us'],
+                'others' => $_POST['others']
             ];
 
             $json_data = json_encode($json_data);
 
-            $sqluc = "UPDATE `cust_name_phone` SET `cust_name`='".$_POST['newcustName']."',`last_name`='".$_POST['newcustLastName']."',`cust_phone`='".$_POST['newcustPhone']."',
-                    `whatsapp_num`='".$_POST['newcustWhatsapp']."',`email`='".$_POST['newcustEmail']."',`birthday`='".$bday."',`anniversary`='".$aday."',`work_phone`='".$_POST['newcustWorkPhoneNum']."',
-                    `qatar_id`='".$_POST['newcustQatarId']."',`address_1`='".$_POST['newcustAddress1']."',`address_2`='".$_POST['newcustAddress2']."',`city`='".$_POST['newcustCity']."',`zip`='".$_POST['newcustZip']."',
-                    `state`='".$_POST['newcustState']."',`country`='".$_POST['newcustCountry']."',`others`='".$_POST['newcustOthers']."' WHERE `cust_id` = '".$_POST['customer_id']."'";
+            $firstName = trim($_POST["firstName"]);
+            $lastName = trim($_POST["lastName"]);
+            $con_phone = $_POST['con_phone'] ? : 974;
+            $phone = trim($_POST["phone"]);
+            $con_whatsapp = $_POST['con_whatsapp'] ? : 974;
+            $whatsapp = trim($_POST["whatsapp"]);
+            $email = trim($_POST['email'] ? : null);
+            $bday_date = trim($_POST['bday_date'] ? : null);
+            $bday_month = trim($_POST['bday_month'] ? : null);
+            $bday_year = trim($_POST['bday_year'] ? : null);
+            $aday_date = trim($_POST['aday_date'] ? : null);
+            $aday_month = trim($_POST['aday_month'] ? : null);
+            $aday_year = trim($_POST['aday_year'] ? : null);
+            $con_work_phone = $_POST['con_work_phone'] ? : 974;
+            $workPhoneNum = trim($_POST['workPhoneNum'] ? : null);
+            $qatarId = trim($_POST['qatarId'] ? : null);
+            $cust_category = trim($_POST['cust_category'] ? : null);
+            $address1 = trim($_POST['address1'] ? : null);
+            $address2 = trim($_POST['address2'] ? : null);
+            $address3 = trim($_POST['address3'] ? : null);
+            $city = trim($_POST['city'] ? : null);
+            $zip = trim($_POST['zip'] ? : null);
+            $state = trim($_POST['state'] ? : null);
+            $country = trim($_POST['country'] ? : null);
+            $skin_allergy = trim($_POST['skin_allergy'] ? : null);
+            $back_problem = trim($_POST['back_problem'] ? : null);
+            $blood_pressure = trim($_POST['blood_pressure'] ? : null);
+            $hear_ab_us = trim($_POST['hear_ab_us'] ? : null);
+            $others = trim($_POST['others'] ? : null);
+
+            $cust_category = mysqli_real_escape_string($link, $cust_category);
+            $address1 = mysqli_real_escape_string($link, $address1);
+            $address2 = mysqli_real_escape_string($link, $address2);
+            $address3 = mysqli_real_escape_string($link, $address3);
+            $city = mysqli_real_escape_string($link, $city);
+            $zip = mysqli_real_escape_string($link, $zip);
+            $state = mysqli_real_escape_string($link, $state);
+            $country = mysqli_real_escape_string($link, $country);
+            $others = mysqli_real_escape_string($link, $others);
+
+            $sqluc = "UPDATE `cust_name_phone` SET `cust_name` = '$firstName', `last_name` = '$lastName', `con_cust_phone` = '$con_phone', 
+            `cust_phone` = '$phone', `con_whatsapp_num` = '$con_whatsapp', `whatsapp_num` = '$whatsapp', `email` = '$email', 
+            `birthday` = '$bday', `anniversary` = '$aday', `con_work_phone` = '$con_work_phone', `work_phone` = '$workPhoneNum', 
+            `qatar_id` = '$qatarId', `cust_category` = '$cust_category', `address_1` = '$address1', `address_2` = '$address2', 
+            `address_3` = '$address3', `city` = '$city', `zip` = '$zip', `state` = '$state', `country` = '$country', 
+            `skin_allergy` = '$skin_allergy', `back_problem` = '$back_problem', `blood_pressure` = '$blood_pressure', 
+            `hear_ab_us` = '$hear_ab_us', `others` = '$others' WHERE `cust_id` = '".$_POST['customer_id']."'";
             
             $updateuc = mysqli_query($link, $sqluc);
 
             if($updateuc)
             {
-                $sqluc2 = "UPDATE `customers` SET `c_name`='".$name."', `c_phone`='".$_POST['newcustPhone']."', `c_whatsapp`='".$_POST['newcustWhatsapp']."', 
+                $sqluc2 = "UPDATE `customers` SET `c_name`='".$name."', `c_phone`='".$_POST['phone']."', `c_whatsapp`='".$_POST['whatsapp']."', 
                             `json_data` = '".$json_data."' WHERE `c_phone` = '".$old_phn."' AND `c_whatsapp` = '".$old_whatsapp."'";
             
                 $updateuc2 = mysqli_query($link, $sqluc2);

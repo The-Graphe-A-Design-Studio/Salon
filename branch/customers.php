@@ -413,7 +413,7 @@
             $("#create_form_for_customer").submit(function(e)
             {
                 var form_data = $(this).serialize();
-                alert(form_data);
+                // alert(form_data);
                 var button_content = $(this).find('button[type=submit]');
                 button_content.addClass("disabled btn-progress");
                 $.ajax({
