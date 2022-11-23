@@ -158,6 +158,9 @@
                                         <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
                                             <span><b>Other : </b></span><span class="text-wrap">'.$row['others'].'</span>
                                         </li>
+                                        <li class="list-group-item d-flex flex-wrap justify-content-between align-items-center">
+                                            <span><b>Registered : </b></span><span class="text-wrap">'.date_format(date_create($row['joined_on']), 'd M, Y').'</span>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="modal-footer">
