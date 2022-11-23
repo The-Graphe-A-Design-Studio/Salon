@@ -144,7 +144,7 @@
                     </div>
 
                     <div class="container-fluid">
-                        <div class="row mt-sm-4 filter_data"> </div>
+                        <div class="row filter_data"> </div>
                     </div>                   
                     
                 </div>

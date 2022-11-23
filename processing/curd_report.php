@@ -64,9 +64,6 @@
         {
             $output .=
             '
-                <div>
-                    <h2 class="section-title">Forms Submitted</h2>
-                </div>
                 <table>
                     <thead>
                         <th>Date</th>
