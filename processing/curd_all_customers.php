@@ -13,7 +13,7 @@
             if(!empty($_POST["searchID"]))
             {
                 $se1 = $_POST['searchID'];
-                $query .= " and cust_id like '%$se1%'";
+                $query .= " and cust_id = '$se1'";
             }
         }
 

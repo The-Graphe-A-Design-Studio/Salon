@@ -113,7 +113,7 @@
                 <div class="section-body">
 
                     <div class="row">
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-2">
                             <div class="form-group">
                                 <input type="text" class="form-control common_selector searchID" placeholder="Search by ID">
                             </div>
@@ -131,6 +131,11 @@
                             <div class="form-group">
                                 <input type="text" class="form-control common_selector searchWhatsapp" placeholder="Search by whatsapp number">
                             </div>
+                        </div>
+                        <div class="col-12 col-md-1 text-right">
+                            <button class="btn btn-primary btn-lg" type="button" title="Export in excel" onclick="goToDownload()">
+                                <i class="fas fa-download"></i>
+                            </button>
                         </div>
                     </div>
 
@@ -201,6 +206,11 @@
 
             $(".all_customers").addClass("active");
         });
+
+        function goToDownload()
+        {
+            window.open('export-customers?download=yes');
+        }
     </script>
 </body>
 </html>
